@@ -1,0 +1,63 @@
+const redNums = [
+  "01",
+  "02",
+  "07",
+  "08",
+  12,
+  13,
+  18,
+  19,
+  23,
+  24,
+  29,
+  30,
+  34,
+  35,
+  40,
+  45,
+  46,
+];
+const blueNums = [
+  "03",
+  "04",
+  "09",
+  10,
+  14,
+  15,
+  20,
+  25,
+  26,
+  31,
+  36,
+  37,
+  41,
+  42,
+  47,
+  48,
+];
+
+const greenNums = [
+  "05",
+  "06",
+  11,
+  16,
+  17,
+  21,
+  22,
+  27,
+  28,
+  32,
+  33,
+  38,
+  39,
+  43,
+  44,
+  49,
+];
+
+const colors = [
+  { colorName: "green", colorZname: "绿波" },
+  { colorName: "red", colorZname: "红波" },
+  { colorName: "blue", colorZname: "蓝波" },
+];
+export default { redNums, greenNums, blueNums, colors };
