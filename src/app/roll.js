@@ -1,4 +1,5 @@
-export default function Roll() {
+function Roll(props) {
+
   return (
     <div className="w-full">
       <div
@@ -20,3 +21,12 @@ export default function Roll() {
     </div>
   );
 }
+
+Roll.getInitialProps = async (ctx) => {
+  const res = await fetch('http://localhost:3001/animal/list')
+  const json = await res.json()
+  console.log(json,1111222);
+  return { stars: json.stargazers_count }
+}
+
+export default Roll

@@ -100,7 +100,7 @@ export default function Table1() {
       </div>
       <div>
         {list.map((item) => (
-          <>
+          <div key={item.periods}>
             <div className="header h-12 p-1 text-lg flex justify-center items-center" style={{backgroundColor: '#fb43e3', color:'#343c4c'}}>
               <span>精选：</span>
               <span>{item.selection}</span>
@@ -119,7 +119,7 @@ export default function Table1() {
               ))}
             </ul>
             <div className="footer h-12 p-1 bg-cyan-400 text-violet-600 flex justify-center items-center text-xl">长期跟踪有惊喜！</div>
-          </>
+          </div>
         ))}
       </div>
     </div>

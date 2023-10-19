@@ -100,14 +100,14 @@ export default function Table1() {
         <p>港澳新彩论坛(必中8肖)</p>
       </div>
       <div>
-        {list.map((item) => (
-          <>
+        {list.map((item,index) => (
+          <div key={index}>
             <div className="header h-12 p-1 text-lg flex justify-center items-center" style={{backgroundColor: '#4e83f4', color:'#343c4c'}}>
               <span>精选：</span>
               <span>{item.selection}</span>
             </div>
             <ul>
-              {item.animals?.map((child,index) => (
+              {item.animals?.map((child) => (
                 <li key={item.periods} className="flex h-10 font-bold" style={{borderTop: '1px solid #ccc'}}>
                   <div className="w-40  flex justify-center items-center" style={{backgroundColor: 'rgb(0, 204, 51)'}}>{item.periods}
                   <span>期</span>
@@ -120,7 +120,7 @@ export default function Table1() {
               ))}
             </ul>
             <div className="footer h-12 p-1 bg-cyan-400 text-zinc-600 flex justify-center items-center text-xl">见证奇迹，成就梦想，彩霸王</div>
-          </>
+          </div>
         ))}
       </div>
     </div>

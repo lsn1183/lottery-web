@@ -105,6 +105,7 @@ export default function Table1() {
       <div className="">
         {list.map((item) => (
           <div
+            key={item.periods}
             className="flex justify-around flex-col items-center font-bold"
             style={{
               height: "175px",

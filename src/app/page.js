@@ -4,13 +4,13 @@ import Footer from "./footer";
 import ImgList from "./image";
 import ImgList2 from "./image-2";
 import ImgList6 from "./image-6";
-
 import Lottery from "./lottery";
 import Nav from "./nav";
 import Roll from "./roll";
 import Table2 from "./table-2";
 import Table3 from "./table-3";
 import Table4 from "./table-4";
+
 
 export default function Home() {
   return (
