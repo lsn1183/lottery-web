@@ -1,7 +1,7 @@
 export default function Table1() {
   const list = [
     {
-      periods: 278,
+      periods: 280,
       open: "",
       selection: "42.40.46.28.18.01.27.03.25.23.11.3",
       animals: [
@@ -19,7 +19,7 @@ export default function Table1() {
     {
       periods: 277,
       selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      open: "44猴",
+      open: "25猪",
       animals: [
         "狗",
         "狗.鸡",
@@ -35,7 +35,7 @@ export default function Table1() {
     {
       periods: 276,
       selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      open: "44猴",
+      open: "45猪",
 
       animals: [
         "狗",
@@ -52,7 +52,7 @@ export default function Table1() {
     {
       periods: 275,
       selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      open: "44猴",
+      open: "33猴",
 
       animals: [
         "狗",
@@ -69,7 +69,7 @@ export default function Table1() {
     {
       periods: 274,
       selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      open: "44猴",
+      open: "23猴",
       animals: [
         "狗",
         "狗.鸡",
@@ -103,9 +103,9 @@ export default function Table1() {
         <p>↓↓↓ 请大家记住新网址 ↓↓↓</p>
       </div>
       <div className="">
-        {list.map((item) => (
+        {list.map((item,index) => (
           <div
-            key={item.periods}
+            key={item.periods + index}
             className="flex justify-around flex-col items-center font-bold"
             style={{
               height: "175px",

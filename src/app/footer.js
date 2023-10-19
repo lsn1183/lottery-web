@@ -1,59 +1,53 @@
-import dataSource from "@/utils/dataSource";
-import { yieldNums } from "@/utils/utils";
+import { getEvenNumber, getUnevenNumber } from "@/utils/utils";
 
-export default function Table1() {
-  const { blueNums, colors, greenNums, redNums } = dataSource;
+async function getData() {
+  const res = await fetch("http://localhost:3001/animal/list");
+  const users = await res.json();
+  return users;
+}
 
-  const numsArr = yieldNums(49);
-  // 获取奇数
-  const getUnevenNumber = () => {
-    const nums = numsArr.filter((num) => num % 2 !== 0);
-    return nums;
-  };
-  // 获取偶数
-  const getEvenNumber = () => {
-    const nums = numsArr.filter((num) => num % 2 === 0);
-    return nums;
-  };
+export default async function Footer() {
+  const data = await getData();
+
   const colorList = [
     {
       colorName: "红波",
-      colors: redNums,
+      color: "red",
+      nums: data
+        .filter((item) => item.color === "red")
+        .map((item) => item.nums)
+        .sort(),
     },
     {
       colorName: "蓝波",
-      colors: blueNums,
+      color: "blue",
+      nums: data
+        .filter((item) => item.color === "blue")
+        .map((item) => item.nums)
+        .sort(),
     },
     {
       colorName: "绿波",
-      colors: greenNums,
+      color: "green",
+      nums: data
+        .filter((item) => item.color === "green")
+        .map((item) => item.nums)
+        .sort(),
     },
   ];
 
   const numsList = [
     {
       numName: "单数",
-      nums: getUnevenNumber(),
+      nums: getUnevenNumber(data).sort((a, b) => a.nums - b.nums),
     },
     {
       numName: "双数",
-      nums: getEvenNumber(),
+      nums: getEvenNumber(data).sort((a, b) => a.nums - b.nums),
     },
   ];
 
-  const getColorNum = (num) => {
-
-    if (redNums.includes(num)) {
-      return 'red';
-    }
-    if (blueNums.includes(num)) {
-      return 'blue';
-    }
-    if (greenNums.includes(num)) {
-      return 'green';
-    }
-
-  }
+  // console.log("numsList:", numsList[0].nums);
 
   return (
     <div className="w-full">
@@ -71,6 +65,7 @@ export default function Table1() {
         <ul>
           {colorList?.map((item) => (
             <li
+              key={item.id}
               className="flex items-center h-10"
               style={{ borderBottom: "1px solid #ccc" }}
             >
@@ -80,14 +75,12 @@ export default function Table1() {
               >
                 {item.colorName}
               </div>
-              <div className=" pl-8 pr-8 h-8 flex items-center justify-between">
-                {item.colors?.map((col) => (
+              <div className="pl-8 pr-8 h-8 flex items-center justify-between">
+                {item.nums?.map((col) => (
                   <div
-                    className="ml-2 p-1 text-white h-5 flex justify-center items-center"
+                    className="ml-2 p-1 text-white h-6 flex justify-center items-center rounded"
                     style={{
-                      backgroundColor: colors.filter(
-                        (c) => c.colorZname == item.colorName
-                      )[0]?.colorName,
+                      backgroundColor: item.color,
                     }}
                   >
                     {col}
@@ -108,10 +101,11 @@ export default function Table1() {
       >
         <p>合数单双</p>
       </div>
-      <div className="">
+      <div className=" w-full">
         <ul>
           {numsList?.map((item) => (
             <li
+              key={item.id + item.numName}
               className="flex items-center h-10"
               style={{ borderBottom: "1px solid #ccc" }}
             >
@@ -124,13 +118,13 @@ export default function Table1() {
               <div className="pl-1 h-10 flex items-center justify-between">
                 {item.nums?.map((child) => (
                   <div
-                    className="ml-1 h-5 flex justify-center items-center text-white"
+                    className="ml-1 h-6 flex justify-center items-center text-white rounded"
                     style={{
-                      backgroundColor: getColorNum(child),
-                      padding: '2px'
+                      backgroundColor: child.color,
+                      padding: "2px",
                     }}
                   >
-                    {child}
+                    {child.nums}
                   </div>
                 ))}
               </div>

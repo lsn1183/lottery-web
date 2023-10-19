@@ -1,12 +1,12 @@
-function Roll(props) {
+export default function Roll({}) {
 
   return (
     <div className="w-full">
       <div
-        class="roll pt-2 pb-2"
+        className="roll pt-2 pb-2"
         style={{ backgroundImage: "url(/images/roll-bg.png)" }}
       >
-        <p class="animate">
+        <p className="animate">
           欢迎光临【港澳新彩】论坛★汇集网上最全港澳新彩资料★永久域名:123.com
           请记
         </p>
@@ -22,11 +22,4 @@ function Roll(props) {
   );
 }
 
-Roll.getInitialProps = async (ctx) => {
-  const res = await fetch('http://localhost:3001/animal/list')
-  const json = await res.json()
-  console.log(json,1111222);
-  return { stars: json.stargazers_count }
-}
 
-export default Roll

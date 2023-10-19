@@ -1,7 +1,7 @@
 export default function Table1() {
   const list = [
     {
-      periods: 278,
+      periods: 218,
       open:'',
       selection: "42.40.46.28.18.01.27.03.25.23.11.3",
       animals: [
@@ -19,7 +19,7 @@ export default function Table1() {
     {
       periods: 277,
       selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      open:'44猴',
+      open:'22鼠',
       animals: [
         "狗",
         "狗.鸡",
@@ -35,7 +35,7 @@ export default function Table1() {
     {
       periods: 276,
       selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      open:'44猴',
+      open:'05猴',
 
       animals: [
         "狗",
@@ -52,7 +52,7 @@ export default function Table1() {
     {
       periods: 275,
       selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      open:'44猴',
+      open:'49猴',
 
       animals: [
         "狗",
@@ -69,7 +69,7 @@ export default function Table1() {
     {
       periods: 274,
       selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      open:'44猴',
+      open:'44龙',
       animals: [
         "狗",
         "狗.鸡",
@@ -101,14 +101,14 @@ export default function Table1() {
       </div>
       <div>
         {list.map((item,index) => (
-          <div key={index}>
+          <div key={item.selection+index}>
             <div className="header h-12 p-1 text-lg flex justify-center items-center" style={{backgroundColor: '#4e83f4', color:'#343c4c'}}>
               <span>精选：</span>
               <span>{item.selection}</span>
             </div>
             <ul>
               {item.animals?.map((child) => (
-                <li key={item.periods} className="flex h-10 font-bold" style={{borderTop: '1px solid #ccc'}}>
+                <li key={item.periods+index+child} className="flex h-10 font-bold" style={{borderTop: '1px solid #ccc'}}>
                   <div className="w-40  flex justify-center items-center" style={{backgroundColor: 'rgb(0, 204, 51)'}}>{item.periods}
                   <span>期</span>
                   <span>{child?.split('.').length}</span>

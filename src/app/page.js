@@ -11,8 +11,15 @@ import Table2 from "./table-2";
 import Table3 from "./table-3";
 import Table4 from "./table-4";
 
+ async function getData() {
+  const res = await fetch('http://localhost:3001/animal/list')
+  const users = await res.json()
+  console.log(users,'page-fetch');
+  return users
+}
 
-export default function Home() {
+export default async function Home({users}) {
+  // const res = getData()
   return (
     <main className="flex min-h-screen flex-col items-center content pb-12">
       <Image

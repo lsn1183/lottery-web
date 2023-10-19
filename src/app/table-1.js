@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Table1() {
   const list = [
     {
-      periods: 278,
+      periods: 279,
       numbers: [
         "42.05.31.12.38.08.13.30",
         "09.46.10.14.48.44.23.22",
@@ -51,8 +51,8 @@ export default function Table1() {
   return (
     <div className="w-full">
       <ul className="text-xl font-bold">
-        {list.map((item) => (
-          <li key={item.periods} className="border m-2 p-3 text-center">
+        {list.map((item,i) => (
+          <li key={item.periods+item.openNum} className="border m-2 p-3 text-center">
             <div>
               <span>{item.periods}期：</span>
               <span className="text-blue-600 mr-1">123.com=精品24码=</span>

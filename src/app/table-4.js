@@ -1,7 +1,7 @@
 export default function Table1() {
   const list = [
     {
-      periods: 278,
+      periods: 298,
       open:'',
       selection: "42.40.46.28.18.01.27.03.25.23.11.3",
       animals: [
@@ -19,7 +19,7 @@ export default function Table1() {
     {
       periods: 277,
       selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      open:'44猴',
+      open:'14猴',
       animals: [
         "狗",
         "狗.鸡",
@@ -35,7 +35,7 @@ export default function Table1() {
     {
       periods: 276,
       selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      open:'44猴',
+      open:'41猴',
       animals: [
         "狗",
         "狗.鸡",
@@ -51,7 +51,7 @@ export default function Table1() {
     {
       periods: 275,
       selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      open:'44猴',
+      open:'4猴',
 
       animals: [
         "狗",
@@ -68,7 +68,7 @@ export default function Table1() {
     {
       periods: 274,
       selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      open:'44猴',
+      open:'40猴',
       animals: [
         "狗",
         "狗.鸡",
@@ -99,16 +99,16 @@ export default function Table1() {
         <p>港澳新彩论坛(内部透密九肖)</p>
       </div>
       <div>
-        {list.map((item) => (
-          <div key={item.periods}>
+        {list.map((item,i) => (
+          <div key={item.periods+ i}>
             <div className="header h-12 p-1 text-lg flex justify-center items-center" style={{backgroundColor: '#fb43e3', color:'#343c4c'}}>
               <span>精选：</span>
               <span>{item.selection}</span>
             </div>
             <ul>
               {item.animals?.map((child,index) => (
-                <li key={item.periods} className="flex h-10 font-bold" style={{borderTop: '1px solid #ccc'}}>
-                  <div className="w-40  flex justify-center items-center" style={{backgroundColor: 'aqua'}}>{item.periods}
+                <li key={child+index} className="flex h-10 font-bold" style={{borderTop: '1px solid #ccc'}}>
+                  <div className="w-40  flex justify-center items-center" style={{backgroundColor: 'aqua'}}>{index}
                   <span>期</span>
                   <span>{child?.split('.').length}</span>
                   <span>肖</span>
