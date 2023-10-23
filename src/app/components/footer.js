@@ -1,4 +1,4 @@
-import { getEvenNumber, getUnevenNumber } from "@/utils/utils";
+import { getEvenNumber, getUnevenNumber } from "../../utils/utils";
 
 async function getData() {
   const res = await fetch("http://localhost:3001/animal/list");

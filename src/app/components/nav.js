@@ -11,7 +11,7 @@ export default function Nav() {
   return (
     <div className=" w-full">
       <div className=" w-full flex justify-start h-10 ml-10 p-2">
-        <button className=" text-left">开奖记录:</button>
+        {/* <Button className="text-left">开奖记录:</Button> */}
         <span>{'???'}</span>
       </div>
       <div className="flex justify-around w-full p-6">
