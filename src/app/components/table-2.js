@@ -1,4 +1,4 @@
-export default function Table1() {
+export default function Table2() {
   const list = [
     {
       periods: 218,

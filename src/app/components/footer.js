@@ -47,8 +47,6 @@ export default async function Footer() {
     },
   ];
 
-  // console.log("numsList:", numsList[0].nums);
-
   return (
     <div className="w-full">
       {/* 波色 */}
