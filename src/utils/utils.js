@@ -41,14 +41,31 @@ export function formatRemainTime(time = 0) {
   res += addZero(time) + timeArr.at(-1)?.s;
   return res;
 }
-
+// 数组分组
 export function group(array, subGroupLength) {
   var index = 0;
   var newArray = [];
-
-  while(index < array.length) {
-      newArray.push(array.slice(index, index += subGroupLength));
+  while (index < array.length) {
+    newArray.push(array.slice(index, index += subGroupLength));
   }
 
   return newArray;
+}
+
+/**
+* @params arr 传入的源数组
+* @params length 需要获取的元素的个数
+*/
+export function myRandom(arr, length) {
+  // console.log('arr, length', arr, length);
+  let newArr = []; // 组成的新数组初始化
+  if (arr.length == 0) return []
+  for (var i = 0; i < length; i++) {
+    let index = Math.floor(Math.random() * arr.length);
+    let item = arr[index];
+    newArr.push(item)
+    arr.splice(index, 1)
+  }
+  // console.log('随机:', newArr);
+  return newArr.reverse()
 }

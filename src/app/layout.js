@@ -1,4 +1,4 @@
-import '@/style/globals.css'
+import '@/styles/globals.css'
 import 'antd-mobile/bundle/css-vars-patch.css'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'

@@ -14,3 +14,12 @@ export const getLatestOpenData = async (params = {}) => {
   const { data } = await result.json();
   return data;
 }
+
+// 获取最新20条历史记录
+export const getLatestRecommendData = async (params = {}) => {
+  // ?pageNum=1&pageSize=20&periods=29
+  const { pageNum, pageSize } = params
+  const result = await fetch(URL + "/recommend/page" + `?pageNum=${pageNum || 1}&pageSize=${pageSize || 10}`)
+  const { data } = await result.json();
+  return data;
+}

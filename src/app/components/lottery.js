@@ -9,7 +9,7 @@ const colorList = [
   { color: "green", url: "/icon/ball-green.png" },
 ]
 
-export default async function Lottery({ data = [] }) {
+export default async function Lottery({ data = [], periodCount }) {
   // console.log('Lottery-props', data);
   const todayDate = new Date().toLocaleDateString(); // 今天日期
   const todayTime = new Date(todayDate).getTime(); // 今天日期转为时间戳
@@ -27,12 +27,10 @@ export default async function Lottery({ data = [] }) {
       return newItem;
     })
 
-  // console.log('list', list)
-
   return (
     <div className="lottery w-full flex flex-col gap-5 p-5">
       <div className="flex justify-between text-sm">
-        <div>新彩第{Number(periods)}期开奖结果：
+        <div>新彩第{Number(periodCount)}期开奖结果：
         </div>
         <div className="flex items-center font-bold">
           <span className="mr-2 ">开奖倒计时:</span>

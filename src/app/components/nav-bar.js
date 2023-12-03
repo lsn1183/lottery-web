@@ -1,7 +1,4 @@
-import { inertRemmDatabase } from "@/utils/database";
 import Image from "next/image";
-
-
 
 export default function Nav() {
   const navList = [
@@ -10,7 +7,6 @@ export default function Nav() {
     { name: "号码属性", url: "/icon/nav_hmsx.png" },
     { name: "开奖记录", url: "/icon/nav_pc.png" },
   ];
-  inertRemmDatabase()
   return (
     <div className="nav-bar w-full p-4">
       <div className="flex justify-between w-full p-5">
