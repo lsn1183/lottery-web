@@ -1,7 +1,8 @@
+import { API } from "../../utils/config";
 import { getEvenNumber, getUnevenNumber } from "../../utils/utils";
 
 async function getData() {
-  const res = await fetch("http://localhost:3001/animal/list");
+  const res = await fetch(API + "/animal/list");
   const users = await res.json();
   return users;
 }
@@ -68,12 +69,12 @@ export default async function Footer() {
               style={{ borderBottom: "1px solid #ccc" }}
             >
               <div
-                className=" w-20 h-full flex items-center justify-center"
+                className="w-20 h-full flex items-center justify-center"
                 style={{ borderRight: "1px solid #ccc" }}
               >
                 {item.colorName}
               </div>
-              <div className="pl-8 pr-8 h-8 flex items-center justify-between">
+              <div className=" w-full pl-8 pr-8 h-8 flex items-center justify-start">
                 {item.nums?.map((col) => (
                   <div
                     className="ml-2 p-1 text-white h-6 flex justify-center items-center rounded"
@@ -104,7 +105,7 @@ export default async function Footer() {
           {numsList?.map((item) => (
             <li
               key={item.id + item.numName}
-              className="flex items-center h-10"
+              className="flex items-center h-10 w-full"
               style={{ borderBottom: "1px solid #ccc" }}
             >
               <div
@@ -113,10 +114,10 @@ export default async function Footer() {
               >
                 {item.numName}
               </div>
-              <div className="pl-1 h-10 flex items-center justify-between">
+              <div className="flex items-center justify-start h-10 flex-auto gap-1 pl-5">
                 {item.nums?.map((child) => (
                   <div
-                    className="ml-1 h-6 flex justify-center items-center text-white rounded"
+                    className=" h-6 flex justify-center items-center text-white rounded"
                     style={{
                       backgroundColor: child.color,
                       padding: "2px",

@@ -1,6 +1,7 @@
 import Image from "next/image";
 
-export default function Table1() {
+export default function Table1({data=[]}) {
+  console.log('table1', data);
   const list = [
     {
       periods: 279,

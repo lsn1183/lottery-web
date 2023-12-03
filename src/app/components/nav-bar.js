@@ -1,4 +1,7 @@
+import { inertRemmDatabase } from "@/utils/database";
 import Image from "next/image";
+
+
 
 export default function Nav() {
   const navList = [
@@ -7,16 +10,12 @@ export default function Nav() {
     { name: "号码属性", url: "/icon/nav_hmsx.png" },
     { name: "开奖记录", url: "/icon/nav_pc.png" },
   ];
-
+  inertRemmDatabase()
   return (
-    <div className=" w-full">
-      <div className=" w-full flex justify-start h-10 ml-10 p-2">
-        {/* <Button className="text-left">开奖记录:</Button> */}
-        <span>{'???'}</span>
-      </div>
-      <div className="flex justify-around w-full p-6">
+    <div className="nav-bar w-full p-4">
+      <div className="flex justify-between w-full p-5">
         {navList.map((item) => (
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center text-base" key={item.name}>
             <Image
               src={item.url}
               alt="Vercel Logo"

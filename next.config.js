@@ -1,4 +1,21 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const path = require('path')
+const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+  transpilePackages: [ 'antd-mobile'],
+}
 
-module.exports = nextConfig
+module.exports =  {
+  ...nextConfig,
+  webpack: (config,
+    { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname),
+      '@/components': path.resolve(__dirname, 'components'),
+    }
+    return config
+  },
+}
+

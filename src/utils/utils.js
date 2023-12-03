@@ -41,3 +41,14 @@ export function formatRemainTime(time = 0) {
   res += addZero(time) + timeArr.at(-1)?.s;
   return res;
 }
+
+export function group(array, subGroupLength) {
+  var index = 0;
+  var newArray = [];
+
+  while(index < array.length) {
+      newArray.push(array.slice(index, index += subGroupLength));
+  }
+
+  return newArray;
+}

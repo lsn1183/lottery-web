@@ -9,28 +9,23 @@ export default function ImgList() {
     { desc: "新加坡新彩", url: "/images/004.gif" },
     { desc: "新加坡新彩", url: "/images/005.gif" },
     { desc: "新加坡新彩", url: "/images/002.gif" },
-    // { desc: "新加坡新彩", url: "/images/001.gif" },
   ];
 
   return (
-    <div className="flex w-full mt-6 p-3 flex-wrap justify-between gap-2 bg-orange-200">
-      {list.map((item) => (
-        <div
-          className="flex flex-col items-center border"
-          style={{ width: "32%", height: "135px",}}
-        >
-          <div className="" style={{height: '100px'}}>
+    <div className="bg-orange-200 mt-6 p-2 flex justify-start flex-wrap">
+      {list.map((item,index) => (
+        <div className="border flex-1 c_item" >
+          <div className="relative" style={{height: '70%'}}>
             <Image
               src={item.url}
               alt="Vercel Logo"
-              className="dark:invert"
-              width={224}
+              sizes="(max-width: 768px) 100vw, 33vw"
+              width={100}
               height={100}
-              priority
-              style={{height: '100%', width:'100%'}}
+              style={{ objectFit: "", width: "100%", height: "100%" }}
             />
           </div>
-          <div className="p-2 flex-1 text-center">{item.desc}</div>
+          <div className="p-2 flex-1 text-center text-sm">{item.desc}</div>
         </div>
       ))}
     </div>
