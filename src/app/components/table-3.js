@@ -95,23 +95,14 @@ export default function Table3() {
       ></div> */}
       <div
         className="w-full h-14 flex justify-center items-center text-2xl border-lime-300  bg-img"
-        style={{
-          backgroundImage: "url(/images/roll-bg2.jpeg)",
-          color: "rgb(255, 255, 0)",
-        }}
+        style={{ backgroundImage: "url(/images/roll-bg2.jpeg)", color: "rgb(255, 255, 0)"}}
       >
         <p>↓↓↓ 请大家记住新网址 ↓↓↓</p>
       </div>
       <div className="">
         {list.map((item,index) => (
-          <div
-            key={item.periods + index}
-            className="flex justify-around flex-col items-center font-bold"
-            style={{
-              height: "175px",
-              borderBottom: "1px solid #ccc",
-              fontSize: "15pt",
-            }}
+          <div key={item.periods + index} className="flex justify-around flex-col items-center font-bold"
+            style={{ height: "175px", borderBottom: "1px solid #ccc", fontSize: "15pt",}}
           >
             <div className="" style={{ color: "#CC0033" }}>
               <span>289期</span>:<span>①波</span>

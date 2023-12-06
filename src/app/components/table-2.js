@@ -28,7 +28,7 @@ export default function Table2({ data = [], animalData = [] }) {
         className="w-full h-14 flex justify-center items-center text-2xl border-lime-300 text-yellow-300 bg-img"
         style={{ backgroundImage: "url(/images/roll-bg2.jpeg)" }}
       >
-        <p>港澳新彩论坛(必中九肖)</p>
+        <p>欧洲彩论坛(必中九肖)</p>
       </div>
       <div>
         {list.map((item, index) => (

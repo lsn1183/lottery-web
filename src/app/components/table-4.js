@@ -96,29 +96,31 @@ export default function Table4() {
         className="w-full h-14 flex justify-center items-center text-2xl border-lime-300  bg-img"
         style={{ backgroundImage: "url(/images/roll-bg2.jpeg)", color:'#FFFF00' }}
       >
-        <p>港澳新彩论坛(内部透密九肖)</p>
+        <p>欧洲彩内部揭秘(内部透密十肖)</p>
       </div>
       <div>
         {list.map((item,i) => (
           <div key={item.periods+ i}>
-            <div className="header h-12 p-1 text-lg flex justify-center items-center" style={{backgroundColor: '#fb43e3', color:'#343c4c'}}>
+            <div className="header h-12 p-1 text-lg flex justify-center items-center bg-orange-300 ">
               <span>精选：</span>
               <span>{item.selection}</span>
             </div>
             <ul>
               {item.animals?.map((child,index) => (
-                <li key={child+index} className="flex h-10 font-bold" style={{borderTop: '1px solid #ccc'}}>
-                  <div className="w-40  flex justify-center items-center" style={{backgroundColor: 'aqua'}}>{index}
-                  <span>期</span>
-                  <span>{child?.split('.').length}</span>
-                  <span>肖</span>
+                <li key={child.id} className="flex h-10 font-medium text-base" style={{borderTop: '1px solid #ccc'}}>
+                  <div className="w-28 flex justify-center items-center bg-amber-200">
+                    <span>{item.periods}</span>
+                    <span>期</span>
+                    <span>{child?.split('.').length}</span>
+                    <span>肖</span>
                   </div>
-                  <div className=" flex-auto flex justify-center items-center text-red-600 text-sm">{child}</div>
-                  <div className="w-40  flex justify-center items-center" style={{backgroundColor: 'aqua'}}>{item.open || '??????'}</div>
+                  <div className="flex-1 flex justify-center items-center text-red-600 text-base">{child}</div>
+
+                  <div className="w-24  flex justify-center items-center bg-amber-200" >{item.open || '??????'}</div>
                 </li>
               ))}
             </ul>
-            <div className="footer h-12 p-1 bg-cyan-400 text-violet-600 flex justify-center items-center text-xl">长期跟踪有惊喜！</div>
+            <div className="footer h-8 p-1 bg-cyan-300 text-rose-500 flex justify-center items-center text-base font-bold">长期跟踪有惊喜！</div>
           </div>
         ))}
       </div>
