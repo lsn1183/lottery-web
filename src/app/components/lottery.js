@@ -2,6 +2,7 @@ import { group } from "@/utils/utils";
 import Image from "next/image";
 // import { CountDown } from "react-vant";
 
+
 // 波色类型列表
 const colorList = [
   { color: "red", url: "/icon/ball-red.png" },
@@ -10,7 +11,6 @@ const colorList = [
 ]
 
 export default async function Lottery({ data = [], periodCount }) {
-  // console.log('Lottery-props', data);
   const todayDate = new Date().toLocaleDateString(); // 今天日期
   const todayTime = new Date(todayDate).getTime(); // 今天日期转为时间戳
   const openTime = 22.5 * 60 * 60 * 1000; //  开奖时间小时
@@ -26,9 +26,9 @@ export default async function Lottery({ data = [], periodCount }) {
       });
       return newItem;
     })
-
+  // console.log('Lottery-props', list);
   return (
-    <div className="lottery w-full flex flex-col gap-5 p-5">
+    <div className="w-full flex flex-col gap-5 p-5">
       <div className="flex justify-between text-sm">
         <div>新彩第{Number(periodCount)}期开奖结果：
         </div>
@@ -37,27 +37,16 @@ export default async function Lottery({ data = [], periodCount }) {
           {/* <CountDown time={countTime} format="HH 时 mm 分 ss 秒" className=" " /> */}
         </div>
       </div>
-      <div className="flex justify-between gap-3 flex-wrap">
+      <ul className="flex flex-wrap justify-between gap-2">
         {list.reverse().map((item, index) => (
-          <div
-            key={item.id || index}
+          <li key={item.id || index}
             className={
               index < 6
-                ? "flex items-center flex-col item"
-                : "flex items-center flex-col item"
-            }
-            style={
-              index < 6
-                ? {
-                  boxShadow: "0 0 8px rgba(0,0,0,0.3)",
-                }
-                : {
-                  boxShadow: "0 0 20px rgb(240 46 238)",
-                  borderColor: "rgb(41 232 163)",
-                }
+                ? `text-${item.color}-600 w-1/6 flex items-center flex-col pt-2 flex-1`
+                : `text-${item.color}-600 w-1/6 flex items-center flex-col pt-2 ml-1 flex-1 font-bold`
             }
           >
-            <div className="relative w-12">
+            <div className="relative">
               <Image
                 src={colorList.filter(color => color.color == item.color)[0].url}
                 alt="Vercel Logo"
@@ -66,24 +55,27 @@ export default async function Lottery({ data = [], periodCount }) {
                 sizes="(max-width: 768px) 100vw, 33vw"
                 width={100}
                 height={100}
-                style={{ objectFit: "contain", width: "100%", height: "auto" }}
-              />
-              <div className="absolute text-lg font-medium top-0 left-0 bottom-0 right-0 m-auto"
+                style={{ objectFit: "contain", width: "auto", height: "auto" }}
+              >
+              </Image>
+              <div className="absolute text-sm font-medium"
                 style={{
-                  left: '50%',
-                  top: '45%',
+                  left: '48%',
+                  top: '30%',
                   transform: 'translate(-50%, -50%)'
                 }}
               >
-                {item.particular || item.ordinary}
+                <span className={index >= 6 && 'font-bold text-base'}> {item.particular || item.ordinary} </span>
+              </div>
+              <div className="p-1 text-sm text-center ">
+                <span className={`text-${item.color}-600 `}>{item.property?.substring(0, 1)}</span>
+                <span className="text-black">{item.property.substring(1)}</span>
               </div>
             </div>
-            <div className="p-2 text-base">
-              {item.property}
-            </div>
-          </div>
+
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }

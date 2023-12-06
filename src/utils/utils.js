@@ -69,3 +69,19 @@ export function myRandom(arr, length) {
   // console.log('随机:', newArr);
   return newArr.reverse()
 }
+
+/**
+* @params arr 传入的源数组
+* @params length 需要获取的元素的个数
+  名称转数字 , length
+*/
+export function nameToNum(str, arr=[]) {
+  let newArr = str?.split('.'); // 字符串转数组
+  if (arr.length == 0) return []
+  const list = newArr.map(name=> {
+    let index = arr.findIndex(item =>  item.name == name)
+    let nums = arr[index].nums
+    return nums
+  } )
+  return list
+}

@@ -1,88 +1,19 @@
-export default function Table2() {
-  const list = [
-    {
-      periods: 218,
-      open:'',
-      selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      animals: [
-        "狗",
-        "狗.鸡",
-        "狗.鸡.虎",
-        "狗.鸡.虎.羊",
-        "狗.鸡.虎.羊.猪",
-        "狗.鸡.虎.羊.猪.牛",
-        "狗.鸡.虎.羊.猪.牛.兔",
-        "狗.鸡.虎.羊.猪.牛.兔.马",
-        "狗.鸡.虎.羊.猪.牛.兔.马.猴",
-      ],
-    },
-    {
-      periods: 277,
-      selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      open:'22鼠',
-      animals: [
-        "狗",
-        "狗.鸡",
-        "狗.鸡.虎",
-        "狗.鸡.虎.羊",
-        "狗.鸡.虎.羊.猪",
-        "狗.鸡.虎.羊.猪.牛",
-        "狗.鸡.虎.羊.猪.牛.兔",
-        "狗.鸡.虎.羊.猪.牛.兔.马",
-        "狗.鸡.虎.羊.猪.牛.兔.马.猴",
-      ],
-    },
-    {
-      periods: 276,
-      selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      open:'05猴',
+import { nameToNum } from "@/utils/utils"
 
-      animals: [
-        "狗",
-        "狗.鸡",
-        "狗.鸡.虎",
-        "狗.鸡.虎.羊",
-        "狗.鸡.虎.羊.猪",
-        "狗.鸡.虎.羊.猪.牛",
-        "狗.鸡.虎.羊.猪.牛.兔",
-        "狗.鸡.虎.羊.猪.牛.兔.马",
-        "狗.鸡.虎.羊.猪.牛.兔.马.猴",
-      ],
-    },
-    {
-      periods: 275,
-      selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      open:'49猴',
+export default function Table2({ data = [], animalData = [] }) {
+  // console.log('data', data);
+  const list = data?.splice(0,5).map((item, i) => {
+    let newItem = {}
+    let selection  = nameToNum(item.names, animalData).join('.')
+    let arr = item.names.split('.')
+    let animals = arr.map((name, index) => {
+      return index === 0 ? name : arr.slice(0, index + 1).join('.')
+    })
+    newItem = { ...item, selection, animals }
+    return newItem
+  })
 
-      animals: [
-        "狗",
-        "狗.鸡",
-        "狗.鸡.虎",
-        "狗.鸡.虎.羊",
-        "狗.鸡.虎.羊.猪",
-        "狗.鸡.虎.羊.猪.牛",
-        "狗.鸡.虎.羊.猪.牛.兔",
-        "狗.鸡.虎.羊.猪.牛.兔.马",
-        "狗.鸡.虎.羊.猪.牛.兔.马.猴",
-      ],
-    },
-    {
-      periods: 274,
-      selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      open:'44龙',
-      animals: [
-        "狗",
-        "狗.鸡",
-        "狗.鸡.虎",
-        "狗.鸡.虎.羊",
-        "狗.鸡.虎.羊.猪",
-        "狗.鸡.虎.羊.猪.牛",
-        "狗.鸡.虎.羊.猪.牛.兔",
-        "狗.鸡.虎.羊.猪.牛.兔.马",
-        "狗.鸡.虎.羊.猪.牛.兔.马.猴",
-      ],
-    },
-  ];
+  // console.log(list, '11111');
   return (
     <div className="w-full">
       <div
@@ -97,29 +28,30 @@ export default function Table2() {
         className="w-full h-14 flex justify-center items-center text-2xl border-lime-300 text-yellow-300 bg-img"
         style={{ backgroundImage: "url(/images/roll-bg2.jpeg)" }}
       >
-        <p>港澳新彩论坛(必中8肖)</p>
+        <p>港澳新彩论坛(必中九肖)</p>
       </div>
       <div>
-        {list.map((item,index) => (
-          <div key={item.selection+index}>
-            <div className="header h-12 p-1 text-lg flex justify-center items-center" style={{backgroundColor: '#4e83f4', color:'#343c4c'}}>
+        {list.map((item, index) => (
+          <div key={item.id}>
+            <div className="header h-12 p-1 text-lg flex justify-center items-center bg-blue-500 text-slate-800">
               <span>精选：</span>
               <span>{item.selection}</span>
             </div>
             <ul>
               {item.animals?.map((child) => (
-                <li key={item.periods+index+child} className="flex h-10 font-bold" style={{borderTop: '1px solid #ccc'}}>
-                  <div className="w-40  flex justify-center items-center" style={{backgroundColor: 'rgb(0, 204, 51)'}}>{item.periods}
-                  <span>期</span>
-                  <span>{child?.split('.').length}</span>
-                  <span>肖</span>
+                <li key={item.periods + index + child} className="flex h-10" style={{ borderTop: '1px solid #ccc' }}>
+                  <div className="w-20 flex justify-center items-center font-medium text-sm" style={{ backgroundColor: 'rgb(0, 204, 51)' }}>
+                    <span>{item.periods}</span>
+                    <span>期</span>
+                    <span>{child?.split('.').length}</span>
+                    <span>肖</span>
                   </div>
-                  <div className=" flex-auto flex justify-center items-center text-red-600 text-sm">{child}</div>
-                  <div className="w-40  flex justify-center items-center" style={{backgroundColor: 'rgb(0, 204, 51)'}}>{item.open || '??????'}</div>
+                  <div className="flex-1 flex justify-center items-center text-sm text-red-600 font-semibold">{child}</div>
+                  <div className="w-20  flex justify-center items-center" style={{ backgroundColor: 'rgb(0, 204, 51)'}}>{item.open || '??????'}</div>
                 </li>
               ))}
             </ul>
-            <div className="footer h-12 p-1 bg-cyan-400 text-zinc-600 flex justify-center items-center text-xl">见证奇迹，成就梦想，彩霸王</div>
+            <div className="footer h-12 p-1 bg-cyan-300 text-zinc-800 flex justify-center items-center text-xl">见证奇迹，成就梦想，彩霸王</div>
           </div>
         ))}
       </div>

@@ -5,15 +5,15 @@ import Head from 'next/head'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: '新加坡新彩',
-  description: '港澳台新加坡菲律宾泰国',
+  title: '欧洲彩',
+  description: '欧洲彩票',
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <Head>
-        <title>彩票</title>
+        <title>欧洲彩</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <body className={inter.className}>{children}</body>

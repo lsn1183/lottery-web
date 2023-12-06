@@ -1,10 +1,17 @@
 import Image from "next/image";
 
-export default function Table1({ data = [], periodCount }) {
-  // console.log('table1', data);
+export default function Table1({ data = [], periodCount, openData = [] }) {
+  // console.log('openData:', openData);
   const latestItem = data[data?.length - 1]
   const recommendData = { ...latestItem, periods: periodCount, id: 0 } // 今期推荐数据
-  const list = [recommendData, ...data.slice(8)]
+  const list = [recommendData, ...data.slice(0, 10)].map(item => {
+    // console.log(item, 'item');
+    const index = openData.findIndex(o => item.periods == o.periods)
+    const openNum = index != -1 ? openData[index].particular : undefined
+    const openName = index != -1 ? openData[index].particular_property?.substring(0, 1) : undefined
+    return { ...item, openNum, openName }
+  })
+
   // console.log( 'period', list);
   return (
     <div className="w-full">
@@ -15,12 +22,24 @@ export default function Table1({ data = [], periodCount }) {
               <span>{item.periods}期：</span>
               <span className="text-blue-600 mr-1">xxx.com=精品24码=</span>
               <span className="text-red-500">
-                开（{item.openNum || "?"}蛇）
+                开({item.openNum || "???"}{item.openName})
               </span>
             </div>
-            <p className="text-red-600 font-medium text-lg">{item.nums1}</p>
-            <p className="text-red-600 font-medium text-lg">{item.nums2}</p>
-            <p className="text-red-600 font-medium text-lg">{item.nums3}</p>
+            <p className="text-red-600 font-medium text-lg">
+              {
+                item.nums1?.split('.').map((ele, i) => (<span className={ele == item.openNum ? ' bg-lime-100 rounded-lg' : ''}>{ele}{i < 6 ? '.' : ''}</span>))
+              }
+            </p>
+            <p className="text-red-600 font-medium text-lg">
+              {
+                item.nums2?.split('.').map((ele, i) => (<span className={ele == item.openNum ? ' bg-lime-100 rounded-lg' : ''}>{ele}{i < 6 ? '.' : ''}</span>))
+              }
+            </p>
+            <p className="text-red-600 font-medium text-lg">
+              {
+                item.nums3?.split('.').map((ele, i) => (<span className={ele == item.openNum ? ' bg-lime-100 rounded-lg' : ''}>{ele}{i < 6 ? '.' : ''}</span>))
+              }
+            </p>
           </li>
         ))}
         <li className=" m-2 p-3 text-start">

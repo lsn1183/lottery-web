@@ -102,7 +102,7 @@ export async function inertOpenDataSource(leng = 0) {
   await createAnimal(data1);
   await createAnimal(data2);
 }
-// 插入recommend 数据表记录
+// 插入 recommend 数据表记录
 export async function inertRemmDatabase(leng) {
   // console.log('1111', dataSource.amimalList)
   const data = []
@@ -146,6 +146,30 @@ export async function inertRemmDatabase(leng) {
 
 }
 
+// 插入 zodiac 数据表记录
+export async function inertZodiacDatabase(leng) {
+  // console.log('1111', dataSource.amimalList)
+  const data = []
+  const NamesArr = dataSource.amimalList.map(item => item.name)
 
+  let nums1;
+  for (let index = 0; index < leng; index++) {
+    nums1 = myRandom(JSON.parse(JSON.stringify(NamesArr)), 9).join('.')
+    const element = {
+      periods: index + 1,
+      names: nums1,
+    }
+    data.push(element)
+  }
+  console.log('即将插入的data', data);
+  // return
+  const res = await fetch(API + "/zodiac/add", {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify(data),
+  });
 
-
+}
