@@ -1,123 +1,78 @@
-export default function Table3() {
-  const list = [
-    {
-      periods: 280,
-      open: "",
-      selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      animals: [
-        "狗",
-        "狗.鸡",
-        "狗.鸡.虎",
-        "狗.鸡.虎.羊",
-        "狗.鸡.虎.羊.猪",
-        "狗.鸡.虎.羊.猪.牛",
-        "狗.鸡.虎.羊.猪.牛.兔",
-        "狗.鸡.虎.羊.猪.牛.兔.马",
-        "狗.鸡.虎.羊.猪.牛.兔.马.猴",
-      ],
-    },
-    {
-      periods: 277,
-      selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      open: "25猪",
-      animals: [
-        "狗",
-        "狗.鸡",
-        "狗.鸡.虎",
-        "狗.鸡.虎.羊",
-        "狗.鸡.虎.羊.猪",
-        "狗.鸡.虎.羊.猪.牛",
-        "狗.鸡.虎.羊.猪.牛.兔",
-        "狗.鸡.虎.羊.猪.牛.兔.马",
-        "狗.鸡.虎.羊.猪.牛.兔.马.猴",
-      ],
-    },
-    {
-      periods: 276,
-      selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      open: "45猪",
+import { getOpenItem } from '@/utils/utils';
 
-      animals: [
-        "狗",
-        "狗.鸡",
-        "狗.鸡.虎",
-        "狗.鸡.虎.羊",
-        "狗.鸡.虎.羊.猪",
-        "狗.鸡.虎.羊.猪.牛",
-        "狗.鸡.虎.羊.猪.牛.兔",
-        "狗.鸡.虎.羊.猪.牛.兔.马",
-        "狗.鸡.虎.羊.猪.牛.兔.马.猴",
-      ],
-    },
-    {
-      periods: 275,
-      selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      open: "33猴",
-
-      animals: [
-        "狗",
-        "狗.鸡",
-        "狗.鸡.虎",
-        "狗.鸡.虎.羊",
-        "狗.鸡.虎.羊.猪",
-        "狗.鸡.虎.羊.猪.牛",
-        "狗.鸡.虎.羊.猪.牛.兔",
-        "狗.鸡.虎.羊.猪.牛.兔.马",
-        "狗.鸡.虎.羊.猪.牛.兔.马.猴",
-      ],
-    },
-    {
-      periods: 274,
-      selection: "42.40.46.28.18.01.27.03.25.23.11.3",
-      open: "23猴",
-      animals: [
-        "狗",
-        "狗.鸡",
-        "狗.鸡.虎",
-        "狗.鸡.虎.羊",
-        "狗.鸡.虎.羊.猪",
-        "狗.鸡.虎.羊.猪.牛",
-        "狗.鸡.虎.羊.猪.牛.兔",
-        "狗.鸡.虎.羊.猪.牛.兔.马",
-        "狗.鸡.虎.羊.猪.牛.兔.马.猴",
-      ],
-    },
+export default function Table3({ title, data = [], openData = [] }) {
+  const colorList = [
+    { color: 'blue', name: '蓝' },
+    { color: 'green', name: '绿' },
+    { color: 'red', name: '红' },
   ];
+  // console.log('================================', title, data);
+  let color1_Name = '',
+    color2_Name = '',
+    openItem,
+    numArray = [];
+  const list = data.map((item) => {
+    color1_Name = colorList.filter((c) => c.color == item.color1)[0]['name'];
+    color2_Name = colorList.filter((c) => c.color == item.color2)[0]['name'];
+    openItem = getOpenItem(openData, item);
+    numArray = item.nums.split('.');
+    return {
+      ...item,
+      main: JSON.parse(item.main).join(''),
+      ...openItem,
+      color2_Name,
+      color1_Name,
+      nums: numArray,
+    };
+  });
+
   return (
     <div className="w-full">
-      {/* <div
-        className="w-full h-14 flex justify-center items-center text-2xl border-lime-300 text-yellow-300 bg-img"
-        style={{ backgroundImage: "url(/images/roll-bg2.jpeg)" }}
-      ></div>
       <div
-        className="w-full h-14 flex justify-center items-center text-2xl border-lime-300 text-yellow-300 bg-img"
-        style={{ backgroundImage: "url(/images/roll-bg5.gif)" }}
-      ></div> */}
-      <div
-        className="w-full h-14 flex justify-center items-center text-2xl border-lime-300  bg-img"
-        style={{ backgroundImage: "url(/images/roll-bg2.jpeg)", color: "rgb(255, 255, 0)"}}
+        className="bg-img flex h-14 w-full items-center justify-center border-lime-300  text-base"
+        style={{
+          backgroundImage: 'url(/images/roll-bg2.jpeg)',
+          color: 'rgb(255, 255, 0)',
+        }}
       >
-        <p>↓↓↓ 请大家记住新网址 ↓↓↓</p>
+        <p>↓↓↓ 请大家记住新网址 ↓↓↓ www.111.com</p>
       </div>
       <div className="">
-        {list.map((item,index) => (
-          <div key={item.periods + index} className="flex justify-around flex-col items-center font-bold"
-            style={{ height: "175px", borderBottom: "1px solid #ccc", fontSize: "15pt",}}
+        {list.map((item, index) => (
+          <div
+            key={item.id}
+            className="flex flex-col items-center justify-around font-bold"
+            style={{
+              height: '175px',
+              borderBottom: '1px solid #ccc',
+              fontSize: '15pt',
+            }}
           >
-            <div className="" style={{ color: "#CC0033" }}>
-              <span>289期</span>:<span>①波</span>
-              <span>①头主10码</span>:<span>开????</span>
+            <div className="" style={{ color: '#CC0033' }}>
+              <span>{item.periods}期</span>:<span className="pl-1">①波</span>
+              <span>①头主10码</span>:
+              <span className="pl-2">
+                开({item.openNum} {item.openName})
+              </span>
             </div>
             <div>
-              <span style={{ color: "#0033CC" }}>①波</span>
-              〖蓝波+红波〗
-              <span style={{ color: "#0033CC" }}>①头</span>
-              〖410头〗
+              <span style={{ color: '#0033CC' }}>①波</span>〖{item.color1_Name}
+              波+{item.color2_Name}波〗
+              <span style={{ color: '#0033CC' }}>①头</span>〖{item.main}头〗
             </div>
             <div>
-              <span style={{ color: "#0033CC" }}>主10码</span>
-              <span>:</span>
-              <span>04.06.09.26.10.05.20.14.42.27</span>
+              <span style={{ color: '#0033CC' }}>主10码</span>
+              <span>: </span>
+              {item.nums?.map((n, _i) => (
+                <span
+                  className={
+                    item.openNum == n ? ' rounded-md bg-yellow-300' : ''
+                  }
+                >
+                  {n}
+                  {_i + 1 < item.nums?.length ? '.' : ''}
+                </span>
+              ))}
             </div>
           </div>
         ))}
