@@ -1,4 +1,4 @@
-export default function Table4({ title }) {
+export default function Table4({ title, data }) {
   const list = [
     {
       periods: 298,

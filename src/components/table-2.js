@@ -1,8 +1,9 @@
 import { nameToNum } from '@/utils/utils';
 
-export default function Table2({ data = [], animalData = [], title }) {
+export default function Table2({ data, title }) {
+  const { zodiacData, animalData } = data;
   // console.log('data', data);
-  const list = data?.splice(0, 5).map((item, i) => {
+  const list = zodiacData?.map((item, i) => {
     let newItem = {};
     let selection = nameToNum(item.names, animalData).join('.');
     let arr = item.names.split('.');
@@ -12,8 +13,7 @@ export default function Table2({ data = [], animalData = [], title }) {
     newItem = { ...item, selection, animals };
     return newItem;
   });
-
-  // console.log(list, '11111');
+  // console.log(list, '11111-Table2');
   return (
     <div className="w-full">
       <div

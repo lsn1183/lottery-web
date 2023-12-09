@@ -1,5 +1,4 @@
 import Image from 'next/image';
-
 // 插图集合
 export default function ImgList({ title = '' }) {
   const list = [
@@ -14,7 +13,7 @@ export default function ImgList({ title = '' }) {
   return (
     <div className="mt-6 flex flex-wrap justify-start bg-orange-200 p-2">
       {list.map((item, index) => (
-        <div className="c_item flex-1 border">
+        <div key={index} className="c_item flex-1 border">
           <div className="relative" style={{ height: '70%' }}>
             <Image
               src={item.url}

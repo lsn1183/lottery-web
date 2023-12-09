@@ -1,13 +1,12 @@
-export default async function Footer({ periodCount, data = [] }) {
+export default function Footer({ data }) {
+  const { animalData } = data
   const redList = [],
     blueList = [],
     greenList = [],
     singleList = [],
     doubleList = [];
 
-  if (!data) return;
-
-  data.forEach((item) => {
+  animalData?.forEach((item) => {
     if (item.color == 'red') {
       redList.push(item);
     }
@@ -58,8 +57,7 @@ export default async function Footer({ periodCount, data = [] }) {
   return (
     <div className="w-full pb-4 text-xs">
       {/* 波色 */}
-      <div
-        className="bg-img flex h-14 w-full items-center justify-center border-lime-300  text-2xl"
+      <div  className="bg-img flex h-14 w-full items-center justify-center border-lime-300  text-2xl"
         style={{
           backgroundImage: 'url(/images/roll-bg2.jpeg)',
           color: 'rgb(255, 255, 0)',
@@ -70,7 +68,7 @@ export default async function Footer({ periodCount, data = [] }) {
       <ul className="flex flex-col">
         {colorList?.map((item) => (
           <li
-            key={item.id}
+            key={item.color}
             className="flex items-center pb-2 pt-2"
             style={{ borderBottom: '1px solid #ccc' }}
           >
@@ -82,8 +80,7 @@ export default async function Footer({ periodCount, data = [] }) {
             </div>
             <div className="flex w-full flex-1 flex-wrap items-center justify-start gap-1 pl-2">
               {item.nums?.map((col) => (
-                <div
-                  className={`flex items-center justify-center rounded text-white`}
+                <div key={col.nums} className={`flex items-center justify-center rounded text-white`}
                   style={{ backgroundColor: item.color, padding: '2px' }}
                 >
                   {col.nums}
@@ -107,7 +104,7 @@ export default async function Footer({ periodCount, data = [] }) {
       <ul className="flex flex-col">
         {numsList?.map((item) => (
           <li
-            key={item.id}
+            key={item.numName}
             className="flex items-center pb-2 pt-2"
             style={{ borderBottom: '1px solid #ccc' }}
           >
@@ -119,8 +116,7 @@ export default async function Footer({ periodCount, data = [] }) {
             </div>
             <div className="flex w-full flex-1 flex-wrap items-center justify-start gap-1 pl-2">
               {item.nums?.map((child) => (
-                <div
-                  className=" flex items-center justify-center rounded text-white"
+                <div key={child.nums} className=" flex items-center justify-center rounded text-white"
                   style={{ backgroundColor: child.color, padding: '2px' }}
                 >
                   {child.nums}

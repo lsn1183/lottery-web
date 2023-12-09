@@ -9,13 +9,14 @@ const colorList = [
   { color: 'green', url: '/icon/ball-green.png' },
 ];
 
-export default async function Lottery({ data = [], periodCount, title }) {
+export default function Lottery({ data, title }) {
+  const { openData, periodCount } = data;
   const todayDate = new Date().toLocaleDateString(); // 今天日期
   const todayTime = new Date(todayDate).getTime(); // 今天日期转为时间戳
   const openTime = 22.5 * 60 * 60 * 1000; //  开奖时间小时
   const countTime = todayTime + openTime - Date.now(); //
-  const item = data ? data[0] : null;
-  if (!item) return;
+  const item = openData ? openData[0] : null;
+
   const { id, periods, ...other } = item;
   const list = group(Object.entries(other), 3).map((item) => {
     let newItem = {};
@@ -45,19 +46,15 @@ export default async function Lottery({ data = [], periodCount, title }) {
       </div>
       <ul className="flex flex-wrap justify-between gap-2">
         {list.reverse().map((item, index) => (
-          <li
-            key={item.id || index}
-            className={
-              index < 6
-                ? `text-${item.color}-600 flex w-1/6 flex-1 flex-col items-center pt-2`
-                : `text-${item.color}-600 ml-1 flex w-1/6 flex-1 flex-col items-center pt-2 font-bold`
+          <li key={item.ordinary + item.property}
+            className={index < 6
+              ? `text-${item.color}-600 flex w-1/6 flex-1 flex-col items-center pt-2`
+              : `text-${item.color}-600 ml-1 flex w-1/6 flex-1 flex-col items-center pt-2 font-bold`
             }
           >
             <div className="relative">
               <Image
-                src={
-                  colorList.filter((color) => color.color == item.color)[0].url
-                }
+                src={colorList.filter((color) => color.color == item.color)[0].url}
                 alt="Vercel Logo"
                 priority
                 quality={100}
@@ -74,7 +71,7 @@ export default async function Lottery({ data = [], periodCount, title }) {
                   transform: 'translate(-50%, -50%)',
                 }}
               >
-                <span className={index >= 6 && 'text-base font-bold'}>
+                <span className={index >= 6 ? 'text-base font-bold' : ''}>
                   {' '}
                   {item.particular || item.ordinary}{' '}
                 </span>

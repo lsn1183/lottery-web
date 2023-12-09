@@ -1,4 +1,4 @@
-import { API } from '@/app/api/config';
+import { API } from '@/api/config';
 import Image from 'next/image';
 const ballList = [
   { color: 'green', url: 'icon/ball-green.png' },

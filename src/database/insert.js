@@ -3,20 +3,20 @@ import {
   createColour,
   createRecommend,
   createZodiac,
-} from '@/app/api/update';
+} from '@/api/update';
 import { getRandomInt, getRandomStr, myRandom } from '@/utils/utils';
 import dataSource from './dataSource';
 
 // 插入开奖记录数据
-export async function insertOpenDataSource(leng = 0) {
+export async function insertOpenDataSource(statrLeng = 0, endLeng) {
   const list = dataSource.amimalList;
   const filterNums = (key) => {
     let data = list.filter((item) => item.nums == key);
     return data.length > 0 ? data[0]['name'] + '/' + data[0]['property'] : null;
   };
-  const createData = (leng) => {
+  const createData = (statrLeng, endLeng) => {
     let newArr = [];
-    for (let index = 0; index < leng; index++) {
+    for (let index = statrLeng; index < endLeng; index++) {
       const obj = {
         periods: 0,
         particular: '',
@@ -69,26 +69,22 @@ export async function insertOpenDataSource(leng = 0) {
       obj.ordinary6_color = list.filter(
         (item) => item.nums == obj.ordinary6
       )[0]['color'];
-
       newArr.push(obj);
     }
     // console.log(newArr, "--arr");
     return newArr;
   };
-  const database = createData(leng);
-  // console.log(database.length, Math.floor((database.length / 2)));
-  // let data1 = database.slice(0, Math.floor(database.length / 2));
-  // let data2 = database.slice(Math.floor(database.length / 2), database.length);
-  console.log('Animal即将插入的data', database);
+  const database = createData(statrLeng, endLeng);
+  // console.log('Animal即将插入的data', database);
   await createAnimal(database);
 }
 // 插入 recommend 数据表记录
-export async function insertRemmDatabase(leng) {
+export async function insertRemmDatabase(statrLeng = 0, endLeng) {
   // console.log('1111', dataSource.amimalList)
   const data = [];
   const NumsArr = dataSource.amimalList.map((item) => item.nums);
   let nums1, nums2, nums3;
-  for (let index = 0; index < leng; index++) {
+  for (let index = statrLeng; index < endLeng; index++) {
     (nums1 = myRandom(JSON.parse(JSON.stringify(NumsArr)), 7).join('.')),
       (nums2 = myRandom(JSON.parse(JSON.stringify(NumsArr)), 7).join('.')),
       (nums3 = myRandom(JSON.parse(JSON.stringify(NumsArr)), 7).join('.'));
@@ -100,19 +96,18 @@ export async function insertRemmDatabase(leng) {
     };
     data.push(element);
   }
-
-  console.log('recommend即将插入的data:', data);
+  // console.log('recommend即将插入的data:', data);
   // return;
   await createRecommend(data);
 }
 
 // 插入 zodiac 数据表记录
-export async function insertZodiacDatabase(leng) {
+export async function insertZodiacDatabase(statrLeng = 0, endLeng) {
   // console.log('1111', dataSource.amimalList)
   const data = [];
   let nums1;
   const NamesArr = dataSource.amimalList.map((item) => item.name);
-  for (let index = 0; index < leng; index++) {
+  for (let index = statrLeng; index < endLeng; index++) {
     nums1 = myRandom(JSON.parse(JSON.stringify(NamesArr)), 9).join('.');
     const element = {
       periods: index + 1,
@@ -120,19 +115,19 @@ export async function insertZodiacDatabase(leng) {
     };
     data.push(element);
   }
-  console.log('zodiac即将插入的data:', data);
+  // console.log('zodiac即将插入的data:', data);
   // return;
   await createZodiac(data);
 }
 
 // 插入 colour 数据表记录
-export async function insertColourDatabase(leng) {
+export async function insertColourDatabase(statrLeng, endLeng) {
   // console.log('1111', dataSource.amimalList)
   const data = [];
   let nums1, nums2, main, colors, colorArr_1, colorArr_2;
   // main= myRandom(['green','red','blue'], 2) // 主什么数字开头
   // nums1 = myRandom(color1, 9).join('.')
-  for (let index = 0; index < leng; index++) {
+  for (let index = statrLeng; index < endLeng; index++) {
     colors = myRandom(['green', 'red', 'blue'], 2); // 颜色随机2个集合
     main = Array.from(
       new Set(
@@ -170,7 +165,7 @@ export async function insertColourDatabase(leng) {
     // console.log('main', main, [...nums1, ...nums2].length);
     data.push(element);
   }
-  console.log('colour即将插入的data:', data);
+  // console.log('colour即将插入的data:', data);
   // return;
   await createColour(data);
 }

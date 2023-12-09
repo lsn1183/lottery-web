@@ -1,6 +1,7 @@
 import { getOpenItem } from '@/utils/utils';
 
-export default function Table3({ title, data = [], openData = [] }) {
+export default function Table3({ title, data  }) {
+  const { colourData, openData} = data
   const colorList = [
     { color: 'blue', name: '蓝' },
     { color: 'green', name: '绿' },
@@ -11,7 +12,7 @@ export default function Table3({ title, data = [], openData = [] }) {
     color2_Name = '',
     openItem,
     numArray = [];
-  const list = data.map((item) => {
+  const list = colourData.map((item) => {
     color1_Name = colorList.filter((c) => c.color == item.color1)[0]['name'];
     color2_Name = colorList.filter((c) => c.color == item.color2)[0]['name'];
     openItem = getOpenItem(openData, item);
@@ -37,18 +38,16 @@ export default function Table3({ title, data = [], openData = [] }) {
       >
         <p>↓↓↓ 请大家记住新网址 ↓↓↓ www.111.com</p>
       </div>
-      <div className="">
+      <ul className="text-xl">
         {list.map((item, index) => (
-          <div
+          <li
             key={item.id}
-            className="flex flex-col items-center justify-around font-bold"
+            className="flex h-44 flex-col items-center justify-around font-bold"
             style={{
-              height: '175px',
               borderBottom: '1px solid #ccc',
-              fontSize: '15pt',
             }}
           >
-            <div className="" style={{ color: '#CC0033' }}>
+            <div className=" text-rose-700">
               <span>{item.periods}期</span>:<span className="pl-1">①波</span>
               <span>①头主10码</span>:
               <span className="pl-2">
@@ -74,9 +73,9 @@ export default function Table3({ title, data = [], openData = [] }) {
                 </span>
               ))}
             </div>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }

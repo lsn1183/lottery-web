@@ -1,4 +1,4 @@
-export default async function Roll({ title }) {
+export default function Roll({ title }) {
   return (
     <div className="roll w-full pb-1 pt-1">
       {/* 滚动图 */}
