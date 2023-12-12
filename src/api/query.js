@@ -21,8 +21,8 @@ export const getLatestRecommendData = async (params = {}) => {
   // const { pageNum, pageSize } = params
   const result = await fetch(
     API +
-      '/recommend/page' +
-      `?pageNum=${pageNum || 1}&pageSize=${pageSize || 10}`
+    '/recommend/page' +
+    `?pageNum=${pageNum || 1}&pageSize=${pageSize || 10}`
   );
   const { data } = await result.json();
   return data;
@@ -43,6 +43,16 @@ export const getLatestColourData = async (params = {}) => {
   // const { pageNum, pageSize } = params
   const result = await fetch(
     API + '/colour/page' + `?pageNum=${pageNum || 1}&pageSize=${pageSize || 10}`
+  );
+  const { data } = await result.json();
+  return data;
+};
+
+// 获取最新20条历史记录
+export const getLatestFourZodiacData = async (params = {}) => {
+  // const { pageNum, pageSize } = params
+  const result = await fetch(
+    API + '/fourzodiac/page' + `?pageNum=${pageNum || 1}&pageSize=${pageSize || 10}`
   );
   const { data } = await result.json();
   return data;

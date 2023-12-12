@@ -505,4 +505,16 @@ const amimalList = [
   },
 ];
 
-export default { redNums, greenNums, blueNums, colors, amimalList };
+const typeList = [
+  { type: '男肖', names: ['鼠', '牛', '虎', '龙', '马', '猴', '狗'] },
+  { type: '女肖', names: ['兔', '蛇', '羊', '鸡', '猪'] },
+  { type: '吉肖', names: ['兔', '蛇', '龙', '马', '羊', '鸡'] },
+  { type: '凶肖', names: ['鼠', '牛', '虎', '猪', '猴', '狗'] },
+  { type: '家肖', names: ['马', '牛', '羊', '鸡', '猪', '狗'] },
+  { type: '野肖', names: ['鼠', '虎', '兔', '龙', '蛇', '猴'] },
+
+
+
+]
+
+export default { redNums, greenNums, blueNums, colors, amimalList, typeList };

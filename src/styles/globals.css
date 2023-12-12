@@ -40,6 +40,13 @@ body {
   body {
     width: 62.5vw;
     margin: 0 auto !important;
+    background-color: #d6ff9c;
+
+  }
+  .content {
+    background-color: #ffffff;
+    max-height: 100vh;
+    padding-bottom: 20px;
   }
   
 }

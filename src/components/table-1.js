@@ -21,9 +21,7 @@ export default function Table1({ data, title }) {
     }),
   ];
 
-  // console.log('todayData', todayData);
-  console.log('Table1-list', list);
-
+  // console.log('Table1-list', list);
   return (
     <div className="w-full">
       <ul className="flex flex-col gap-1">
@@ -39,7 +37,7 @@ export default function Table1({ data, title }) {
             </div>
             <p className="text-lg font-bold text-red-600">
               {item.nums1?.split('.').map((ele, i) => (
-                <span key={ele} className={ ele == item.openNum ? ' rounded-lg bg-lime-100' : ''}>
+                <span key={ele} className={ele == item.openNum ? ' rounded-lg bg-lime-100' : ''}>
                   {ele}
                   {i < 6 ? '.' : ''}
                 </span>
@@ -47,7 +45,7 @@ export default function Table1({ data, title }) {
             </p>
             <p className="text-lg font-bold text-red-600">
               {item.nums2?.split('.').map((ele, i) => (
-                <span key={ele} className={ ele == item.openNum ? ' rounded-lg bg-lime-100' : ''}>
+                <span key={ele} className={ele == item.openNum ? ' rounded-lg bg-lime-100' : ''}>
                   {ele}
                   {i < 6 ? '.' : ''}
                 </span>
@@ -55,7 +53,7 @@ export default function Table1({ data, title }) {
             </p>
             <p className="text-lg font-bold text-red-600">
               {item.nums3?.split('.').map((ele, i) => (
-                <span key={ele} className={  ele == item.openNum ? ' rounded-lg bg-lime-100' : ''}>
+                <span key={ele} className={ele == item.openNum ? ' rounded-lg bg-lime-100' : ''}>
                   {ele}
                   {i < 6 ? '.' : ''}
                 </span>

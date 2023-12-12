@@ -1,6 +1,17 @@
 import { API } from './config';
 
 export async function createAnimal(params) {
+  return await fetch(API + '/animal/create', {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify(params),
+  });
+}
+
+export async function createOpenAnimal(params) {
   return await fetch(API + '/open/create', {
     headers: {
       Accept: 'application/json',
@@ -35,6 +46,28 @@ export async function createColour(params) {
 
 export async function createRecommend(params) {
   return await fetch(API + '/recommend/create', {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify(params),
+  });
+}
+
+export async function createFourzodiac(params) {
+  return await fetch(API + '/fourzodiac/create', {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify(params),
+  });
+}
+
+export async function createFauvist(params) {
+  return await fetch(API + '/fauvist/create', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',

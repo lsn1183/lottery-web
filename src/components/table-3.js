@@ -1,31 +1,38 @@
 import { getOpenItem } from '@/utils/utils';
 
-export default function Table3({ title, data  }) {
-  const { colourData, openData} = data
+export default function Table3({ title, data }) {
+  const { colourData, openData } = data
   const colorList = [
     { color: 'blue', name: '蓝' },
     { color: 'green', name: '绿' },
     { color: 'red', name: '红' },
   ];
-  // console.log('================================', title, data);
   let color1_Name = '',
     color2_Name = '',
+    color1,
+    color2,
     openItem,
     numArray = [];
   const list = colourData.map((item) => {
     color1_Name = colorList.filter((c) => c.color == item.color1)[0]['name'];
+    color1 = colorList.filter((c) => c.color == item.color1)[0]['color'];
+
     color2_Name = colorList.filter((c) => c.color == item.color2)[0]['name'];
+    color2 = colorList.filter((c) => c.color == item.color2)[0]['color'];
+
     openItem = getOpenItem(openData, item);
     numArray = item.nums.split('.');
     return {
       ...item,
-      main: JSON.parse(item.main).join(''),
+      // main: JSON.parse(item.main).join('') // 数组转字符串,
+      main: JSON.parse(item.main),
       ...openItem,
       color2_Name,
       color1_Name,
       nums: numArray,
     };
   });
+  // console.log('================================', title, list);
 
   return (
     <div className="w-full">
@@ -47,25 +54,27 @@ export default function Table3({ title, data  }) {
               borderBottom: '1px solid #ccc',
             }}
           >
-            <div className=" text-rose-700">
-              <span>{item.periods}期</span>:<span className="pl-1">①波</span>
+            <div className=" text-rose-600">
+              <span>{item.periods}期</span>:<span className="pl-1 text-cyan-700">①波</span>
               <span>①头主10码</span>:
-              <span className="pl-2">
+              <span className="pl-2 text-orange-600">
                 开({item.openNum} {item.openName})
               </span>
             </div>
             <div>
-              <span style={{ color: '#0033CC' }}>①波</span>〖{item.color1_Name}
-              波+{item.color2_Name}波〗
-              <span style={{ color: '#0033CC' }}>①头</span>〖{item.main}头〗
+
+              <span style={{ color: '#0033CC' }}>①波</span>〖<span className={item.color1 == item.openColor ? 'bg-yellow-300' : ''}>{item.color1_Name}</span>
+              波+ <span className={item.color2 == item.openColor ? 'bg-yellow-300' : ''}>{item.color2_Name}</span> 波〗
+              <span style={{ color: '#0033CC' }}>①头</span>〖{item.main.map((v, i) => (<span key={JSON.stringify(item.main) + i} className={item.openNum[0] == v ? 'bg-yellow-300' : ''}>{v}</span>))}头〗
             </div>
             <div>
               <span style={{ color: '#0033CC' }}>主10码</span>
               <span>: </span>
               {item.nums?.map((n, _i) => (
                 <span
+                  key={item.id + _i}
                   className={
-                    item.openNum == n ? ' rounded-md bg-yellow-300' : ''
+                    item.openNum == n ? 'bg-yellow-300' : ''
                   }
                 >
                   {n}

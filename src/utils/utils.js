@@ -64,18 +64,22 @@ export function group(array, subGroupLength) {
  * @params length 需要获取的元素的个数
  */
 export function myRandom(arr, length) {
-  // console.log('arr, length', arr, length);
-  let newArr = []; // 组成的新数组初始化
-  if (arr.length == 0) return [];
-  for (var i = 0; i < length; i++) {
-    let index = Math.floor(Math.random() * arr.length);
-    let item = arr[index];
-    newArr.push(item);
-    arr.splice(index, 1);
+  let ranNum = length;
+  let hash = {};
+  let result = [];
+  let index;
+  while (ranNum > 0) {
+    index = Math.floor(Math.random() * arr.length);
+    if (!hash[arr[index]]) {
+      hash[arr[index]] = 1;
+      result.push(arr[index]);
+      ranNum--;
+    };
   }
-  // console.log('随机:', newArr);
-  return newArr.reverse();
+  // console.log('随机:', result);
+  return result;
 }
+
 
 /**
 * @params arr 传入的源数组
@@ -112,5 +116,8 @@ export function getOpenItem(openData, item) {
     index != -1
       ? openData[index].particular_property?.substring(0, 1)
       : undefined;
-  return { openNum, openName };
+  const openColor = index != -1
+    ? openData[index].particular_color
+    : undefined;
+  return { openNum, openName, openColor };
 }

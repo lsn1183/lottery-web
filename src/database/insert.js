@@ -1,11 +1,25 @@
 import {
-  createAnimal,
-  createColour,
-  createRecommend,
-  createZodiac,
+  createAnimal, createColour, createFauvist, createFourzodiac, createOpenAnimal, createRecommend, createZodiac
 } from '@/api/update';
 import { getRandomInt, getRandomStr, myRandom } from '@/utils/utils';
 import dataSource from './dataSource';
+
+// 插入 recommend 数据表记录
+export async function insertAnimalDatabase(statrLeng = 0, endLeng) {
+  // console.log('1111', dataSource.amimalList)
+  const data = dataSource.amimalList.map((item) => {
+    let type = []
+    dataSource.typeList.forEach(el => {
+      if (el.names.some(name => name == item.name)) {
+        type.push(el.type)
+      }
+    })
+    return { ...item, type: JSON.stringify(type) }
+  });
+
+  console.log('animal即将插入的data:', data);
+  await createAnimal(data);
+}
 
 // 插入开奖记录数据
 export async function insertOpenDataSource(statrLeng = 0, endLeng) {
@@ -76,7 +90,7 @@ export async function insertOpenDataSource(statrLeng = 0, endLeng) {
   };
   const database = createData(statrLeng, endLeng);
   // console.log('Animal即将插入的data', database);
-  await createAnimal(database);
+  await createOpenAnimal(database);
 }
 // 插入 recommend 数据表记录
 export async function insertRemmDatabase(statrLeng = 0, endLeng) {
@@ -108,15 +122,14 @@ export async function insertZodiacDatabase(statrLeng = 0, endLeng) {
   let nums1;
   const NamesArr = dataSource.amimalList.map((item) => item.name);
   for (let index = statrLeng; index < endLeng; index++) {
-    nums1 = myRandom(JSON.parse(JSON.stringify(NamesArr)), 9).join('.');
+    nums1 = myRandom(NamesArr, 9).join('.');
     const element = {
       periods: index + 1,
       names: nums1,
     };
     data.push(element);
   }
-  // console.log('zodiac即将插入的data:', data);
-  // return;
+  console.log('zodiac即将插入的data:', data);
   await createZodiac(data);
 }
 
@@ -169,3 +182,61 @@ export async function insertColourDatabase(statrLeng, endLeng) {
   // return;
   await createColour(data);
 }
+
+// 插入单双四肖数据表 Fourzodiac
+export async function insertFourzodiacDatabase(statrLeng, endLeng) {
+  // console.log('1111', dataSource.amimalList)
+  const data = [];
+  let single, double, name1, name2;
+  single = dataSource.amimalList.filter(
+    (item) => Number(item.nums) % 2 !== 0
+  ).map(item => item.name);
+  double = dataSource.amimalList.filter(
+    (item) => Number(item.nums) % 2 === 0
+  ).map(item => item.name);
+  for (let index = statrLeng; index < endLeng; index++) {
+    name1 = myRandom(single, 4); // 颜色随机2个集合
+    name2 = myRandom(double, 4); // 颜色随机2个集合
+    const element = {
+      periods: index + 1,
+      single: JSON.stringify(name1),
+      double: JSON.stringify(name2),
+    };
+    // console.log('main', main, [...nums1, ...nums2].length);
+    data.push(element);
+  }
+  console.log('colour即将插入的data:', single, data);
+
+  await createFourzodiac(data);
+  // return;
+}
+
+// 插入野兽家禽数据表 Fauvist
+export async function insertFauvistDatabase(statrLeng, endLeng) {
+  // console.log('1111', dataSource.amimalList)
+  const data = [];
+  let single, double, name1, name2;
+  single = dataSource.amimalList.filter(
+    (item) => Number(item.nums) % 2 !== 0
+  ).map(item => item.name);
+  double = dataSource.amimalList.filter(
+    (item) => Number(item.nums) % 2 === 0
+  ).map(item => item.name);
+  for (let index = statrLeng; index < endLeng; index++) {
+    name1 = myRandom(single, 4); // 颜色随机2个集合
+    name2 = myRandom(double, 4); // 颜色随机2个集合
+    const element = {
+      periods: index + 1,
+      single: JSON.stringify(name1),
+      double: JSON.stringify(name2),
+    };
+    // console.log('main', main, [...nums1, ...nums2].length);
+    data.push(element);
+  }
+  console.log('colour即将插入的data:', single, data);
+
+  await createFauvist(data);
+  // return;
+}
+
+

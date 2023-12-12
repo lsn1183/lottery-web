@@ -1,4 +1,4 @@
-import { getAnimalList, getLatestColourData, getLatestOpenData, getLatestRecommendData, getLatestZodiacData } from '@/api/query';
+import { getAnimalList, getLatestColourData, getLatestFourZodiacData, getLatestOpenData, getLatestRecommendData, getLatestZodiacData } from '@/api/query';
 import TopImage from '@/components/fixed-image';
 import Footer from '@/components/footer';
 import ImgList1 from '@/components/image-1';
@@ -10,17 +10,25 @@ import Roll from '@/components/roll';
 import Table1 from '@/components/table-1';
 import Table2 from '@/components/table-2';
 import Table3 from '@/components/table-3';
-// import Table4 from '@/components/table-4';
-import { insertColourDatabase, insertOpenDataSource, insertRemmDatabase, insertZodiacDatabase } from '@/database/insert';
+import Table4 from '@/components/table-4';
+import Table5 from '@/components/table-5';
+import Table6 from '@/components/table-6';
+import Table7 from '@/components/table-7';
+import Table8 from '@/components/table-8';
+
+import { insertAnimalDatabase, insertColourDatabase, insertFourzodiacDatabase, insertOpenDataSource, insertRemmDatabase, insertZodiacDatabase } from '@/database/insert';
 import moment from 'moment';
 
 const insertDataFunctions = async (statrLeng, endLeng) => {
+
   console.log('插入数据长度：', statrLeng, endLeng);
-  // return;
-  await insertOpenDataSource(statrLeng, endLeng); // 往open数据库插入历史开奖数据
+  await insertAnimalDatabase(statrLeng, endLeng);
+  await insertFourzodiacDatabase(statrLeng, endLeng)
   await insertZodiacDatabase(statrLeng, endLeng);
+  await insertOpenDataSource(statrLeng, endLeng); // 往open数据库插入历史开奖数据
   await insertColourDatabase(statrLeng, endLeng);
   await insertRemmDatabase(statrLeng, endLeng);
+
 };
 
 // This gets called on every request
@@ -37,26 +45,22 @@ export async function getServerSideProps() {
     // 超过21:30分，已过当天开奖时间，+1 , 再从中决定自动加不加数据
     periodCount += 1;
   }
-  // const res = await fetch('http://localhost:3001' + '/animal/list')
-  // const data = await res.json()
+  // await insertAnimalDatabase()
   const result = await getAnimalList();
   const result1 = await getLatestOpenData();
   const result2 = await getLatestRecommendData();
   const result3 = await getLatestZodiacData();
   const result4 = await getLatestColourData();
-
-  // console.log('result3:', result3);
-  // console.log('result1', result1);
-
+  const result5 = await getLatestFourZodiacData()
   const data = {
     openData: result1.list || [],
     animalData: result?.data || [],
     recommendData: result2.list || [],
     zodiacData: result3?.list || [],
     colourData: result4?.list || [],
+    fourZodiacData: result5.list || [],
     periodCount
   };
-
   return { props: { data } }
 }
 
@@ -65,6 +69,7 @@ export default function Page({ data }) {
   const Title = '欧洲彩';
 
   console.log('2023年目前为止最新期数：', periodCount);
+
   // Render data...
   return (
     <main className="content overflow-scroll">
@@ -79,8 +84,12 @@ export default function Page({ data }) {
       <Table2 title={Title} data={data} />
       <Table3 title={Title} data={data} />
       {/* <ImgList2 title={Title} /> */}
-      {/* <Table4 title={Title} data={data} /> */}
+      <Table4 title={Title} data={data} />
       {/* <ImgList6 title={Title} /> */}
+      <Table5 title={Title} data={data} />
+      <Table6 title={Title} data={data} />
+      <Table7 title={Title} data={data} />
+      <Table8 title={Title} data={data} />
       <Footer title={Title} data={data} />
     </main>
   )

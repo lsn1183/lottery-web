@@ -7,7 +7,7 @@
   },
   // Formatting using Prettier for JavaScript, overrides VSCode default.
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   // Linting using ESLint.
   "eslint.validate": [

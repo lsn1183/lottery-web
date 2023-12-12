@@ -1,15 +1,23 @@
 import { getOpenItem } from '@/utils/utils';
 
-export default function Table4({ title, data }) {
+export default function Table5({ title, data }) {
   const { openData, fourZodiacData } = data
   // console.log(data, '----');
-  const list = fourZodiacData.map(item => {
+  let name1, name2;
+  const list = fourZodiacData.map((item, index) => {
     const { single, double } = item
     const openItem = getOpenItem(openData, item)
-    return { ...item, single: JSON.parse(single), double: JSON.parse(double), ...openItem }
+    if (index % 2 === 0) {
+      name1 = JSON.parse(single).slice(0, 2)
+      name2 = JSON.parse(double).slice(0, 3)
+    } else {
+      name1 = JSON.parse(single).slice(0, 3)
+      name2 = JSON.parse(double).slice(0, 2)
+    }
+    return { ...item, ...openItem, names: [...name1, ...name2], }
   })
 
-  // console.log('data', list);
+  console.log('data', list);
 
   return (
     <div className="w-full">
@@ -28,26 +36,22 @@ export default function Table4({ title, data }) {
           color: '#FFFF00',
         }}
       >
-        <p>{title}(内部论坛：单双四肖)</p>
+        <p>{title}(内部论坛：五肖中特)</p>
       </div>
       <ul className='w-full'>
         {list.map((item, i) => (
           <li key={item.id} className="flex text-base font-medium h-10 justify-center items-center " style={{
             borderBottom: '1px solid #ccc',
           }}>
-            <div className=" text-violet-700 ">{item.periods} 期：</div>
-            <div className=' text-red-600'>
-              <span className={Number(item.openNum) % 2 !== 0 ? 'text-fuchsia-600 bg-yellow-200' : 'text-fuchsia-600'}>单数</span>
-              <span>【 {item.single.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-300' : ''}>{name}</span>))} 】</span>
+            <div className=" ">{item.periods} 期：</div>
+            <div className=' '>
+              <span className='text-blue-700'>精准五肖中特</span>
+              <span>【 {item.names.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-300' : ''}>{name}</span>))} 】</span>
             </div>
-            <div className=' text-red-600'>
-              <span className={Number(item.openNum) % 2 == 0 ? 'text-purple-700 bg-yellow-200' : 'text-purple-700'}>双数</span>
-              <span>【 {item.double.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-300' : ''}>{name}</span>))} 】</span>
 
-            </div>
-            <div >开：
-              <span className='pl-1 pr-1 text-pink-700'>{item.openNum}</span>
-              <span className='text-sm font-bold'>{item.openName}</span>
+            <div className='text-pink-400'>开：
+              <span className='pl-1 pr-1'>{item.openNum}</span>
+              <span className='text-sm font-bold text-amber-500'>({item.openName})</span>
             </div>
           </li>
         ))}
