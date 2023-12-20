@@ -16,18 +16,20 @@ import Table6 from '@/components/table-6';
 import Table7 from '@/components/table-7';
 import Table8 from '@/components/table-8';
 
-import { insertAnimalDatabase, insertColourDatabase, insertFourzodiacDatabase, insertOpenDataSource, insertRemmDatabase, insertZodiacDatabase } from '@/database/insert';
+import { insertAnimalDatabase, insertColourDatabase, insertFauvistDatabase, insertFourzodiacDatabase, insertOpenDataSource, insertRemmDatabase, insertZodiacDatabase } from '@/database/insert';
 import moment from 'moment';
 
-const insertDataFunctions = async (statrLeng, endLeng) => {
+async function insertDataFunctions(statrLeng, endLeng) {
 
-  console.log('插入数据长度：', statrLeng, endLeng);
   await insertAnimalDatabase(statrLeng, endLeng);
   await insertFourzodiacDatabase(statrLeng, endLeng)
   await insertZodiacDatabase(statrLeng, endLeng);
   await insertOpenDataSource(statrLeng, endLeng); // 往open数据库插入历史开奖数据
   await insertColourDatabase(statrLeng, endLeng);
   await insertRemmDatabase(statrLeng, endLeng);
+  await insertFauvistDatabase(statrLeng, endLeng);
+
+  console.log('插入数据长度：', statrLeng, endLeng);
 
 };
 
@@ -45,7 +47,7 @@ export async function getServerSideProps() {
     // 超过21:30分，已过当天开奖时间，+1 , 再从中决定自动加不加数据
     periodCount += 1;
   }
-  // await insertAnimalDatabase()
+
   const result = await getAnimalList();
   const result1 = await getLatestOpenData();
   const result2 = await getLatestRecommendData();
@@ -61,6 +63,18 @@ export async function getServerSideProps() {
     fourZodiacData: result5.list || [],
     periodCount
   };
+
+  // await insertAnimalDatabase()
+  insertDataFunctions(0, periodCount)
+  let statrLeng = 0, endLeng = periodCount;
+  // await insertAnimalDatabase(statrLeng, endLeng);
+  // await insertFourzodiacDatabase(statrLeng, endLeng)
+  // await insertZodiacDatabase(statrLeng, endLeng);
+  // await insertOpenDataSource(statrLeng, endLeng); // 往open数据库插入历史开奖数据
+  // await insertColourDatabase(statrLeng, endLeng);
+  // await insertRemmDatabase(statrLeng, endLeng);
+
+
   return { props: { data } }
 }
 

@@ -513,8 +513,6 @@ const typeList = [
   { type: '家肖', names: ['马', '牛', '羊', '鸡', '猪', '狗'] },
   { type: '野肖', names: ['鼠', '虎', '兔', '龙', '蛇', '猴'] },
 
-
-
 ]
 
 export default { redNums, greenNums, blueNums, colors, amimalList, typeList };

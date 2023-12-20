@@ -16,7 +16,6 @@ export async function insertAnimalDatabase(statrLeng = 0, endLeng) {
     })
     return { ...item, type: JSON.stringify(type) }
   });
-
   console.log('animal即将插入的data:', data);
   await createAnimal(data);
 }
@@ -89,7 +88,7 @@ export async function insertOpenDataSource(statrLeng = 0, endLeng) {
     return newArr;
   };
   const database = createData(statrLeng, endLeng);
-  // console.log('Animal即将插入的data', database);
+  console.log('open即将插入的data', database);
   await createOpenAnimal(database);
 }
 // 插入 recommend 数据表记录
@@ -238,5 +237,3 @@ export async function insertFauvistDatabase(statrLeng, endLeng) {
   await createFauvist(data);
   // return;
 }
-
-
