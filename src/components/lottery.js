@@ -16,7 +16,7 @@ export default function Lottery({ data, title }) {
   const openTime = 22.5 * 60 * 60 * 1000; //  开奖时间小时
   const countTime = todayTime + openTime - Date.now(); //
   const item = openData ? openData[0] : null;
-
+  if (!item) return null;
   const { id, periods, ...other } = item;
   const list = group(Object.entries(other), 3).map((item) => {
     let newItem = {};
