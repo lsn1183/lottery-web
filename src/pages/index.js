@@ -44,9 +44,7 @@ export async function getServerSideProps() {
   const diffTime = moment(todayDate).diff(targetDate, 'MM').valueOf(); // 现在时间和目标时间比较
   let periodCount = moment().dayOfYear(); // 今年的第几天
   console.log('2023年第：' + periodCount + '天');
-
   console.log('距离开奖时间：', diffTime);
-
   const result = await getAnimalList();
   const result1 = await getLatestOpenData();
   const result2 = await getLatestRecommendData();
@@ -55,8 +53,8 @@ export async function getServerSideProps() {
   const result5 = await getLatestFourZodiacData();
   const result6 = await getLatestFauvistData();
   if (result?.data.length == 0 || result.data.length < 49) {
-    await insertAnimalDatabase(); // 生肖表
     console.log(1111);
+    await insertAnimalDatabase(); // 生肖表
   }
   if (diffTime < 0) { // 
     // 超过21:30分，已过当天开奖时间，+1 , 再从中决定自动加不加数据
