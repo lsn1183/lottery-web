@@ -53,7 +53,6 @@ export async function getServerSideProps() {
   const result5 = await getLatestFourZodiacData();
   const result6 = await getLatestFauvistData();
   if (result?.data.length == 0 || result.data.length < 49) {
-    console.log(1111);
     await insertAnimalDatabase(); // 生肖表
   }
   if (diffTime < 0) { // 
