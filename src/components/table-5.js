@@ -17,7 +17,7 @@ export default function Table5({ title, data }) {
     return { ...item, ...openItem, names: [...name1, ...name2], }
   })
 
-  console.log('data', list);
+  // console.log('data', list);
 
   return (
     <div className="w-full">

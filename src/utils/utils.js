@@ -60,23 +60,23 @@ export function group(array, subGroupLength) {
 }
 
 /**
- * @params arr 传入的源数组
+ * @params arr 传入的源数组, arr非类数组
  * @params length 需要获取的元素的个数
  */
-export function myRandom(arr, length) {
-  let ranNum = length;
+export function myRandom(arr = [], length) {
+  // console.log('arr, length', arr, length);
+  let ranNum = length || 0;
   let hash = {};
   let result = [];
-  let index;
+  let index = 0;
   while (ranNum > 0) {
     index = Math.floor(Math.random() * arr.length);
     if (!hash[arr[index]]) {
       hash[arr[index]] = 1;
       result.push(arr[index]);
-      ranNum--;
+      ranNum = ranNum - 1;
     };
   }
-  // console.log('随机:', result);
   return result;
 }
 

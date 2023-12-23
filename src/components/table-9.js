@@ -5,10 +5,10 @@ export default function Table6({ title, data }) {
   // console.log(fauvistData, '----fauvistData');
   let arr1 = [], arr2 = [];
   const list = fauvistData.map((item, index) => {
-    const { beast, birds } = item
+    const { propitious, fierce } = item
     const openItem = getOpenItem(openData, item)
-    arr1 = JSON.parse(beast) // 野
-    arr2 = JSON.parse(birds) // 家
+    arr1 = JSON.parse(propitious) // 吉
+    arr2 = JSON.parse(fierce) // 凶
     return { ...item, ...openItem, names3: arr1, names4: arr2 }
   })
   // console.log('data', list);
@@ -29,7 +29,7 @@ export default function Table6({ title, data }) {
           color: '#FFFF00',
         }}
       >
-        <p>{title}论坛：(绝杀家禽野兽)</p>
+        <p>{title}论坛：(吉凶肖推荐)</p>
       </div>
       <ul className='w-full'>
         {list.map((item, i) => (
@@ -39,11 +39,11 @@ export default function Table6({ title, data }) {
             <div className="w-20">{item.periods} 期：</div>
             <div>
               <div className='text-sm'>
-                <span className='text-Neutral-600'>【野兽】</span>
+                <span className='text-emerald-600'>【吉肖】</span>
                 <span>【 {item.names3.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-400 pl-1 pr-1' : 'pl-1 pr-1'}>{name}</span>))} 】</span>
               </div>
               <div className='text-sm'>
-                <span className='text-lime-500'>【家禽】</span>
+                <span className='text-amber-600'>【凶肖】</span>
                 <span>【 {item.names4.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-400 pl-1 pr-1' : 'pl-1 pr-1'}>{name}</span>))} 】</span>
               </div>
             </div>

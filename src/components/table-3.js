@@ -49,7 +49,7 @@ export default function Table3({ title, data }) {
         {list.map((item, index) => (
           <li
             key={item.id}
-            className="flex h-44 flex-col items-center justify-around font-bold"
+            className="flex h-32 flex-col items-center justify-around font-bold"
             style={{
               borderBottom: '1px solid #ccc',
             }}
@@ -62,7 +62,6 @@ export default function Table3({ title, data }) {
               </span>
             </div>
             <div>
-
               <span style={{ color: '#0033CC' }}>①波</span>〖<span className={item.color1 == item.openColor ? 'bg-yellow-300' : ''}>{item.color1_Name}</span>
               波+ <span className={item.color2 == item.openColor ? 'bg-yellow-300' : ''}>{item.color2_Name}</span> 波〗
               <span style={{ color: '#0033CC' }}>①头</span>〖{item.main.map((v, i) => (<span key={JSON.stringify(item.main) + i} className={item.openNum[0] == v ? 'bg-yellow-300' : ''}>{v}</span>))}头〗

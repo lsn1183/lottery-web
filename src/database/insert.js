@@ -5,7 +5,7 @@ import { getRandomInt, getRandomStr, myRandom } from '@/utils/utils';
 import dataSource from './dataSource';
 
 // 插入 recommend 数据表记录
-export async function insertAnimalDatabase(statrLeng = 0, endLeng) {
+export async function insertAnimalDatabase() {
   // console.log('1111', dataSource.amimalList)
   const data = dataSource.amimalList.map((item) => {
     let type = []
@@ -109,7 +109,7 @@ export async function insertRemmDatabase(statrLeng = 0, endLeng) {
     };
     data.push(element);
   }
-  // console.log('recommend即将插入的data:', data);
+  console.log('recommend即将插入的data:', data);
   // return;
   await createRecommend(data);
 }
@@ -136,49 +136,46 @@ export async function insertZodiacDatabase(statrLeng = 0, endLeng) {
 export async function insertColourDatabase(statrLeng, endLeng) {
   // console.log('1111', dataSource.amimalList)
   const data = [];
-  let nums1, nums2, main, colors, colorArr_1, colorArr_2;
-  // main= myRandom(['green','red','blue'], 2) // 主什么数字开头
-  // nums1 = myRandom(color1, 9).join('.')
+  let nums1, nums2, mainNums, colors, colorArr_1, colorArr_2;
   for (let index = statrLeng; index < endLeng; index++) {
     colors = myRandom(['green', 'red', 'blue'], 2); // 颜色随机2个集合
-    main = Array.from(
+    mainNums = Array.from(
       new Set(
         [...new Array(3)].map((v) => {
           return getRandomInt(0, 4);
         })
       )
-    ); // 主什么数字开头，随机数集合
-    while (main.length < 3) {
-      let num = parseInt(Math.random() * 4);
+    ); //随机数主0-4数字开头
+    while (mainNums.length < 3) { // 如果不够三位，不足三位数字
       // parseInt取正，小数点后面的数字全部抹掉
-      // Math.random() 0-1的随机数
-      // this.arr.indexOf(num)若等于-1则证明arr这个数组里没有num这个随机数，因此可以放进这个数组里
-      if (main.indexOf(num) == -1) {
-        main.push(num);
+      let num = parseInt(Math.random() * 4); // Math.random() 0-1的随机数
+      // 若等于-1则证明arr这个数组里没有num这个随机数，因此可以放进这个数组里
+      if (mainNums.indexOf(num) == -1) {
+        mainNums.push(num);
       }
     }
-    // console.log(main,'main');
+    // console.log('mainNums', mainNums, colors);
     colorArr_1 = dataSource.amimalList.filter(
       (item) => item.color === colors[0]
     );
     colorArr_2 = dataSource.amimalList.filter(
       (item) => item.color === colors[1]
     );
-    let subIndex = getRandomInt(3, 7); // 随机数
-    nums1 = myRandom(colorArr_1, subIndex)?.map((item) => item.nums); // 取第一组波色随机数
-    nums2 = myRandom(colorArr_2, 10 - subIndex)?.map((item) => item.nums); // // 取第二组波色随机数
+    let subIndex = getRandomInt(2, 7); // 随机数
+    nums1 = myRandom(colorArr_1.map(item => item.nums), subIndex); // 取第一组波色随机数
+    nums2 = myRandom(colorArr_2.map(item => item.nums), 10 - subIndex); // 取第二组波色随机数
+
     const element = {
       periods: index + 1,
       nums: [...nums1, ...nums2].join('.'),
-      main: JSON.stringify(main),
+      main: JSON.stringify(mainNums),
       color1: colors[0],
       color2: colors[1],
     };
     // console.log('main', main, [...nums1, ...nums2].length);
     data.push(element);
   }
-  // console.log('colour即将插入的data:', data);
-  // return;
+  console.log('colour即将插入的data:', data);
   await createColour(data);
 }
 
@@ -212,28 +209,40 @@ export async function insertFourzodiacDatabase(statrLeng, endLeng) {
 
 // 插入野兽家禽数据表 Fauvist
 export async function insertFauvistDatabase(statrLeng, endLeng) {
-  // console.log('1111', dataSource.amimalList)
+  // console.log('1111', dataSource.typeList)
   const data = [];
-  let single, double, name1, name2;
-  single = dataSource.amimalList.filter(
-    (item) => Number(item.nums) % 2 !== 0
-  ).map(item => item.name);
-  double = dataSource.amimalList.filter(
-    (item) => Number(item.nums) % 2 === 0
-  ).map(item => item.name);
+  let name1, name2, beast, birds, propitious, fierce;
+  beast = dataSource.typeList.filter(
+    (item) => item.type == '野肖'
+  )[0]['names'];
+
+  birds = dataSource.typeList.filter(
+    (item) => item.type == '家肖'
+  )[0]['names'];
+
+  propitious = dataSource.typeList.filter(
+    (item) => item.type == '吉肖'
+  )[0]['names'];
+
+  fierce = dataSource.typeList.filter(
+    (item) => item.type == '凶肖'
+  )[0]['names'];
   for (let index = statrLeng; index < endLeng; index++) {
-    name1 = myRandom(single, 4); // 颜色随机2个集合
-    name2 = myRandom(double, 4); // 颜色随机2个集合
+    beast = myRandom(beast, 4)
+    birds = myRandom(birds, 4)
+    propitious = myRandom(propitious, 4)
+    fierce = myRandom(fierce, 4)
     const element = {
       periods: index + 1,
-      single: JSON.stringify(name1),
-      double: JSON.stringify(name2),
+      beast: JSON.stringify(beast),
+      birds: JSON.stringify(birds),
+      fierce: JSON.stringify(fierce),
+      propitious: JSON.stringify(propitious),
+
     };
     // console.log('main', main, [...nums1, ...nums2].length);
     data.push(element);
   }
-  console.log('colour即将插入的data:', single, data);
-
+  console.log('即将插入的data:', data);
   await createFauvist(data);
-  // return;
 }

@@ -51,17 +51,17 @@ export default function Lottery({ data, title }) {
               ? `text-${item.color}-600 flex w-1/6 flex-1 flex-col items-center pt-2`
               : `text-${item.color}-600 ml-1 flex w-1/6 flex-1 flex-col items-center pt-2 font-bold`
             }
+
           >
             <div className="relative">
               <Image
+                className={index < 6 ? '' : `shadow-md shadow-${item.color}-500 rounded-full`}
                 src={colorList.filter((color) => color.color == item.color)[0].url}
                 alt="Vercel Logo"
                 priority
                 quality={100}
-                sizes="(max-width: 768px) 100vw, 33vw"
-                width={100}
-                height={100}
-                style={{ objectFit: 'contain', width: 'auto', height: 'auto' }}
+                width={index < 6 ? 100 : 120}
+                height={index < 6 ? 100 : 120}
               ></Image>
               <div
                 className="absolute text-sm font-medium"
@@ -76,7 +76,7 @@ export default function Lottery({ data, title }) {
                   {item.particular || item.ordinary}{' '}
                 </span>
               </div>
-              <div className="p-1 text-center text-sm ">
+              <div className="p-1 text-center text-sm">
                 <span className={`text-${item.color}-600 `}>
                   {item.property?.substring(0, 1)}
                 </span>

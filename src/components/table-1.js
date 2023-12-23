@@ -26,7 +26,7 @@ export default function Table1({ data, title }) {
     <div className="w-full">
       <ul className="flex flex-col gap-1">
         {list.map((item, i) => (
-          <li key={item.id} className="flex flex-col items-center border-b-2 pb-4 pt-3">
+          <li key={item.id} className="flex flex-col items-center justify-around border-b-2 pb-1 pt-1">
             <div className="text-xl font-medium">
               <span>{item.periods}期：</span>
               <span className="mr-1 text-blue-600">xxx.com=精品24码=</span>

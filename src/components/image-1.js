@@ -21,7 +21,7 @@ export default function ImgList({ title = '' }) {
               sizes="(max-width: 768px) 100vw, 33vw"
               width={100}
               height={100}
-              style={{ objectFit: '', width: '100%', height: '100%' }}
+              style={{ width: '100%', height: '100%' }}
             />
           </div>
           <div className="flex-1 p-2 text-center text-sm">{item.desc}</div>

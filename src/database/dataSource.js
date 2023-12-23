@@ -512,7 +512,10 @@ const typeList = [
   { type: '凶肖', names: ['鼠', '牛', '虎', '猪', '猴', '狗'] },
   { type: '家肖', names: ['马', '牛', '羊', '鸡', '猪', '狗'] },
   { type: '野肖', names: ['鼠', '虎', '兔', '龙', '蛇', '猴'] },
-
+  { type: '天肖', names: ['龙', '免', '牛', '马', '猴', '猪'] },
+  { type: '地肖', names: ['鼠', '虎', '蛇', '羊', '鸡', '狗'] },
+  { type: '阴肖', names: ['鼠', '龙', '蛇', '马', '狗', '猪'] },
+  { type: '阳肖', names: ['牛', '虎', '免', '羊', '猴', '鸡'] },
 ]
 
 export default { redNums, greenNums, blueNums, colors, amimalList, typeList };
