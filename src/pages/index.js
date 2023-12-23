@@ -111,7 +111,7 @@ export default function Page({ data }) {
   const { periodCount } = data;
   const Title = '欧洲彩';
 
-  console.log('2023年目前为止最新期数：', periodCount);
+  console.log('2023年目前为止最新期数--123：', periodCount);
 
   // Render data...
   return (
