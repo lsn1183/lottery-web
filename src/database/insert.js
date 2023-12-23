@@ -9,12 +9,13 @@ export async function insertAnimalDatabase() {
   // console.log('1111', dataSource.amimalList)
   const data = dataSource.amimalList.map((item) => {
     let type = []
+    const { id, ...other } = item
     dataSource.typeList.forEach(el => {
       if (el.names.some(name => name == item.name)) {
         type.push(el.type)
       }
     })
-    return { ...item, type: JSON.stringify(type) }
+    return { ...other, type: type.join('.') }
   });
   console.log('animal即将插入的data:', data);
   await createAnimal(data);

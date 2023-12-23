@@ -52,8 +52,10 @@ export async function getServerSideProps() {
   const result4 = await getLatestColourData();
   const result5 = await getLatestFourZodiacData();
   const result6 = await getLatestFauvistData();
+  console.log('result.list.length', result.data.length);
   if (result?.data.length == 0 || result.data.length < 49) {
     await insertAnimalDatabase(); // 生肖表
+    console.log('进来了');
   }
   if (diffTime < 0) { // 
     // 超过21:30分，已过当天开奖时间，+1 , 再从中决定自动加不加数据
@@ -67,9 +69,7 @@ export async function getServerSideProps() {
     // await insertFauvistDatabase(statrLeng, endLeng);
   }
 
-
   let statrLeng = 0, endLeng = periodCount, periods = 0;
-  console.log('result1.list.length', result1.list.length);
   if (result1.list.length > 0) {
     periods = result1.list[0]?.periods
     statrLeng = periods < periodCount ? periods : periodCount;

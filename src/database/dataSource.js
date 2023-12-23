@@ -63,7 +63,7 @@ const colors = [
 
 const amimalList = [
   {
-    nums: '18',
+    nums: '07',
     color: 'red',
     name: '狗',
     id: 1,
@@ -72,13 +72,22 @@ const amimalList = [
     profession: '文官',
   },
   {
-    nums: '30',
+    nums: '19',
     color: 'red',
     name: '狗',
     id: 2,
     property: '火',
     general: '土',
     profession: '先锋',
+  },
+  {
+    nums: '31',
+    color: 'blue',
+    name: '狗',
+    id: 4,
+    property: '水',
+    general: '土',
+    profession: '管家',
   },
   {
     nums: '20',
@@ -89,15 +98,7 @@ const amimalList = [
     general: '金',
     profession: '寇王',
   },
-  {
-    nums: '42',
-    color: 'blue',
-    name: '狗',
-    id: 4,
-    property: '水',
-    general: '土',
-    profession: '管家',
-  },
+
   {
     nums: '32',
     color: 'green',
