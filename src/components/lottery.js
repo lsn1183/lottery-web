@@ -116,7 +116,7 @@ export default function Lottery({ data, title, openTime }) {
     <div className="flex w-full flex-col gap-5 p-5">
       <div className='text-base'> {title}第{newPeriods}期开奖结果： </div>
       <ul className="flex flex-wrap justify-between gap-2">
-        {openData?.reverse().map((item, index) => (
+        {openData?.map((item, index) => (
           <li key={item.ordinary + item.property}
             className={index < 6
               ? `text-${item.color}-600 flex w-1/6 flex-1 flex-col items-center pt-2`
