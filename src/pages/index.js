@@ -20,7 +20,7 @@ import Table9 from '@/components/table-9';
 import moment from 'moment';
 
 const Title = '欧洲彩';
-const openTime = '17:01'
+const openTime = '20:50'
 // This gets called on every request
 export async function getServerSideProps() {
   // Fetch data from external API
