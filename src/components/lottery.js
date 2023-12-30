@@ -37,6 +37,11 @@ const checkData = (item) => {
   return data
 }
 
+const getOpenData = async () => {
+  const result = await fetch(API + '/open/' + `${periodCount}`);
+  return await result.json();
+}
+
 export default function Lottery({ data, title, openTime }) {
   const { openHistoryData, periodCount, diffTime } = data;
   const historyItem = openHistoryData[0];
@@ -55,10 +60,7 @@ export default function Lottery({ data, title, openTime }) {
   const today = moment().format('YYYY-MM-DD'); // 今天日期
   let countDownDate = moment(today + ' ' + openTime).valueOf(); //  距离开奖时间小时
 
-  const getOpenData = async () => {
-    const result = await fetch(API + '/open/' + `${periodCount}`);
-    return await result.json();
-  }
+
 
   const createOpenHistoryData = async (params) => {
     const result = await fetch(API + '/history/create', {
@@ -90,8 +92,10 @@ export default function Lottery({ data, title, openTime }) {
       if (difference <= 0) {
         clearInterval(updateTime);
         console.log('进来清除了111'); // 也就是开奖触发时间
-        const result = await getOpenData()
-        const item = result.data[0] || {};
+        const result = await fetch(API + '/open/' + `${periodCount}`);
+        // const result = await getOpenData()
+        const data = await result.json()
+        const item = data.data[0] || {};
         // console.log(result, checkData(item));
         setOpenData(checkData(item))
         setDays(0);
