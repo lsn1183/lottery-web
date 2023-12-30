@@ -3,33 +3,32 @@ import {
 } from '@/api/update';
 import { getRandomInt, getRandomStr, myRandom } from '@/utils/utils';
 import dataSource from './dataSource';
-
 // 插入 recommend 数据表记录
-export async function insertAnimalDatabase() {
-  // console.log('1111', dataSource.amimalList)
-  const data = dataSource.amimalList.map((item) => {
-    let type = []
-    const { id, ...other } = item
-    dataSource.typeList.forEach(el => {
+export async function insertAnimalDatabase(year = 2023) {
+  const { animals, typeList } = dataSource
+  const data = animals[year].map((item) => {
+    let types = []
+    typeList.forEach(el => {
       if (el.names.some(name => name == item.name)) {
-        type.push(el.type)
+        types.push(el.type)
       }
     })
-    return { ...other, type: type.join('.') }
+    return { ...item, type: JSON.stringify(types), year }
   });
-  console.log('animal即将插入的data:', data);
-  await createAnimal(data);
+  let arr = data.sort((a, b) => Number(a.nums) - Number(b.nums))
+  console.log('animal即将插入的data:', arr);
+  // return
+  await createAnimal(arr);
 }
-
 // 插入开奖记录数据
-export async function insertOpenDataSource(statrLeng = 0, endLeng) {
-  const list = dataSource.amimalList;
+export async function insertOpenDataSource(statrLeng = 0, endLeng, year = 2023) {
+  const list = dataSource.animals[year];
   const filterNums = (key) => {
     let data = list.filter((item) => item.nums == key);
     return data.length > 0 ? data[0]['name'] + '/' + data[0]['property'] : null;
   };
   const createData = (statrLeng, endLeng) => {
-    let newArr = [];
+    let data = [];
     for (let index = statrLeng; index < endLeng; index++) {
       const obj = {
         periods: 0,
@@ -45,64 +44,62 @@ export async function insertOpenDataSource(statrLeng = 0, endLeng) {
       obj.particular = getRandomStr(); // 特码
       obj.particular_property = filterNums(obj.particular);
       obj.particular_color = list.filter(
-        (item) => item.nums == obj.particular
-      )[0]['color'];
+        (item) => Number(item.nums) == Number(obj.particular)
+      )[0]?.color;
 
       obj.ordinary1 = getRandomStr();
       obj.ordinary1_property = filterNums(obj.ordinary1);
       obj.ordinary1_color = list.filter(
-        (item) => item.nums == obj.ordinary1
-      )[0]['color'];
+        (item) => Number(item.nums) == Number(obj.ordinary1)
+      )[0]?.color;
 
       obj.ordinary2 = getRandomStr();
       obj.ordinary2_property = filterNums(obj.ordinary2);
       obj.ordinary2_color = list.filter(
-        (item) => item.nums == obj.ordinary2
-      )[0]['color'];
+        (item) => Number(item.nums) == Number(obj.ordinary2)
+      )[0]?.color;
 
       obj.ordinary3 = getRandomStr();
       obj.ordinary3_property = filterNums(obj.ordinary3);
       obj.ordinary3_color = list.filter(
-        (item) => item.nums == obj.ordinary3
-      )[0]['color'];
+        (item) => Number(item.nums) == Number(obj.ordinary3)
 
+      )[0]?.color;
       obj.ordinary4 = getRandomStr();
       obj.ordinary4_property = filterNums(obj.ordinary4);
       obj.ordinary4_color = list.filter(
-        (item) => item.nums == obj.ordinary4
-      )[0]['color'];
-
+        (item) => Number(item.nums) == Number(obj.ordinary4)
+      )[0]?.color;
       obj.ordinary5 = getRandomStr();
       obj.ordinary5_property = filterNums(obj.ordinary5);
       obj.ordinary5_color = list.filter(
-        (item) => item.nums == obj.ordinary5
-      )[0]['color'];
+        (item) => Number(item.nums) == Number(obj.ordinary5)
+      )[0]?.color;
 
       obj.ordinary6 = getRandomStr();
       obj.ordinary6_property = filterNums(obj.ordinary6);
       obj.ordinary6_color = list.filter(
-        (item) => item.nums == obj.ordinary6
-      )[0]['color'];
-      newArr.push(obj);
+        (item) => Number(item.nums) == Number(obj.ordinary6)
+      )[0]?.color;
+      data.push({ ...obj, year });
     }
-    // console.log(newArr, "--arr");
-    return newArr;
+    return data;
   };
   const database = createData(statrLeng, endLeng);
   console.log('open即将插入的data', database);
   await createOpenAnimal(database);
 }
 // 插入 recommend 数据表记录
-export async function insertRemmDatabase(statrLeng = 0, endLeng) {
-  // console.log('1111', dataSource.amimalList)
+export async function insertRemmDatabase(statrLeng = 0, endLeng, year = 2023) {
   const data = [];
-  const NumsArr = dataSource.amimalList.map((item) => item.nums);
+  const NumsArr = dataSource.animals[year].map((item) => item.nums);
   let nums1, nums2, nums3;
   for (let index = statrLeng; index < endLeng; index++) {
     (nums1 = myRandom(JSON.parse(JSON.stringify(NumsArr)), 7).join('.')),
       (nums2 = myRandom(JSON.parse(JSON.stringify(NumsArr)), 7).join('.')),
       (nums3 = myRandom(JSON.parse(JSON.stringify(NumsArr)), 7).join('.'));
     const element = {
+      year,
       periods: index + 1,
       nums1,
       nums2,
@@ -114,28 +111,26 @@ export async function insertRemmDatabase(statrLeng = 0, endLeng) {
   // return;
   await createRecommend(data);
 }
-
 // 插入 zodiac 数据表记录
-export async function insertZodiacDatabase(statrLeng = 0, endLeng) {
-  // console.log('1111', dataSource.amimalList)
+export async function insertZodiacDatabase(statrLeng = 0, endLeng, year = 2023) {
   const data = [];
+  const namesArr = dataSource.animals[year].map((item) => item.name);
   let nums1;
-  const NamesArr = dataSource.amimalList.map((item) => item.name);
   for (let index = statrLeng; index < endLeng; index++) {
-    nums1 = myRandom(NamesArr, 9).join('.');
+    nums1 = myRandom(namesArr, 9).join('.');
     const element = {
       periods: index + 1,
       names: nums1,
+      year: year
     };
     data.push(element);
   }
   console.log('zodiac即将插入的data:', data);
   await createZodiac(data);
 }
-
 // 插入 colour 数据表记录
-export async function insertColourDatabase(statrLeng, endLeng) {
-  // console.log('1111', dataSource.amimalList)
+export async function insertColourDatabase(statrLeng, endLeng, year = 2023) {
+
   const data = [];
   let nums1, nums2, mainNums, colors, colorArr_1, colorArr_2;
   for (let index = statrLeng; index < endLeng; index++) {
@@ -156,10 +151,10 @@ export async function insertColourDatabase(statrLeng, endLeng) {
       }
     }
     // console.log('mainNums', mainNums, colors);
-    colorArr_1 = dataSource.amimalList.filter(
+    colorArr_1 = dataSource.animals[year].filter(
       (item) => item.color === colors[0]
     );
-    colorArr_2 = dataSource.amimalList.filter(
+    colorArr_2 = dataSource.animals[year].filter(
       (item) => item.color === colors[1]
     );
     let subIndex = getRandomInt(2, 7); // 随机数
@@ -172,6 +167,7 @@ export async function insertColourDatabase(statrLeng, endLeng) {
       main: JSON.stringify(mainNums),
       color1: colors[0],
       color2: colors[1],
+      year
     };
     // console.log('main', main, [...nums1, ...nums2].length);
     data.push(element);
@@ -179,16 +175,15 @@ export async function insertColourDatabase(statrLeng, endLeng) {
   console.log('colour即将插入的data:', data);
   await createColour(data);
 }
-
 // 插入单双四肖数据表 Fourzodiac
-export async function insertFourzodiacDatabase(statrLeng, endLeng) {
-  // console.log('1111', dataSource.amimalList)
+export async function insertFourzodiacDatabase(statrLeng, endLeng, year = 2023) {
+
   const data = [];
   let single, double, name1, name2;
-  single = dataSource.amimalList.filter(
+  single = dataSource.animals[year].filter(
     (item) => Number(item.nums) % 2 !== 0
   ).map(item => item.name);
-  double = dataSource.amimalList.filter(
+  double = dataSource.animals[year].filter(
     (item) => Number(item.nums) % 2 === 0
   ).map(item => item.name);
   for (let index = statrLeng; index < endLeng; index++) {
@@ -198,21 +193,21 @@ export async function insertFourzodiacDatabase(statrLeng, endLeng) {
       periods: index + 1,
       single: JSON.stringify(name1),
       double: JSON.stringify(name2),
+      year
     };
     // console.log('main', main, [...nums1, ...nums2].length);
     data.push(element);
   }
   console.log('colour即将插入的data:', single, data);
+  // return;
 
   await createFourzodiac(data);
-  // return;
 }
-
 // 插入野兽家禽数据表 Fauvist
-export async function insertFauvistDatabase(statrLeng, endLeng) {
+export async function insertFauvistDatabase(statrLeng, endLeng, year = 2023) {
   // console.log('1111', dataSource.typeList)
   const data = [];
-  let name1, name2, beast, birds, propitious, fierce;
+  let sky, land, beast, birds, propitious, fierce, cloudy, male;
   beast = dataSource.typeList.filter(
     (item) => item.type == '野肖'
   )[0]['names'];
@@ -228,18 +223,38 @@ export async function insertFauvistDatabase(statrLeng, endLeng) {
   fierce = dataSource.typeList.filter(
     (item) => item.type == '凶肖'
   )[0]['names'];
+  sky = dataSource.typeList.filter(
+    (item) => item.type == '天肖'
+  )[0]['names'];
+  land = dataSource.typeList.filter(
+    (item) => item.type == '地肖'
+  )[0]['names'];
+  cloudy = dataSource.typeList.filter(
+    (item) => item.type == '阴肖'
+  )[0]['names'];
+  male = dataSource.typeList.filter(
+    (item) => item.type == '阳肖'
+  )[0]['names'];
   for (let index = statrLeng; index < endLeng; index++) {
     beast = myRandom(beast, 4)
     birds = myRandom(birds, 4)
     propitious = myRandom(propitious, 4)
     fierce = myRandom(fierce, 4)
+    sky = myRandom(sky, 4)
+    land = myRandom(land, 4)
+    cloudy = myRandom(cloudy, 4)
+    male = myRandom(male, 4)
     const element = {
       periods: index + 1,
       beast: JSON.stringify(beast),
       birds: JSON.stringify(birds),
       fierce: JSON.stringify(fierce),
       propitious: JSON.stringify(propitious),
-
+      sky: JSON.stringify(sky),
+      land: JSON.stringify(land),
+      cloudy: JSON.stringify(cloudy),
+      male: JSON.stringify(male),
+      year
     };
     // console.log('main', main, [...nums1, ...nums2].length);
     data.push(element);

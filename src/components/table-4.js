@@ -1,11 +1,11 @@
 import { getOpenItem } from '@/utils/utils';
 
 export default function Table4({ title, data }) {
-  const { openData, fourZodiacData } = data
+  const { openHistoryData, fourZodiacData } = data
   // console.log(data, '----');
   const list = fourZodiacData.map(item => {
     const { single, double } = item
-    const openItem = getOpenItem(openData, item)
+    const openItem = getOpenItem(openHistoryData, item)
     return { ...item, single: JSON.parse(single), double: JSON.parse(double), ...openItem }
   })
 

@@ -1,12 +1,12 @@
 import { getOpenItem } from '@/utils/utils';
 
 export default function Table6({ title, data }) {
-  const { openData, fourZodiacData } = data
+  const { openHistoryData, fourZodiacData } = data
   // console.log(data, '----');
   let name1, name2, arr1, arr2;
   const list = fourZodiacData.map((item, index) => {
     const { single, double } = item
-    const openItem = getOpenItem(openData, item)
+    const openItem = getOpenItem(openHistoryData, item)
     arr1 = JSON.parse(single)
     arr2 = JSON.parse(double)
     if (index % 2 === 0) {

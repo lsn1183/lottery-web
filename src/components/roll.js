@@ -7,7 +7,7 @@ export default function Roll({ title }) {
         style={{ backgroundImage: 'url(/images/roll-bg.png)' }}
       >
         <p className="animate">
-          欢迎光临【{title}】论坛★汇集网上最全最新资料★永久域名:123.com，请记！
+          欢迎光临【{title}】论坛★汇集网上最全最新资料★永久域名:12312378.xyz，请记！
         </p>
       </div>
       {/* 背景图 */}

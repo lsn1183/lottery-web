@@ -3,9 +3,9 @@ import Link from 'next/link';
 
 export default function Nav() {
   const navList = [
-    { name: '挑码助手', url: '/icon/nav_tmzs.png', path: '/history' },
-    { name: '开奖日期', url: '/icon/date.png', path: '/history' },
-    { name: '号码属性', url: '/icon/nav_hmsx.png', path: '/history' },
+    { name: '挑码助手', url: '/icon/nav_tmzs.png', path: '/helper' },
+    { name: '开奖日期', url: '/icon/date.png', path: '/date' },
+    { name: '号码属性', url: '/icon/nav_hmsx.png', path: '/attribute' },
     { name: '开奖记录', url: '/icon/nav_pc.png', path: '/history' },
   ];
   return (

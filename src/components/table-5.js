@@ -1,12 +1,12 @@
 import { getOpenItem } from '@/utils/utils';
 
 export default function Table5({ title, data }) {
-  const { openData, fourZodiacData } = data
+  const { openHistoryData, fourZodiacData } = data
   // console.log(data, '----');
   let name1, name2;
   const list = fourZodiacData.map((item, index) => {
     const { single, double } = item
-    const openItem = getOpenItem(openData, item)
+    const openItem = getOpenItem(openHistoryData, item)
     if (index % 2 === 0) {
       name1 = JSON.parse(single).slice(0, 2)
       name2 = JSON.parse(double).slice(0, 3)

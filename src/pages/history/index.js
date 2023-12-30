@@ -1,6 +1,7 @@
-import { API } from '@/api/config';
-import Image from 'next/image';
-
+import { getLatestAllHistoryData } from '@/api/query';
+import moment from 'moment';
+import { useState } from 'react';
+import style from './history.module.scss';
 const ballList = [
   { color: 'green', url: 'icon/ball-green.png' },
   { color: 'red', url: 'icon/ball-red.png' },
@@ -8,29 +9,50 @@ const ballList = [
 ];
 
 export async function getServerSideProps() {
-  const res = await fetch(API + '/open');
-  const { data } = await res.json();
+  const year = moment().year(); // 今年年份
+  const result = await getLatestAllHistoryData();
+  const data = {
+    list: result || [],
+    year
+  };
   return { props: { data } }
 }
 
 export default function History({ data }) {
-  const list = data || []; // 倒序
-  // console.log("list", data, 11111);
+  const { list } = data || [];
+  const yearList = [2023, 2024]
+  const datas = {
+    2023: list.filter(item => item.year == 2023),
+    2024: list.filter(item => item.year == 2024)
+  }
+  let [active, setActive] = useState(2023)
+  const handleSelect = (v) => {
+    setActive(v)
+  }
+
   return (
     <div className="content flex min-h-screen flex-col items-center pb-12 ">
-      <Image
+      {/* <Image
         src="/images/222.jpg"
         alt="Vercel Logo"
         className="dark:invert"
         width={768}
         height={48}
         priority
-      />
-      <div className=" mb-2 mt-2 w-full text-center text-xl font-bold">
-        2023年开奖记录
+      /> */}
+
+      <div className=" mb-2 mt-4 w-full text-center text-xl font-bold ">
+        <div>开奖历史记录</div>
+        <ul className='flex gap-4'>
+          {
+            yearList.map(item => (<li key={item} className={active == item ? style.active : ''} onClick={() => handleSelect(item)} >{item}年</li>))
+          }
+          {/* <li className={active == 2023 ? style.active : ''}>2023年</li>
+          <li className={active == 2024 ? style.active : ''}>2024</li> */}
+        </ul>
       </div>
       <ul className="w-full overflow-auto">
-        {list?.map((item) => {
+        {datas[active]?.map((item) => {
           return (
             <li key={item.id} className=" w-full" style={{ borderBottom: '1px solid #ccc' }}>
               <div className=" w-full bg-gray-200 pl-1 text-left text-lg">

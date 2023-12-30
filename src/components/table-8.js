@@ -1,12 +1,12 @@
 import { getOpenItem } from '@/utils/utils';
 
 export default function Table6({ title, data }) {
-  const { openData, fauvistData } = data
+  const { openHistoryData, fauvistData } = data
   // console.log(fauvistData, '----fauvistData');
   let arr1 = [], arr2 = [];
   const list = fauvistData.map((item, index) => {
     const { beast, birds } = item
-    const openItem = getOpenItem(openData, item)
+    const openItem = getOpenItem(openHistoryData, item)
     arr1 = JSON.parse(beast) // 野
     arr2 = JSON.parse(birds) // 家
     return { ...item, ...openItem, names3: arr1, names4: arr2 }

@@ -1,12 +1,12 @@
 import { getOpenItem } from '@/utils/utils';
 
 export default function Table6({ title, data }) {
-  const { openData, fourZodiacData, animalData } = data
+  const { openHistoryData, fourZodiacData, animalData } = data
   let leng = 4
   let arr1 = [], arr2 = [], type1 = [], type2 = [], arr_1 = [], arr_2 = [], type3 = [], type4 = [], arr_3 = [], arr_4 = [];
   const list = fourZodiacData.map((item, index) => {
     const { single, double } = item
-    const openItem = getOpenItem(openData, item)
+    const openItem = getOpenItem(openHistoryData, item)
     arr1 = JSON.parse(single)
     arr2 = JSON.parse(double)
     type1 = animalData.filter((item, index) => item.type?.includes('男肖'))

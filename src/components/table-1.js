@@ -2,21 +2,11 @@ import { getOpenItem } from '@/utils/utils';
 import Image from 'next/image';
 
 export default function Table1({ data, title }) {
-  const { recommendData, periodCount, openData } = data;
-  // console.log('-periodCount:', periodCount);
-  const lastIndex = recommendData?.length - 1;
-  const lastIndex2 = recommendData?.length - 3;
-  const lastIndex3 = data?.length - 5;
-  const nums1 = recommendData[lastIndex]?.nums1;
-  const nums2 = recommendData[lastIndex2]?.nums2;
-  const nums3 = recommendData[lastIndex3]?.nums3;
-  // 最新一期推荐，未开奖的
-  const todayData = { nums1, nums2, nums3, periods: periodCount, id: 0 }; // 今期推荐数据
+  const { recommendData, periodCount, openHistoryData } = data;
 
   const list = [
-    todayData,
     ...recommendData.slice(0, 10).map((item) => {
-      const openItem = getOpenItem(openData, item);
+      const openItem = getOpenItem(openHistoryData, item);
       return { ...item, ...openItem };
     }),
   ];

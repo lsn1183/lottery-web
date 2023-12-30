@@ -1,14 +1,14 @@
 import { getOpenItem, nameToNum } from '@/utils/utils';
 
 export default function Table2({ data, title }) {
-  const { zodiacData, animalData, openData } = data;
+  const { zodiacData, animalData, openHistoryData } = data;
   // console.log('zodiacData', zodiacData);
   let newItem, selection, arr, animals, openItem;
   const list = zodiacData?.map((item, i) => {
     newItem = {};
     selection = nameToNum(item.names, animalData);
     arr = item.names.split('.');
-    openItem = getOpenItem(openData, item);
+    openItem = getOpenItem(openHistoryData, item);
     animals = arr.map((name, index) => {
       return arr.slice(0, index + 1);
     });
