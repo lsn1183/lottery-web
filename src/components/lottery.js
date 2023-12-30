@@ -34,6 +34,7 @@ const checkData = (item) => {
   const item2 = data[data.length - 1]
   data[sourceIndex] = item2
   data[data.length - 1] = item1
+  console.log('开奖data', data);
   return data
 }
 
