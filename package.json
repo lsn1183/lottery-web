@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 3000",
+    "start": "next build && PORT=3000 npm start",
+    "pm2start": "pm2 start npm --name nextjs-web -- run start",
     "lint": "next lint"
   },
   "dependencies": {
