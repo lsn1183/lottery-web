@@ -50,8 +50,8 @@ export default function Table6({ title, data }) {
             </div>
 
             <div className='text-pink-400'>开：
-              <span className='pl-1 pr-1'>{item.openNum}</span>
-              <span className='text-sm font-bold text-amber-500'>({item.openName})</span>
+              <span className='pl-1 pr-1'>{item.openNum || '????'}</span>
+              <span className=' font-bold text-amber-500'>{item.openName}</span>
             </div>
           </li>
         ))}

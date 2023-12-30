@@ -15,7 +15,7 @@ export default function Roll({ title }) {
         className="flex items-center justify-center border-lime-300 pb-4 pt-4 text-xl text-yellow-300"
         style={{ backgroundImage: 'url(/images/roll-bg2.jpeg)' }}
       >
-        {title}精品24码，欢迎喝彩123.com
+        {title}精品24码，欢迎喝彩12312378.com
       </div>
     </div>
   );

@@ -55,7 +55,7 @@ export default function Table3({ title, data }) {
               <span>{item.periods}期</span>:<span className="pl-1 text-cyan-700">①波</span>
               <span>①头主10码</span>:
               <span className="pl-2 text-orange-600">
-                开({item.openNum} {item.openName})
+                开{item.openNum ? `(${item.openNum} ${item.openName} )` : '???'}
               </span>
             </div>
             <div>

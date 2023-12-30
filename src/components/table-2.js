@@ -62,7 +62,7 @@ export default function Table2({ data, title }) {
                     className="flex w-20 items-center justify-center"
                     style={{ backgroundColor: 'rgb(0, 204, 51)' }}
                   >
-                    {(`${item.openNum} ${item.openName}`) || '??????'}
+                    {item.openNum ? (`${item.openNum} ${item.openName}`) : '??????'}
                   </div>
                 </li>
               ))}

@@ -13,7 +13,7 @@ const colorList = [
   { color: 'green', url: '/icon/ball-green.png' },
 ];
 
-const checkData = (item) => {
+const convertOpenData = (item) => {
   const { id, periods, year, ...other } = item;
   const data = group(Object.entries(other), 3).map((item) => {
     let newItem = {};
@@ -34,7 +34,6 @@ const checkData = (item) => {
   const item2 = data[data.length - 1]
   data[sourceIndex] = item2
   data[data.length - 1] = item1
-  console.log('开奖data', data);
   return data
 }
 
@@ -42,7 +41,7 @@ export default function Lottery({ data, title, openTime }) {
   const { openHistoryData, periodCount, diffTime } = data;
   const historyItem = openHistoryData[0];
   if (!historyItem) return null;
-  const list = checkData(historyItem);
+  const list = convertOpenData(historyItem);
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
@@ -73,7 +72,7 @@ export default function Lottery({ data, title, openTime }) {
     return await result.json();
   }
 
-  console.log('list:', historyItem.periods, periodCount);
+  // console.log('list:', historyItem.periods, periodCount);
 
   useEffect(() => {
     let updateTime = setInterval(async () => {
@@ -94,7 +93,7 @@ export default function Lottery({ data, title, openTime }) {
         console.log('进来清除了'); // 也就是开奖触发时间
         const result = await getOpenData()
         const item = result.data[0] || {};
-        setOpenData(checkData(item))
+        setOpenData(convertOpenData(item))
         setDays(0);
         setHours(0);
         setMinutes(0);

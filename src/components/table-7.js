@@ -1,25 +1,16 @@
 import { getOpenItem } from '@/utils/utils';
 
 export default function Table6({ title, data }) {
-  const { openHistoryData, fourZodiacData, animalData } = data
-  let leng = 4
-  let arr1 = [], arr2 = [], type1 = [], type2 = [], arr_1 = [], arr_2 = [], type3 = [], type4 = [], arr_3 = [], arr_4 = [];
-  const list = fourZodiacData.map((item, index) => {
-    const { single, double } = item
+  const { openHistoryData, fourZodiacData, animalData, fauvistData } = data
+  // console.log(fauvistData, '----fauvistData');
+  // console.log(fauvistData, '----fauvistData');
+  let arr1 = [], arr2 = [];
+  const list = fauvistData.map((item, index) => {
+    const { beast, birds } = item
     const openItem = getOpenItem(openHistoryData, item)
-    arr1 = JSON.parse(single)
-    arr2 = JSON.parse(double)
-    type1 = animalData.filter((item, index) => item.type?.includes('男肖'))
-    type2 = animalData.filter((item, index) => item.type?.includes('女肖'))
-    // type3 = animalData.filter((item, index) => item.type?.includes('家肖'))
-    // type4 = animalData.filter((item, index) => item.type?.includes('野肖'))
-
-    arr_1 = [...arr1, ...arr2].filter((name, index) => type1.some(item => item.name == name))
-    arr_2 = [...arr1, ...arr2].filter((name, index) => type2.some(item => item.name == name))
-    // arr_3 = [...arr1, ...arr2].filter((name, index) => type3.some(item => item.name == name))
-    // arr_4 = [...arr1, ...arr2].filter((name, index) => type4.some(item => item.name == name))
-    // console.log(type1, 'openItem', arr_1, arr_2);
-    return { ...item, ...openItem, names1: arr_1.length > leng ? arr_1.splice(0, leng) : arr_1, names2: arr_2.length > leng ? arr_2.splice(0, leng) : arr2, names3: arr_3.length > leng ? arr_3.splice(0, leng) : arr_3, names4: arr_4.length > leng ? arr_4.splice(0, leng) : arr_4 }
+    arr1 = JSON.parse(beast) // 野
+    arr2 = JSON.parse(birds) // 家
+    return { ...item, ...openItem, names1: arr1, names2: arr2 }
   })
   // console.log('data', list);
   return (
@@ -57,9 +48,9 @@ export default function Table6({ title, data }) {
                 <span>【 {item.names2.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-300 pl-1 pr-1' : 'pl-1 pr-1'}>{name}</span>))} 】</span>
               </div>
             </div>
-            <div className='w-20 ml-2 text-pink-400'>开：
-              <span>{item.openNum}</span>
-              <span className='text-sm font-bold text-amber-500'>({item.openName})</span>
+            <div className='w-20 ml-2 text-pink-400 flex'>开：
+              <span>{item.openNum || '????'}</span>
+              {item.openName && <span className='font-bold text-amber-500'>【{item.openName}】</span>}
             </div>
           </li>
         ))}

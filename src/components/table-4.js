@@ -46,7 +46,7 @@ export default function Table4({ title, data }) {
 
             </div>
             <div >开：
-              <span className='pl-1 pr-1 text-pink-700'>{item.openNum}</span>
+              <span className='pl-1 pr-1 text-pink-700'>{item.openNum || '????'}</span>
               <span className='text-sm font-bold'>{item.openName}</span>
             </div>
           </li>

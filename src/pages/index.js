@@ -20,9 +20,16 @@ import Table9 from '@/components/table-9';
 import moment from 'moment';
 
 const Title = '欧洲彩';
-const openTime = '22:35'
+const openTime = '23:35'
 // This gets called on every request
-export async function getServerSideProps() {
+export async function getServerSideProps({ req }) {
+  // console.log('req', req.headers);
+  let userAgent;
+  if (req) { // if you are on the server and you get a 'req' property from your context
+    userAgent = req.headers['user-agent'] // get the user-agent from the headers
+  } else {
+    userAgent = navigator.userAgent // if you are on the client you can access the navigator from the window object
+  }
   // Fetch data from external API
   const todayDate = moment().format('YYYY-MM-DD HH:mm'); // 现在时间
   const today = moment().format('YYYY-MM-DD'); // 今天日期
@@ -40,11 +47,6 @@ export async function getServerSideProps() {
   const result5 = await getLatestFourZodiacData({ year });
   const result6 = await getLatestFauvistData({ year });
 
-  // if (diffTime < 0) {  // 今日未开奖
-  // } else { // 已过当天开奖日期+1
-  //   periodCount += 1;
-  // }
-
   const data = {
     openHistoryData: result1.list || [],
     animalData: result?.data || [],
@@ -54,12 +56,23 @@ export async function getServerSideProps() {
     fourZodiacData: result5.list || [],
     fauvistData: result6.list || [],
     periodCount,
-    diffTime
+    diffTime,
+    userAgent
   };
 
   return { props: { data } }
 }
+
 export default function Page({ data }) {
+  const { userAgent } = data
+  // console.log('data', userAgent);
+  const isMobile = Boolean(userAgent.match(
+    /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+  ))
+  const isIPhone = () => Boolean(userAgent.match(/iPhone/i))
+  // console.log(isMobile, 'isMobile');
+  // console.log('userAgent', userAgent);
+
   return (
     <main className="content overflow-scroll">
       {/* 顶部图片 */}

@@ -17,8 +17,6 @@ export default function Table5({ title, data }) {
     return { ...item, ...openItem, names: [...name1, ...name2], }
   })
 
-  // console.log('data', list);
-
   return (
     <div className="w-full">
       <div
@@ -50,8 +48,8 @@ export default function Table5({ title, data }) {
             </div>
 
             <div className='text-pink-400'>开：
-              <span className='pl-1 pr-1'>{item.openNum}</span>
-              <span className='text-sm font-bold text-amber-500'>({item.openName})</span>
+              <span className='pl-1 pr-1'>{item.openNum || '????'}</span>
+              <span className=' font-bold text-amber-500'>{item.openName}</span>
             </div>
           </li>
         ))}

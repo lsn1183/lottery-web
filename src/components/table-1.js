@@ -10,7 +10,6 @@ export default function Table1({ data, title }) {
       return { ...item, ...openItem };
     }),
   ];
-
   // console.log('Table1-list', list);
   return (
     <div className="w-full">
@@ -19,7 +18,7 @@ export default function Table1({ data, title }) {
           <li key={item.id} className="flex flex-col items-center justify-around border-b-2 pb-1 pt-1">
             <div className="text-xl font-medium">
               <span>{item.periods}期：</span>
-              <span className="mr-1 text-blue-600">xxx.com=精品24码=</span>
+              <span className="mr-1 text-blue-600"><a href="http://12312378.xyz">12312378.com</a>=精品24码=</span>
               <span className="text-red-500">
                 开: {item.openNum || '???'}
                 {item.openName}

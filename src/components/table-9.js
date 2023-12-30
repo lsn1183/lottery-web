@@ -48,8 +48,11 @@ export default function Table6({ title, data }) {
               </div>
             </div>
             <div className='w-20 ml-2 text-pink-500'>开：
-              <span className=''>{item.openNum}</span>
-              <span className='text-sm font-bold text-amber-600'>({item.openName})</span>
+              <span className=''>{item.openNum || '????'}</span>
+              {
+                item.openName &&
+                <span className='text-sm font-bold text-amber-600'>({item.openName})</span>
+              }
             </div>
           </li>
         ))}
