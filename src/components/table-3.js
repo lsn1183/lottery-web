@@ -30,7 +30,6 @@ export default function Table3({ title, data }) {
       nums: numArray,
     };
   });
-  console.log('================================', title, list);
 
   return (
     <div className="w-full">

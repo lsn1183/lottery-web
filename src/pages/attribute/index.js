@@ -3,7 +3,6 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 
 export async function getServerSideProps() {
-  // Fetch data from external API
   const year = moment().year(); // 今年年份
   const result = await getAnimalList({ year });
   const data = {

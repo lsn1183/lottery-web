@@ -32,6 +32,7 @@ const checkData = (item) => {
   const sourceIndex = data.findIndex(item => item.particular)
   const item1 = data[sourceIndex]
   const item2 = data[data.length - 1]
+  console.log('sourceIndex', sourceIndex);
   data[sourceIndex] = item2
   data[data.length - 1] = item1
   return data
@@ -88,7 +89,7 @@ export default function Lottery({ data, title, openTime }) {
 
       if (difference <= 0) {
         clearInterval(updateTime);
-        console.log('进来清除了'); // 也就是开奖触发时间
+        console.log('进来清除了111'); // 也就是开奖触发时间
         const result = await getOpenData()
         const item = result.data[0] || {};
         // console.log(result, checkData(item));
