@@ -32,7 +32,6 @@ const checkData = (item) => {
   const sourceIndex = data.findIndex(item => item.particular)
   const item1 = data[sourceIndex]
   const item2 = data[data.length - 1]
-  console.log('sourceIndex', sourceIndex);
   data[sourceIndex] = item2
   data[data.length - 1] = item1
   return data
@@ -110,7 +109,9 @@ export default function Lottery({ data, title, openTime }) {
       clearInterval(updateTime);
     }
   }, []);
-  // console.log('Lottery-props', diffTimes);
+  console.log('Lottery-props', hours,
+    minutes,
+    seconds);
   return (
     <div className="flex w-full flex-col gap-5 p-5">
       <div className='text-base'> {title}第{newPeriods}期开奖结果： </div>
