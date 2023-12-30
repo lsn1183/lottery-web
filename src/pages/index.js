@@ -20,7 +20,7 @@ import Table9 from '@/components/table-9';
 import moment from 'moment';
 
 const Title = '欧洲彩';
-const openTime = '23:35'
+const openTime = '22:35'
 // This gets called on every request
 export async function getServerSideProps({ req }) {
   // console.log('req', req.headers);
