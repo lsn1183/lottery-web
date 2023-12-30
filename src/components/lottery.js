@@ -76,11 +76,12 @@ export default function Lottery({ data, title, openTime }) {
   useEffect(() => {
     let updateTime = setInterval(async () => {
       let now = new Date().getTime();
-      let difference = countDownDate - now;
+      let difference = countDownDate - now < 0 ? 0 : countDownDate - now;
       let newDays = Math.floor(difference / (1000 * 60 * 60 * 24));
       let newHours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       let newMinutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
       let newSeconds = Math.floor((difference % (1000 * 60)) / 1000);
+
       setDays(newDays);
       setHours(newHours);
       setMinutes(newMinutes);
