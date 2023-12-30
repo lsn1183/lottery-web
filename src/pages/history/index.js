@@ -31,7 +31,7 @@ export default function History({ data }) {
   }
 
   return (
-    <div className="content flex min-h-screen flex-col items-center pb-12 ">
+    <div className="content flex min-h-screen flex-col items-center pb-4 ">
       {/* <Image
         src="/images/222.jpg"
         alt="Vercel Logo"

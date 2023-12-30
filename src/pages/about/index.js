@@ -1,13 +1,12 @@
 import pageStyles from './about.module.scss';
 
 function About() {
+	return (
+		<div className={pageStyles['P-about']}>
+			<h1>This is About Page.</h1>
 
-    return (
-        <div className={pageStyles['P-about']}>
-            <h1>This is About Page.</h1>
-
-        </div>
-    )
+		</div>
+	)
 }
 
 export default About
