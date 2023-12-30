@@ -1,5 +1,6 @@
 
 export const NumberBox = ({ num, unit, flip }) => {
+  console.log('num', num);
   return (
     <div className="flex flex-col items-center">
       <div className="relative bg-transparent flex flex-col items-center justify-center rounded-lg w-8 h-6 text-sm ">
