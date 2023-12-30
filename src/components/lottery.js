@@ -73,6 +73,7 @@ export default function Lottery({ data, title, openTime }) {
   }
 
   console.log('list:', historyItem.periods, periodCount);
+
   useEffect(() => {
     let updateTime = setInterval(async () => {
       let now = new Date().getTime();
@@ -109,9 +110,7 @@ export default function Lottery({ data, title, openTime }) {
       clearInterval(updateTime);
     }
   }, []);
-  console.log('Lottery-props', hours,
-    minutes,
-    seconds);
+
   return (
     <div className="flex w-full flex-col gap-5 p-5">
       <div className='text-base'> {title}第{newPeriods}期开奖结果： </div>
