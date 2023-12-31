@@ -1,12 +1,12 @@
 import { getOpenItem } from '@/utils/utils';
 
-export default function Table10({ title, data }) {
-  const { openHistoryData, multiZodiacData } = data
+export default function Table11({ title, data }) {
+  const { openHistoryData, zodiacData } = data
   // console.log(multiZodiacData, '----multiZodiacData');
-  const list = multiZodiacData.map((item, index) => {
-    const { four } = item // 8肖
+  const list = zodiacData.map((item, index) => {
+    const { mantissa } = item // 论坛：金牌六尾
     const openItem = getOpenItem(openHistoryData, item)
-    return { ...item, ...openItem, names: JSON.parse(four) }
+    return { ...item, ...openItem, names: JSON.parse(mantissa) }
   })
   // console.log('data', list);
   return (
@@ -26,16 +26,16 @@ export default function Table10({ title, data }) {
           color: '#FFFF00',
         }}
       >
-        <p>{title}论坛：神奇四肖</p>
+        <p>{title}论坛：金牌六尾</p>
       </div>
-      <ul className="w-full">
+      <ul>
         {list.map((item, i) => (
           <li key={item.id} className="flex items-center justify-around h-10 font-bold" style={{
             borderBottom: '1px solid #ccc',
           }}>
             <div className="pl-2">{item.periods} 期：</div>
             <div className=''>
-              【 {item.names.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-400' : ''}>{name}</span>))} 】
+              【 {item.names.map((name, index) => (<span key={index + item.id} className={name == item.openName ? 'bg-yellow-400' : ''}>{name}{index < 5 ? ',' : ''}</span>))} 】
             </div>
             <div className='w-32'>开：
               <span className=''>{item.openNum || '????'}</span>

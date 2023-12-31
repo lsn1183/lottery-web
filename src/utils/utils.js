@@ -86,15 +86,22 @@ export function myRandom(arr = [], length) {
 * @params length 需要获取的元素的个数
   名称转数字 , length
 */
-export function nameToNum(str, arr = []) {
-  let newArr = str?.split('.'); // 字符串转数组
+export function nameToNum(source = [], arr = []) {
+  console.log(source, arr, 'target, arr');
+  let newArr = source; // 字符串转数组
   if (arr.length == 0) return [];
-  const list = newArr.map((name) => {
-    let index = arr.findIndex((item) => item.name == name);
-    let nums = arr[index].nums;
-    return nums;
+  let numObj = {}
+  newArr.forEach((name) => {
+    arr.forEach((item) => {
+      if (item.name == name) {
+        if (!numObj[name]) {
+          numObj[name] = []
+        }
+        numObj[name].push(item.nums)
+      }
+    });
   });
-  return list;
+  return numObj;
 }
 
 /** 随机数字产生

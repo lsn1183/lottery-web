@@ -1,4 +1,4 @@
-import { getAnimalList, getLatestColourData, getLatestFauvistData, getLatestFourZodiacData, getLatestOpenHistoryData, getLatestRecommendData, getLatestZodiacData } from '@/api/query';
+import { getAnimalList, getLatestColourData, getLatestFauvistData, getLatestMultiZodiacData, getLatestOpenHistoryData, getLatestRecommendData, getLatestZodiacData } from '@/api/query';
 import TopImage from '@/components/fixed-image';
 import Footer from '@/components/footer';
 import ImgList1 from '@/components/image-1';
@@ -9,6 +9,8 @@ import NavBar from '@/components/nav-bar';
 import Roll from '@/components/roll';
 import Table1 from '@/components/table-1';
 import Table10 from '@/components/table-10';
+import Table11 from '@/components/table-11';
+import Table12 from '@/components/table-12';
 import Table2 from '@/components/table-2';
 import Table3 from '@/components/table-3';
 import Table4 from '@/components/table-4';
@@ -17,6 +19,8 @@ import Table6 from '@/components/table-6';
 import Table7 from '@/components/table-7';
 import Table8 from '@/components/table-8';
 import Table9 from '@/components/table-9';
+
+
 import moment from 'moment';
 
 const Title = '欧洲彩';
@@ -44,7 +48,7 @@ export async function getServerSideProps({ req }) {
   const result2 = await getLatestRecommendData({ year });
   const result3 = await getLatestZodiacData({ year });
   const result4 = await getLatestColourData({ year });
-  const result5 = await getLatestFourZodiacData({ year });
+  const result5 = await getLatestMultiZodiacData({ year });
   const result6 = await getLatestFauvistData({ year });
 
   const data = {
@@ -53,7 +57,7 @@ export async function getServerSideProps({ req }) {
     recommendData: result2.list || [],
     zodiacData: result3?.list || [],
     colourData: result4?.list || [],
-    fourZodiacData: result5.list || [],
+    multiZodiacData: result5.list || [],
     fauvistData: result6.list || [],
     periodCount,
     diffTime,
@@ -74,7 +78,7 @@ export default function Page({ data }) {
   // console.log('userAgent', userAgent);
 
   return (
-    <main className="content overflow-scroll">
+    <main className="content overflow-y-auto">
       {/* 顶部图片 */}
       <TopImage />
       {/* 导航按钮 */}
@@ -94,7 +98,10 @@ export default function Page({ data }) {
       <Table8 title={Title} data={data} />
       <Table9 title={Title} data={data} />
       <Table10 title={Title} data={data} />
+      <Table11 title={Title} data={data} />
+      <Table12 title={Title} data={data} />
       <Footer title={Title} data={data} />
+
     </main>
   )
 }

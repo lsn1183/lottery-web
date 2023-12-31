@@ -11,7 +11,7 @@ export default function ImgList({ title = '' }) {
   ];
 
   return (
-    <div className="mt-2 flex flex-wrap justify-start bg-orange-200 p-2">
+    <div className="mt-2 flex flex-wrap justify-start bg-orange-200 p-2 font-bold ">
       {list.map((item, index) => (
         <div key={index} className="c_item flex-1 border">
           <div className="relative" style={{ height: '70%' }}>
@@ -24,7 +24,7 @@ export default function ImgList({ title = '' }) {
               style={{ width: '100%', height: '100%' }}
             />
           </div>
-          <div className="flex-1 p-2 text-center text-sm">{item.desc}</div>
+          <div className="flex-1 p-2 text-center text-base">{item.desc}</div>
         </div>
       ))}
     </div>

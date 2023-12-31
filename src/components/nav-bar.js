@@ -9,7 +9,7 @@ export default function Nav() {
     { name: '开奖记录', url: '/icon/nav_pc.png', path: '/history' },
   ];
   return (
-    <div className="nav-bar w-full p-4">
+    <div className="nav-bar w-full p-4 font-bold">
       <div className="flex w-full justify-between">
         {navList.map((item) => (
           <Link className="flex flex-col items-center justify-between text-base" key={item.name} href={item.path} >

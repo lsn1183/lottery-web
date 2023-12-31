@@ -3,6 +3,7 @@ import { CLIENT_API } from '@/api/config';
 import { group } from '@/utils/utils';
 import moment from 'moment';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { TimerContainer } from './CountDown/timer';
 
@@ -39,6 +40,7 @@ const convertOpenData = (item) => {
 
 export default function Lottery({ data, title, openTime }) {
   const { openHistoryData, periodCount, diffTime } = data;
+  // console.log(diffTime);
   const historyItem = openHistoryData[0];
   if (!historyItem) return null;
   const list = convertOpenData(historyItem);
@@ -72,36 +74,42 @@ export default function Lottery({ data, title, openTime }) {
     return await result.json();
   }
 
-  // console.log('list:', historyItem.periods, periodCount);
-
   useEffect(() => {
     let updateTime = setInterval(async () => {
       let now = new Date().getTime();
-      let difference = countDownDate - now < 0 ? 0 : countDownDate - now;
+      let difference = countDownDate - now;
       let newDays = Math.floor(difference / (1000 * 60 * 60 * 24));
       let newHours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       let newMinutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
       let newSeconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-      setDays(newDays);
+      // setDays(newDays);
       setHours(newHours);
       setMinutes(newMinutes);
       setSeconds(newSeconds);
-
       if (difference <= 0) {
         clearInterval(updateTime);
         console.log('进来清除了'); // 也就是开奖触发时间
         const result = await getOpenData()
         const item = result.data[0] || {};
-        setOpenData(convertOpenData(item))
-        setDays(0);
+        let arr = []
+        difference < (-1 * 60 * 1000) ? setOpenData(convertOpenData(item)) :
+          convertOpenData(item).forEach((element, index) => {
+            (function (element, index) {
+              setTimeout(() => {
+                arr.push(element)
+                setOpenData([...arr])
+                // console.log(element, index, arr);
+              }, index * 1000);
+            })(element, index)
+          })
+        // setDays(0);
         setHours(0);
         setMinutes(0);
         setSeconds(0);
         setPeriods(periodCount)
         setOpenNums(result?.data[0]?.particular)
         if (historyItem?.periods !== periodCount) {
-          console.log('插入新数据', item);
+          // console.log('插入新数据', item);
           createOpenHistoryData(item)
         }
       }
@@ -110,64 +118,72 @@ export default function Lottery({ data, title, openTime }) {
       clearInterval(updateTime);
     }
   }, []);
-
+  // console.log('list:', historyItem.periods, periodCount, openData);
   return (
-    <div className="flex w-full flex-col gap-5 p-5">
-      <div className='text-base'> {title}第{newPeriods}期开奖结果： </div>
-      <ul className="flex flex-wrap justify-between gap-2">
-        {openData?.map((item, index) => (
-          <li key={item.ordinary + item.property}
-            className={index < 6
-              ? `text-${item.color}-600 flex w-1/6 flex-1 flex-col items-center pt-2`
-              : `text-${item.color}-600 ml-4 flex w-1/6 flex-1 flex-col items-center pt-2 font-bold`
-            }
-          >
-            <div className="relative">
-              <Image
-                className={index < 6 ? '' : `shadow-md shadow-${item.color}-500 rounded-full`}
-                src={colorList.filter((color) => color.color == item.color)[0]?.url}
-                alt="Vercel Logo"
-                priority
-                quality={100}
-                width={index < 6 ? 100 : 120}
-                height={index < 6 ? 100 : 120}
-              ></Image>
-              <div
-                className="absolute text-sm font-medium"
-                style={{
-                  left: '48%',
-                  top: '30%',
-                  transform: 'translate(-50%, -50%)',
-                }}
-              >
-                <span className={index >= 6 ? 'text-base font-bold' : ''}>
-                  {' '}
-                  {item.particular || item.ordinary}{' '}
-                </span>
-              </div>
-              <div className="p-1 text-center text-sm">
-                <span className={`text-${item.color}-600 `}>
-                  {item.property?.substring(0, 1)}
-                </span>
-                <span className="text-black">{item.property?.substring(1)}</span>
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
-      <div className="flex justify-between items-center text-sm">
-        <div className=' text-sm'>
-          {title}{Number(periodCount)}期开奖结果：{openNums}
+    <div className='w-full'>
+      <div className='flex justify-end text-sm p-1 text-yellow-800'>
+        <Link href="/history">
+          往期记录{'>>'}
+        </Link>
+      </div>
+      <div className="flex text-xl flex-col gap-5 p-2 font-bold">
+        <div className='flex justify-between'> {title}第{newPeriods}期开奖结果：
+          <div className="flex items-center font-bold">
+            {/* <span className="mr-2 ">倒计时:</span> */}
+            <TimerContainer
+              // days={days}
+              hours={hours}
+              minutes={minutes}
+              seconds={seconds}
+            ></TimerContainer>
+          </div>
         </div>
-        <div className="flex items-center font-bold">
-          <span className="mr-2 ">开奖倒计时:</span>
-          {/* <CountDown time={countTime} format="HH 时 mm 分 ss 秒" className=" " /> */}
-          <TimerContainer
-            days={days}
-            hours={hours}
-            minutes={minutes}
-            seconds={seconds}
-          ></TimerContainer>
+
+        <ul className="flex flex-wrap justify-between gap-2">
+          {openData?.map((item, index) => (
+            <li key={item.ordinary + item.property}
+              className={index < 6
+                ? ` flex w-1/6 flex-1 flex-col items-center pt-2`
+                : ` ml-4 flex w-1/6 flex-1 flex-col items-center pt-2 font-bold`
+              }
+            >
+              <div className="relative slide-in-right">
+                <Image
+                  className={index < 6 ? '' : `shadow-md shadow-${item.color}-500 rounded-full`}
+                  src={colorList.filter((color) => color.color == item.color)[0]?.url}
+                  alt="Vercel Logo"
+                  priority
+                  quality={100}
+                  width={index < 6 ? 100 : 120}
+                  height={index < 6 ? 100 : 120}
+                ></Image>
+                <div
+                  className="absolute font-bold"
+                  style={{
+                    left: '48%',
+                    top: '25%',
+                    transform: 'translate(-50%, -50%)',
+                  }}
+                >
+                  <span className={'text-xl font-bold'}>
+                    {item.particular || item.ordinary}
+                  </span>
+                </div>
+                <div className="p-1 text-center text-sm">
+                  <span className="text-black">
+                    {item.property?.substring(0, 1)}
+                  </span>
+                  <span className="text-black">{item.property?.substring(1)}</span>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <div className="flex justify-between items-center">
+          <p>
+            {title}{Number(periodCount)}期开奖结果：{openNums}
+          </p>
+
         </div>
       </div>
     </div>

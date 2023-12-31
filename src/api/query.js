@@ -50,10 +50,10 @@ export const getLatestColourData = async (params = {}) => {
 };
 
 // 获取最新n条历史记录
-export const getLatestFourZodiacData = async (params = {}) => {
+export const getLatestMultiZodiacData = async (params = {}) => {
   // const { pageNum, pageSize } = params
   const result = await fetch(
-    API + '/fourzodiac/page' + `?pageNum=${pageNum || 1}&pageSize=${pageSize || 10}&year=${params?.year}`
+    API + '/multiZodiac/page' + `?pageNum=${pageNum || 1}&pageSize=${pageSize || 10}&year=${params?.year}`
   );
   const { data } = await result.json();
   return data;

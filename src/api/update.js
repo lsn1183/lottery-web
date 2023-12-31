@@ -55,8 +55,8 @@ export async function createRecommend(params) {
   });
 }
 
-export async function createFourzodiac(params) {
-  return await fetch(API + '/fourzodiac/create', {
+export async function createMultizodiac(params) {
+  return await fetch(API + '/multiZodiac/create', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',

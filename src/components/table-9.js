@@ -1,15 +1,15 @@
 import { getOpenItem } from '@/utils/utils';
 
-export default function Table6({ title, data }) {
+export default function Table9({ title, data }) {
   const { openHistoryData, fauvistData } = data
   // console.log(fauvistData, '----fauvistData');
   let arr1 = [], arr2 = [];
   const list = fauvistData.map((item, index) => {
-    const { propitious, fierce } = item
+    const { beast, birds, main } = item
     const openItem = getOpenItem(openHistoryData, item)
-    arr1 = JSON.parse(propitious) // 吉
-    arr2 = JSON.parse(fierce) // 凶
-    return { ...item, ...openItem, names3: arr1, names4: arr2 }
+    arr1 = JSON.parse(beast) // 野
+    arr2 = JSON.parse(birds) // 家
+    return { ...item, ...openItem, names3: arr1, names4: arr2, names: main }
   })
   // console.log('data', list);
   return (
@@ -23,36 +23,39 @@ export default function Table6({ title, data }) {
         style={{ backgroundImage: 'url(/images/roll-bg5.gif)' }}
       ></div>
       <div
-        className="bg-img flex h-14 w-full items-center justify-center border-lime-300  text-2xl"
+        className="bg-img flex h-14 w-full items-center justify-center border-lime-300  text-2xl font-bold"
         style={{
           backgroundImage: 'url(/images/roll-bg2.jpeg)',
           color: '#FFFF00',
         }}
       >
-        <p>{title}论坛：(吉凶肖推荐)</p>
+        <p>{title}论坛：(绝杀家禽野兽)</p>
       </div>
       <ul className='w-full'>
         {list.map((item, i) => (
-          <li key={item.id} className="flex items-center justify-evenly h-10 text-base font-medium pl-5 pr-5" style={{
+          <li key={item.id} className="h-10 flex items-center justify-around font-bold text-2xl gap-4 " style={{
             borderBottom: '1px solid #ccc',
           }}>
-            <div className="w-20">{item.periods} 期：</div>
-            <div>
-              <div className='text-sm'>
-                <span className='text-emerald-600'>【吉肖】</span>
-                <span>【 {item.names3.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-400 pl-1 pr-1' : 'pl-1 pr-1'}>{name}</span>))} 】</span>
+            <div className="w-30">{item.periods} 期：</div>
+            {
+              item.names == '野肖' && <div className=''>
+                【
+                <span className={item.names3.some(name => name == item.openName) ? 'bg-yellow-400' : ''}>野兽</span>
+                】
               </div>
-              <div className='text-sm'>
-                <span className='text-amber-600'>【凶肖】</span>
-                <span>【 {item.names4.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-400 pl-1 pr-1' : 'pl-1 pr-1'}>{name}</span>))} 】</span>
+            }
+
+            {
+              item.names == '家肖' && <div className=''>
+                【
+                <span className={item.names3.some(name => name == item.openName) ? 'bg-yellow-400' : ''}>家畜</span>
+                】
               </div>
-            </div>
-            <div className='w-20 ml-2 text-pink-500'>开：
+            }
+
+            <div className='w-32'>开：
               <span className=''>{item.openNum || '????'}</span>
-              {
-                item.openName &&
-                <span className='text-sm font-bold text-amber-600'>({item.openName})</span>
-              }
+              {item.openName && <span>({item.openName})</span>}
             </div>
           </li>
         ))}

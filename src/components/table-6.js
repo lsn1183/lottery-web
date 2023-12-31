@@ -1,26 +1,20 @@
 import { getOpenItem } from '@/utils/utils';
 
 export default function Table6({ title, data }) {
-  const { openHistoryData, fourZodiacData } = data
-  // console.log(data, '----');
-  let name1, name2, arr1, arr2;
-  const list = fourZodiacData.map((item, index) => {
-    const { single, double } = item
+  const { openHistoryData, fauvistData } = data
+  // console.log(fauvistData, '----fauvistData');
+  // console.log(fauvistData, '----fauvistData');
+  let arr1 = [], arr2 = [];
+  const list = fauvistData.map((item, index) => {
+    const { beast, birds } = item
     const openItem = getOpenItem(openHistoryData, item)
-    arr1 = JSON.parse(single)
-    arr2 = JSON.parse(double)
-    if (index % 2 === 0) {
-      name1 = arr1.slice(arr1.length - 2, arr1.length - 1)
-      name2 = arr2.slice(0, 2)
-    } else {
-      name1 = arr1.slice(arr1.length - 4, -1)
-      name2 = arr2.slice(arr2.length - 2, 1)
-    }
-    return { ...item, ...openItem, names: [...name1, ...name2], }
+    arr1 = [...JSON.parse(beast), ...JSON.parse(birds)] // 野
+    // arr2 = JSON.parse(birds) // 家
+    return { ...item, ...openItem, names1: arr1.splice(0, 6) }
   })
   // console.log('data', list);
   return (
-    <div className="w-full">
+    <div className="w-full font-medium">
       <div
         className="bg-img flex h-14 w-full items-center justify-center border-lime-300 text-2xl text-yellow-300"
         style={{ backgroundImage: 'url(/images/roll-bg4.gif)' }}
@@ -33,25 +27,23 @@ export default function Table6({ title, data }) {
         className="bg-img flex h-14 w-full items-center justify-center border-lime-300  text-2xl"
         style={{
           backgroundImage: 'url(/images/roll-bg2.jpeg)',
-          color: '#FFFF00',
+          color: '#7c04ff',
         }}
       >
-        <p>{title}(天天中彩论坛：绝杀三肖)</p>
+        <p>{title}论坛：必中6肖</p>
       </div>
       <ul className='w-full'>
         {list.map((item, i) => (
-          <li key={item.id} className="flex text-base font-medium h-10 justify-center items-center " style={{
+          <li key={item.id} className="flex items-center justify-around h-12 text-xl font-bold" style={{
             borderBottom: '1px solid #ccc',
           }}>
-            <div className=" ">{item.periods} 期：</div>
-            <div className=' '>
-              <span className='text-lime-700'>【绝杀三肖】</span>
-              <span>【 {item.names.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-300' : ''}>{name}</span>))} 】</span>
+            <div className="">{item.periods}期</div>
+            <div className=''>
+              <span>【{item.names1.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-300 pl-1 pr-1' : 'pl-1 pr-1'}>{name}</span>))} 】</span>
             </div>
-
-            <div className='text-pink-400'>开：
-              <span className='pl-1 pr-1'>{item.openNum || '????'}</span>
-              <span className=' font-bold text-amber-500'>{item.openName}</span>
+            <div className='flex w-24'>开
+              <span className='pl-2'>{item.openNum || '????'}</span>
+              {item.openName && <span className=''>{item.openName}</span>}
             </div>
           </li>
         ))}

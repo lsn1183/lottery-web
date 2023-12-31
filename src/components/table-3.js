@@ -1,4 +1,5 @@
 import { getOpenItem } from '@/utils/utils';
+import Link from 'next/link';
 
 export default function Table3({ title, data }) {
   const { colourData, openHistoryData } = data
@@ -34,13 +35,15 @@ export default function Table3({ title, data }) {
   return (
     <div className="w-full">
       <div
-        className="bg-img flex h-14 w-full items-center justify-center border-lime-300  text-base"
+        className="bg-img flex h-14 w-full items-center justify-center border-lime-300  text-xl"
         style={{
           backgroundImage: 'url(/images/roll-bg2.jpeg)',
           color: 'rgb(255, 255, 0)',
         }}
       >
-        <p>↓↓↓ 请大家记住新网址 ↓↓↓ www.111.com</p>
+        <p>↓↓↓ 请大家记住新网址,
+          <Link href="https://12312378.xyz">12312378.xyz</Link>
+        </p>
       </div>
       <ul className="text-xl">
         {list.map((item, index) => (
@@ -52,16 +55,16 @@ export default function Table3({ title, data }) {
             }}
           >
             <div className=" text-rose-600">
-              <span>{item.periods}期</span>:<span className="pl-1 text-cyan-700">①波</span>
+              <span>{item.periods}期</span>:<span className="pl-1 text-cyan-700">②波</span>
               <span>①头主10码</span>:
-              <span className="pl-2 text-orange-600">
+              <span className="pl-2 text-black">
                 开{item.openNum ? `(${item.openNum} ${item.openName} )` : '???'}
               </span>
             </div>
             <div>
-              <span style={{ color: '#0033CC' }}>①波</span>〖<span className={item.color1 == item.openColor ? 'bg-yellow-300' : ''}>{item.color1_Name}</span>
+              <span style={{ color: '#0033CC' }}>②波</span>〖<span className={item.color1 == item.openColor ? 'bg-yellow-300' : ''}>{item.color1_Name}</span>
               波+ <span className={item.color2 == item.openColor ? 'bg-yellow-300' : ''}>{item.color2_Name}</span> 波〗
-              <span style={{ color: '#0033CC' }}>①头</span>〖{item.main.map((v, i) => (<span key={JSON.stringify(item.main) + i}
+              <span style={{ color: '#0033CC' }}>头数</span>〖{item.main.map((v, i) => (<span key={JSON.stringify(item.main) + i}
                 className={JSON.stringify(Number(item.openNum))[0] == v ? 'bg-yellow-300' : ''}>{v}</span>))}头〗
             </div>
             <div>
