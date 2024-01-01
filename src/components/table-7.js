@@ -5,20 +5,11 @@ import { getOpenItem } from '@/utils/utils';
 export default function Table7({ title, data }) {
   const { openHistoryData, multiZodiacData } = data
   // console.log(data, '----');
-  let name1, name2, arr1, arr2;
   const list = multiZodiacData.map((item, index) => {
-    const { single, double } = item
+    let { three, periods } = item
     const openItem = getOpenItem(openHistoryData, item)
-    arr1 = JSON.parse(single)
-    arr2 = JSON.parse(double)
-    if (index % 2 === 0) {
-      name1 = arr1.slice(arr1.length - 2, arr1.length - 1)
-      name2 = arr2.slice(0, 2)
-    } else {
-      name1 = arr1.slice(arr1.length - 4, -1)
-      name2 = arr2.slice(arr2.length - 2, 1)
-    }
-    return { ...item, ...openItem, names: [...name1, ...name2], }
+    periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
+    return { ...item, ...openItem, names: JSON.parse(three), periods }
   })
   // console.log('data', list);
   return (

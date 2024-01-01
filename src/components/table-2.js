@@ -1,4 +1,5 @@
 import { getOpenItem } from '@/utils/utils';
+import Image from 'next/image';
 
 export default function Table2({ data, title }) {
   const { multiZodiacData, animalData, openHistoryData } = data;
@@ -6,10 +7,9 @@ export default function Table2({ data, title }) {
   let newItem, selection, arr, animals, openItem;
   const list = multiZodiacData?.map((item, i) => {
     newItem = {};
-    const { nine, id, periods } = item // 9肖
+    let { nine, id, periods } = item // 9肖
+    periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
     arr = JSON.parse(nine);
-    // console.log('item', item);
-    // selection = nameToNum(arr, animalData);
     openItem = getOpenItem(openHistoryData, item);
     animals = arr.map((name, index) => {
       return arr.slice(0, index + 1);
@@ -39,6 +39,11 @@ export default function Table2({ data, title }) {
         {list.map((item, index) => (
           <div key={item.id} className='font-bold'>
             <div className="header flex h-12 items-center justify-center bg-blue-400 p-1">
+              <Image
+                width={28}
+                height={20}
+                src='/images/icons/newArrow.jpeg'
+              />
               <span>精选</span>
               <span>{item.selection?.map((s, i) => (<span key={item.id + i} className={s == item.openNum ? ' bg-yellow-300' : ''}>{s}{i < item.selection.length - 1 ? '.' : ''}</span>))}</span>
             </div>

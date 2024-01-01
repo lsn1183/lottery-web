@@ -5,11 +5,12 @@ export default function Table9({ title, data }) {
   // console.log(fauvistData, '----fauvistData');
   let arr1 = [], arr2 = [];
   const list = fauvistData.map((item, index) => {
-    const { beast, birds, main } = item
+    let { beast, birds, main, periods } = item
     const openItem = getOpenItem(openHistoryData, item)
     arr1 = JSON.parse(beast) // 野
     arr2 = JSON.parse(birds) // 家
-    return { ...item, ...openItem, names3: arr1, names4: arr2, names: main }
+    periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
+    return { ...item, ...openItem, names3: arr1, names4: arr2, names: main, periods }
   })
   // console.log('data', list);
   return (

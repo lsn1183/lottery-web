@@ -8,8 +8,9 @@ export default function Table1({ data, title }) {
   const list = [
     ...recommendData.map((item) => {
       const openItem = getOpenItem(openHistoryData, item);
-
-      return { ...item, ...openItem };
+      let { periods } = item
+      periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
+      return { ...item, ...openItem, periods };
     }),
   ];
   return (
@@ -26,30 +27,45 @@ export default function Table1({ data, title }) {
                 {item.openName}
               </span>
             </div>
-            <p className="font-mono font-bold">
+            <div className="font-mono font-bold text-red-600 flex">
+              <Image
+                width={28}
+                height={20}
+                src='/images/icons/xuanzhuan.gif'
+              />
               {item.nums1?.split('.').map((ele, i) => (
                 <span key={ele} className={ele == item.openNum ? ' rounded-lg bg-yellow-200' : ''}>
                   {ele}
                   {i < 7 ? '.' : ''}
                 </span>
               ))}
-            </p>
-            <p className="font-mono font-bold">
+            </div>
+            <div className="font-mono font-bold text-red-600 flex">
+              <Image
+                width={28}
+                height={20}
+                src='/images/icons/xuanzhuan.gif'
+              />
               {item.nums2?.split('.').map((ele, i) => (
                 <span key={ele} className={ele == item.openNum ? ' rounded-lg bg-yellow-200' : ''}>
                   {ele}
                   {i < 7 ? '.' : ''}
                 </span>
               ))}
-            </p>
-            <p className=" font-mono font-bold">
+            </div>
+            <div className=" font-mono font-bold text-red-600 flex">
+              <Image
+                width={28}
+                height={20}
+                src='/images/icons/xuanzhuan.gif'
+              />
               {item.nums3?.split('.').map((ele, i) => (
                 <span key={ele} className={ele == item.openNum ? ' rounded-lg bg-yellow-200' : ''}>
                   {ele}
                   {i < 7 ? '.' : ''}
                 </span>
               ))}
-            </p>
+            </div>
           </li>
         ))}
         <li className=" m-2 p-3 text-start">
@@ -58,9 +74,7 @@ export default function Table1({ data, title }) {
           </p>
         </li>
       </ul>
-      {/* <div className="w-full" style={{ backgroundImage: "url(/images/roll-bg3.gif)" }}></div> */}
-      <Image src="/images/roll-bg3.gif" alt='bg3' width={768} height={64} />
-      <Image src="/images/roll-bg3.gif" alt='bg1' width={768} height={64} />
+      <Image src="/images/nav/3.png" alt='' width={768} height={100} />
     </div>
   );
 }

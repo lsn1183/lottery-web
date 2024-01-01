@@ -4,9 +4,10 @@ export default function Table10({ title, data }) {
   const { openHistoryData, multiZodiacData } = data
   // console.log(multiZodiacData, '----multiZodiacData');
   const list = multiZodiacData.map((item, index) => {
-    const { four } = item // 8肖
+    let { four, periods } = item // 8肖
     const openItem = getOpenItem(openHistoryData, item)
-    return { ...item, ...openItem, names: JSON.parse(four) }
+    periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
+    return { ...item, ...openItem, names: JSON.parse(four), periods }
   })
   // console.log('data', list);
   return (

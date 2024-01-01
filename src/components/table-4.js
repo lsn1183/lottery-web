@@ -4,9 +4,10 @@ export default function Table4({ title, data }) {
   const { openHistoryData, multiZodiacData } = data
   // console.log(data, '----');
   const list = multiZodiacData.map(item => {
-    const { single, double, main } = item
+    let { periods, main } = item
     const openItem = getOpenItem(openHistoryData, item)
-    return { ...item, main, ...openItem }
+    periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
+    return { ...item, main, ...openItem, periods }
   })
   // console.log('data', list);
   return (
@@ -25,7 +26,7 @@ export default function Table4({ title, data }) {
           backgroundImage: 'url(/images/roll-bg2.jpeg)',
         }}
       >
-        <p>{title}：暴富单双</p>
+        <p>{title}：单双(發發發)</p>
       </div>
       <ul className='w-full'>
         {list.map((item, i) => (
@@ -35,14 +36,14 @@ export default function Table4({ title, data }) {
             <div className='w-20 text-center'>{item.periods} 期</div>
             {
               item.main == '单' && <div className=''>
-                <span className={item.openNum && Number(item.openNum) % 2 !== 0 ? ' bg-yellow-200' : ''}>单数</span>
+                <span className={item.openNum && Number(item.openNum) % 2 !== 0 ? ' bg-yellow-200' : ''}>【单】</span>
                 {/* <span>【 {item.single.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-300' : ''}>{name}</span>))} 】</span> */}
               </div>
             }
             {
               item.main == '双' &&
               <div className=''>
-                <span className={item.openNum && Number(item.openNum) % 2 == 0 ? ' bg-yellow-200' : ''}>双数</span>
+                <span className={item.openNum && Number(item.openNum) % 2 == 0 ? ' bg-yellow-200' : ''}>【双】</span>
                 {/* <span>【 {item.double.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-300' : ''}>{name}</span>))} 】</span> */}
               </div>
             }

@@ -12,11 +12,11 @@ export default function Roll({ title }) {
       </div>
       {/* 背景图 */}
       <div
-        className="flex items-center justify-center border-lime-600 pb-4 pt-4 text-xl text-[#102bde]"
-        style={{ backgroundImage: 'url(/images/roll-bg2.jpeg)' }}
+        className="flex items-center justify-center border-lime-600 h-12"
+        style={{ backgroundImage: 'url(/images/nav/4.png)', backgroundSize: 'cover' }}
       >
-        {title}精品24码，欢迎喝彩12312378.xyz
       </div>
+
     </div>
   );
 }

@@ -59,8 +59,6 @@ export default function Lottery({ data, title, openTime }) {
   const today = moment().format('YYYY-MM-DD'); // 今天日期
   let countDownDate = moment(today + ' ' + openTime).valueOf(); //  距离开奖时间小时
 
-  // console.log(month, 'month');
-
   const getOpenData = async () => {
     const result = await fetch(CLIENT_API + '/open/' + `${periodCount}`);
     return await result.json();
@@ -81,7 +79,7 @@ export default function Lottery({ data, title, openTime }) {
   useEffect(() => {
     let updateTime = setInterval(async () => {
       let now = new Date().getTime();
-      let difference = countDownDate - now;
+      let difference = countDownDate - now <= 0 ? 0 : countDownDate - now;
       let newDays = Math.floor(difference / (1000 * 60 * 60 * 24));
       let newHours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       let newMinutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
@@ -126,13 +124,16 @@ export default function Lottery({ data, title, openTime }) {
   // console.log('list:', historyItem.periods, periodCount, openData);
   return (
     <div className='w-full'>
-      <div className='flex justify-end text-sm p-1 text-red-600'>
+      <div className='flex justify-end items-center text-sm p-1 text-red-600'>
         <Link href="/history">
-          往期记录{'>>'}
+          往期开奖记录{'>>'}
         </Link>
       </div>
       <div className="flex text-xl flex-col gap-5 p-2 font-bold">
-        <div className='flex justify-between'> {title}第{newPeriods}期开奖结果：
+        <div className='flex justify-between'>
+          <div className='text-base'>
+            {title}第<span className='text-red-500'>{newPeriods < 10 ? '00' + newPeriods : newPeriods < 100 ? '0' + newPeriods : newPeriods}</span>期开奖：
+          </div>
           <div className="flex items-center font-bold">
             <TimerContainer
               // days={days}
@@ -183,11 +184,12 @@ export default function Lottery({ data, title, openTime }) {
             </li>
           ))}
         </ul>
-        <div className="">
-          <p>第{periodCount}期: {month} 月 {day} 日 {weeks[moment().day()]} 22 点 35 分</p>
-          <p>
+        <div className="text-base font-medium">
+          <div>第<span className='text-red-500'>{periodCount < 10 ? '00' + periodCount : periodCount < 100 ? '0' + periodCount : periodCount}</span>期开奖:
+            <span className='text-red-500 text-sm'> {month}月{day}日 {weeks[moment().day()]} 22点35分</span></div>
+          {/* <p>
             {title}{Number(periodCount)}期开奖结果：{openNums}
-          </p>
+          </p> */}
         </div>
       </div>
     </div>

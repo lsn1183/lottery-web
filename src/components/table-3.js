@@ -15,11 +15,13 @@ export default function Table3({ title, data }) {
     openItem,
     numArray = [];
   const list = colourData.map((item) => {
+    let { periods } = item
     color1_Name = colorList.filter((c) => c.color == item.color1)[0]['name'];
     color1 = colorList.filter((c) => c.color == item.color1)[0]['color'];
     color2_Name = colorList.filter((c) => c.color == item.color2)[0]['name'];
     color2 = colorList.filter((c) => c.color == item.color2)[0]['color'];
     openItem = getOpenItem(openHistoryData, item);
+    periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
 
     numArray = item.nums.split('.');
     return {
@@ -29,6 +31,7 @@ export default function Table3({ title, data }) {
       color2_Name,
       color1_Name,
       nums: numArray,
+      periods
     };
   });
 
@@ -41,7 +44,7 @@ export default function Table3({ title, data }) {
           color: 'rgb(255, 255, 0)',
         }}
       >
-        <p>↓↓↓ 请大家记住新网址,
+        <p className='animate text-[yellow] text-2xl'>↓↓↓ 请大家记住新网址,
           <Link href="https://12312378.xyz">12312378.xyz</Link>
         </p>
       </div>

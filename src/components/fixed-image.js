@@ -4,7 +4,7 @@ export default function Header({ periodCount }) {
   return (
     <div className="header">
       <Image
-        src="/images/8787.gif"
+        src="/images/top.jpg"
         alt="Vercel Logo"
         priority
         quality={100}

@@ -1,6 +1,6 @@
 import { getAnimalList } from '@/api/query';
 import moment from 'moment';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export async function getServerSideProps() {
   const year = moment().year(); // 今年年份
@@ -46,8 +46,6 @@ function Attribute({ data }) {
       arr.push(item)
     }
   });
-  console.log('obj', animals);
-
   const colorList = [
     {
       colorName: '红波',
@@ -76,8 +74,6 @@ function Attribute({ data }) {
     },
   ];
 
-  useEffect(() => { }, []);
-
   return (
     <div className='content overflow-scroll'>
       <div className="w-full pb-4 text-lg overflow-auto">
@@ -105,7 +101,7 @@ function Attribute({ data }) {
               </div>
               <div className="flex w-full flex-1 flex-wrap items-center justify-start gap-1 pl-2">
                 {item.nums?.map((col) => (
-                  <div key={col.nums} className={`flex items-center justify-center rounded text-white`}
+                  <div key={col.nums} className={`flex items-center justify-center rounded-full text-white w-8 h-8`}
                     style={{ backgroundColor: item.color, padding: '2px' }}
                   >
                     {col.nums}
@@ -141,7 +137,7 @@ function Attribute({ data }) {
               </div>
               <div className="flex w-full flex-1 flex-wrap items-center justify-start gap-1 pl-2">
                 {item.nums?.map((child) => (
-                  <div key={child.nums} className=" flex items-center justify-center rounded text-white"
+                  <div key={child.nums} className=" flex items-center justify-center rounded-full text-white w-8 h-8"
                     style={{ backgroundColor: child.color, padding: '2px' }}
                   >
                     {child.nums}
@@ -177,11 +173,12 @@ function Attribute({ data }) {
               </div>
               <div className="flex w-full flex-1 flex-wrap items-center justify-start gap-1 pl-2">
                 {animals[key].sort((a, b) => a.nums - b.nums)?.map((item) => (
-                  <div key={item.nums} className=" flex items-center justify-center rounded text-white"
-                    style={{ backgroundColor: item.color, padding: '2px' }}
-                  >
-                    <div>
-                      <span className=' m-1'>{item.nums}，</span>
+                  <div key={item.nums} className=" flex items-center justify-center  text-white " >
+                    <div className=' m-1 rounded-full text-white w-8 h-8 flex items-center justify-center'
+                      style={{ backgroundColor: item.color, padding: '2px' }}
+                    >{item.nums}</div>
+
+                    <div style={{ backgroundColor: item.color, padding: '2px' }}>
                       <span className=' m-1'>{item.property}，</span>
                       <span className=' m-1'>{item.profession}，</span>
                       <span className=' m-1'>{JSON.parse(item.type).join(',')}</span>

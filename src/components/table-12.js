@@ -4,9 +4,10 @@ export default function Table12({ title, data }) {
   const { openHistoryData, zodiacData } = data
   // console.log(multiZodiacData, '----multiZodiacData');
   const list = zodiacData.map((item, index) => {
-    // const { single } = item // ：平特①肖中
+    let { periods } = item // ：平特①肖中
     const openItem = getOpenItem(openHistoryData, item)
-    return { ...item, ...openItem }
+    periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
+    return { ...item, ...openItem, periods }
   })
   // console.log('data', list);
   return (
@@ -33,7 +34,7 @@ export default function Table12({ title, data }) {
           <li key={item.id} className="flex items-center justify-around h-10 font-bold font-mono" style={{
             borderBottom: '1px solid #ccc',
           }}>
-            <div className="pl-2">{item.periods} 期：</div>
+            <div className="pl-2">{item.periods}期：</div>
             <div className=''>
               【 <span className={item.single == item.openName ? 'bg-yellow-400' : ''}>{item.single}</span> 】
             </div>

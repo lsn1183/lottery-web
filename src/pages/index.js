@@ -10,7 +10,7 @@ import moment from 'moment';
 
 import ImgList1 from '@/components/image-1';
 import ImgList2 from '@/components/image-2';
-import ImgList6 from '@/components/image-6';
+import ImgList3 from '@/components/image-3';
 
 import Table10 from '@/components/table-10';
 import Table11 from '@/components/table-11';
@@ -27,7 +27,6 @@ import Table9 from '@/components/table-9';
 // const ImgList2 = dynamic(() => import('@/components/image-2'))
 // const ImgList6 = dynamic(() => import('@/components/image-6'))
 // const TopImage = dynamic(() => import('@/components/fixed-image'))
-
 
 // const ImgList6 = dynamic(() => import('@/components/image-6'))
 // const Table2 = dynamic(() => import('@/components/table-2'))
@@ -96,7 +95,7 @@ export default function Page({ data }) {
       <Table3 title={Title} data={data} />
       <ImgList2 title={Title} />
       <Table4 title={Title} data={data} />
-      <ImgList6 title={Title} />
+      <ImgList3 title={Title} />
       <Table5 title={Title} data={data} />
       <Table6 title={Title} data={data} />
       <Table7 title={Title} data={data} />

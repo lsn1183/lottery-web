@@ -5,31 +5,25 @@ export default function Table5({ title, data }) {
   // console.log(data, '----');
   let name1, name2, names;
   const list = multiZodiacData.map((item, index) => {
-    const { single, double } = item
+    let { five, periods } = item
     const openItem = getOpenItem(openHistoryData, item)
-    if (index % 2 === 0) {
-      name1 = JSON.parse(single).slice(0, 3)
-      name2 = JSON.parse(double).slice(2, 4)
-    } else {
-      name1 = JSON.parse(single).slice(2, 4)
-      name2 = JSON.parse(double).slice(0, 3)
-    }
-    names = [...name1, ...name2]
-    return { ...item, ...openItem, names, }
+    periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
+    names = JSON.parse(five)
+    return { ...item, ...openItem, names, periods }
   })
 
   return (
     <div className="w-full">
       <div
-        className="bg-img flex h-14 w-full items-center justify-center border-lime-300 text-2xl text-yellow-300"
+        className="bg-img flex h-14 w-full items-center justify-center"
         style={{ backgroundImage: 'url(/images/roll-bg4.gif)' }}
       ></div>
       <div
-        className="bg-img flex h-14 w-full items-center justify-center border-lime-300 text-2xl text-yellow-300"
-        style={{ backgroundImage: 'url(/images/roll-bg5.gif)' }}
+        className="bg-img flex h-14 w-full items-center justify-center "
+        style={{ backgroundImage: 'url(/images/2123.gif)' }}
       ></div>
       <div
-        className="bg-img flex h-14 w-full items-center justify-center border-lime-300  text-2xl"
+        className="bg-img flex h-14 w-full items-center justify-center"
         style={{
           backgroundImage: 'url(/images/roll-bg2.jpeg)',
           color: '#FFFF00',

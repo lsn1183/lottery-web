@@ -4,23 +4,24 @@ export default function Table8({ title, data }) {
   const { openHistoryData, multiZodiacData } = data
   // console.log(multiZodiacData, '----multiZodiacData');
   const list = multiZodiacData.map((item, index) => {
-    const { eight } = item // 8肖
+    let { eight, periods } = item // 8肖
     const openItem = getOpenItem(openHistoryData, item)
-    return { ...item, ...openItem, names: JSON.parse(eight) }
+    periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
+    return { ...item, ...openItem, names: JSON.parse(eight), periods }
   })
   // console.log('data', list);
   return (
     <div className="w-full">
       <div
-        className="bg-img flex h-14 w-full items-center justify-center border-lime-300 text-2xl text-yellow-300"
+        className="bg-img flex h-14 w-full items-center justify-center "
         style={{ backgroundImage: 'url(/images/roll-bg4.gif)' }}
       ></div>
       <div
-        className="bg-img flex h-14 w-full items-center justify-center border-lime-300 text-2xl text-yellow-300"
-        style={{ backgroundImage: 'url(/images/roll-bg5.gif)' }}
+        className="bg-img flex h-14 w-full items-center justify-center "
+        style={{ backgroundImage: 'url(/images/234.jpeg)' }}
       ></div>
       <div
-        className="bg-img flex h-14 w-full items-center justify-center border-lime-300  text-2xl"
+        className="bg-img flex h-14 w-full items-center justify-center"
         style={{
           backgroundImage: 'url(/images/roll-bg2.jpeg)',
           color: '#FFFF00',

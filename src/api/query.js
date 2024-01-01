@@ -1,6 +1,6 @@
 import { API } from './config';
 
-const pageSize = 10;
+const pageSize = 5;
 const pageNum = 1;
 
 export const getAnimalList = async ({ year }) => {

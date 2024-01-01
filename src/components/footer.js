@@ -80,7 +80,7 @@ export default function Footer({ data }) {
             </div>
             <div className="flex w-full flex-1 flex-wrap items-center justify-start gap-1 pl-2">
               {item.nums?.map((col) => (
-                <div key={col.nums} className={`flex items-center justify-center rounded text-white`}
+                <div key={col.nums} className={`flex items-center justify-center rounded-full text-white w-8 h-8`}
                   style={{ backgroundColor: item.color, padding: '2px' }}
                 >
                   {col.nums}
@@ -116,7 +116,7 @@ export default function Footer({ data }) {
             </div>
             <div className="flex w-full flex-1 flex-wrap items-center justify-start gap-1 pl-2">
               {item.nums?.map((child) => (
-                <div key={child.nums} className=" flex items-center justify-center rounded text-white"
+                <div key={child.nums} className=" flex items-center justify-center rounded-full text-white w-8 h-8"
                   style={{ backgroundColor: child.color, padding: '2px' }}
                 >
                   {child.nums}
