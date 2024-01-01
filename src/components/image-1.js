@@ -1,4 +1,5 @@
 import Image from 'next/image';
+// import sharp from 'sharp';
 // 插图集合
 export default function ImgList({ title = '' }) {
   const list = [
@@ -9,6 +10,13 @@ export default function ImgList({ title = '' }) {
     { desc: title, url: '/images/005.gif' },
     { desc: title, url: '/images/002.gif' },
   ];
+
+  // async function getImageData() { 
+  //   const imagePath = '/path/to/image.jpg'; 
+  //   const image = sharp(imagePath); 
+  //   const imageBuffer = await image.resize(800, 600).toBuffer(); 
+  //   return imageBuffer; 
+  // }
 
   return (
     <div className="mt-2 flex flex-wrap justify-start bg-orange-200 p-2 font-bold ">
