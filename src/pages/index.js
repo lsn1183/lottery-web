@@ -6,7 +6,7 @@ import NavBar from '@/components/nav-bar';
 import Roll from '@/components/roll';
 import Table1 from '@/components/table-1';
 import moment from 'moment';
-// import dynamic from 'next/dynamic';
+import dynamic from 'next/dynamic';
 
 import ImgList6 from '@/components/image-6';
 import Table10 from '@/components/table-10';
