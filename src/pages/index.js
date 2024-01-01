@@ -20,8 +20,8 @@ import Table6 from '@/components/table-6';
 import Table7 from '@/components/table-7';
 import Table8 from '@/components/table-8';
 import Table9 from '@/components/table-9';
-// const ImgList1 = dynamic(() => import('@/components/image-1'))
-// const ImgList2 = dynamic(() => import('@/components/image-2'))
+const ImgList1 = dynamic(() => import('@/components/image-1'))
+const ImgList2 = dynamic(() => import('@/components/image-2'))
 // const ImgList6 = dynamic(() => import('@/components/image-6'))
 // const Table2 = dynamic(() => import('@/components/table-2'))
 // const Table3 = dynamic(() => import('@/components/table-3'))
