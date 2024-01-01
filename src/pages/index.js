@@ -1,14 +1,17 @@
 import { getAnimalList, getLatestColourData, getLatestFauvistData, getLatestMultiZodiacData, getLatestOpenHistoryData, getLatestRecommendData, getLatestZodiacData } from '@/api/query';
-// import TopImage from '@/components/fixed-image';
+import TopImage from '@/components/fixed-image';
 import Footer from '@/components/footer';
 import Lottery from '@/components/lottery';
 import NavBar from '@/components/nav-bar';
 import Roll from '@/components/roll';
 import Table1 from '@/components/table-1';
 import moment from 'moment';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 
-// import ImgList6 from '@/components/image-6';
+import ImgList1 from '@/components/image-1';
+import ImgList2 from '@/components/image-2';
+import ImgList6 from '@/components/image-6';
+
 import Table10 from '@/components/table-10';
 import Table11 from '@/components/table-11';
 import Table12 from '@/components/table-12';
@@ -20,10 +23,10 @@ import Table6 from '@/components/table-6';
 import Table7 from '@/components/table-7';
 import Table8 from '@/components/table-8';
 import Table9 from '@/components/table-9';
-const ImgList1 = dynamic(() => import('@/components/image-1'))
-const ImgList2 = dynamic(() => import('@/components/image-2'))
-const ImgList6 = dynamic(() => import('@/components/image-6'))
-const TopImage = dynamic(() => import('@/components/fixed-image'))
+// const ImgList1 = dynamic(() => import('@/components/image-1'))
+// const ImgList2 = dynamic(() => import('@/components/image-2'))
+// const ImgList6 = dynamic(() => import('@/components/image-6'))
+// const TopImage = dynamic(() => import('@/components/fixed-image'))
 
 
 // const ImgList6 = dynamic(() => import('@/components/image-6'))
