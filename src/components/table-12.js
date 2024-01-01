@@ -30,14 +30,14 @@ export default function Table12({ title, data }) {
       </div>
       <ul>
         {list.map((item, i) => (
-          <li key={item.id} className="flex items-center justify-around h-10 font-bold" style={{
+          <li key={item.id} className="flex items-center justify-around h-10 font-bold font-mono" style={{
             borderBottom: '1px solid #ccc',
           }}>
             <div className="pl-2">{item.periods} 期：</div>
             <div className=''>
               【 <span className={item.single == item.openName ? 'bg-yellow-400' : ''}>{item.single}</span> 】
             </div>
-            <div className='w-32'>开：
+            <div className='w-32 flex'>开：
               <span className=''>{item.openNum || '????'}</span>
               {
                 item.openName &&

@@ -42,7 +42,7 @@ export default function Table5({ title, data }) {
           <li key={item.id} className="flex text-2xl font-medium h-10 items-center justify-around" style={{
             borderBottom: '1px solid #ccc',
           }}>
-            <div className='w-20 text-center'>{item.periods} 期</div>
+            <div className='w-22 font-mono'>{item.periods} 期</div>
             <div className=''>
               <span>【 {item.names.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-300' : ''}>{name}</span>))} 】</span>
             </div>

@@ -1,5 +1,6 @@
 import { getOpenItem } from '@/utils/utils';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Table1({ data, title }) {
   const { recommendData, periodCount, openHistoryData } = data;
@@ -13,18 +14,19 @@ export default function Table1({ data, title }) {
   ];
   return (
     <div className="w-full">
-      <ul className="flex flex-col gap-1 text-xl">
+      <ul className="flex flex-col gap-1">
         {list.map((item, i) => (
-          <li key={item.id} className="flex flex-col items-center justify-around border-b-2 pb-1 pt-1">
-            <div className="text-xl font-medium">
+          <li key={item.id} className="flex flex-col gap-1 items-center border-b-2 text-2xl">
+            <div className="flex items-center justify-center text-2xl font-medium">
               <span>{item.periods}期：</span>
-              <span className="mr-1 text-blue-700"><a href="12312378.xyz">12312378.xyz</a>=精品24码=</span>
+              {/* <span className="mr-1 text-blue-700"></span> */}
+              <Link href='https://12312378.xyz' className="text-xl text-blue-600">精品24码=12312378.xyz=</Link>
               <span className="">
-                开: {item.openNum || '????'}
+                开:{item.openNum || '????'}
                 {item.openName}
               </span>
             </div>
-            <p className=" font-bold ">
+            <p className="font-mono font-bold">
               {item.nums1?.split('.').map((ele, i) => (
                 <span key={ele} className={ele == item.openNum ? ' rounded-lg bg-yellow-200' : ''}>
                   {ele}
@@ -32,7 +34,7 @@ export default function Table1({ data, title }) {
                 </span>
               ))}
             </p>
-            <p className=" font-bold ">
+            <p className="font-mono font-bold">
               {item.nums2?.split('.').map((ele, i) => (
                 <span key={ele} className={ele == item.openNum ? ' rounded-lg bg-yellow-200' : ''}>
                   {ele}
@@ -40,7 +42,7 @@ export default function Table1({ data, title }) {
                 </span>
               ))}
             </p>
-            <p className=" font-bold ">
+            <p className=" font-mono font-bold">
               {item.nums3?.split('.').map((ele, i) => (
                 <span key={ele} className={ele == item.openNum ? ' rounded-lg bg-yellow-200' : ''}>
                   {ele}

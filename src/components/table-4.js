@@ -29,7 +29,7 @@ export default function Table4({ title, data }) {
       </div>
       <ul className='w-full'>
         {list.map((item, i) => (
-          <li key={item.id} className="flex font-medium h-10 justify-around items-center " style={{
+          <li key={item.id} className="flex font-medium h-10 justify-around items-center text-2xl" style={{
             borderBottom: '1px solid #ccc',
           }}>
             <div className='w-20 text-center'>{item.periods} 期</div>

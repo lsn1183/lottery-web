@@ -30,7 +30,7 @@ export default function Table2({ data, title }) {
         style={{ backgroundImage: 'url(/images/roll-bg5.gif)' }}
       ></div>
       <div
-        className="bg-img flex h-14 w-full items-center justify-center border-lime-300 text-2xl text-yellow-300"
+        className="bg-img flex h-14 w-full items-center justify-center border-lime-300 text-3xl text-yellow-300"
         style={{ backgroundImage: 'url(/images/roll-bg2.jpeg)' }}
       >
         <p>{title}论坛(必中九肖)</p>
@@ -39,7 +39,7 @@ export default function Table2({ data, title }) {
         {list.map((item, index) => (
           <div key={item.id} className='font-bold'>
             <div className="header flex h-12 items-center justify-center bg-blue-400 p-1">
-              <span>精选：⑨肖</span>
+              <span>精选</span>
               <span>{item.selection?.map((s, i) => (<span key={item.id + i} className={s == item.openNum ? ' bg-yellow-300' : ''}>{s}{i < item.selection.length - 1 ? '.' : ''}</span>))}</span>
             </div>
             <ul>
@@ -50,7 +50,7 @@ export default function Table2({ data, title }) {
                   style={{ borderTop: '1px solid #ccc' }}
                 >
                   <div
-                    className="flex w-24 items-center justify-center"
+                    className="flex w-24 items-center justify-center font-serif"
                     style={{ backgroundColor: 'rgb(0, 204, 51)' }}
                   >
                     <span>{item.periods}</span>
@@ -62,7 +62,7 @@ export default function Table2({ data, title }) {
                     {child.map((c, i) => (<span key={i + c} className={c.indexOf(item.openName) !== -1 ? ' bg-yellow-300' : ''}>{c}{i < child.length - 1 ? '.' : ''}</span>))}
                   </div>
                   <div
-                    className="flex w-16 items-center justify-center"
+                    className="flex w-16 items-center justify-center font-serif"
                     style={{ backgroundColor: 'rgb(0, 204, 51)' }}
                   >
                     {item.openNum ? (`${item.openNum} ${item.openName}`) : '????'}

@@ -8,7 +8,7 @@ function Helper() {
 
   return (
     <div className='content overflow-scroll'>
-      <h1>This is Helper Page.</h1>
+      <h1>暂不开放</h1>
     </div>
   )
 }

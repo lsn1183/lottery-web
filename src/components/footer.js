@@ -55,9 +55,9 @@ export default function Footer({ data }) {
   ];
   // console.log('singleList', singleList);
   return (
-    <div className="w-full pb-4 text-xs">
+    <div className="w-full pb-4 text-lg font-medium font-mono">
       {/* 波色 */}
-      <div  className="bg-img flex h-14 w-full items-center justify-center border-lime-300  text-2xl"
+      <div className="bg-img flex h-14 w-full items-center justify-center border-lime-300  text-2xl"
         style={{
           backgroundImage: 'url(/images/roll-bg2.jpeg)',
           color: 'rgb(255, 255, 0)',

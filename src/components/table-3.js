@@ -54,27 +54,27 @@ export default function Table3({ title, data }) {
               borderBottom: '1px solid #ccc',
             }}
           >
-            <div className=" text-rose-600">
-              <span>{item.periods}期</span>:<span className="pl-1 text-cyan-700">②波</span>
+            <div className=" text-rose-600 font-mono text-2xl">
+              <span className='text-black'>{item.periods}期</span>:<span className="pl-1 text-cyan-700">②波</span>
               <span>①头主10码</span>:
               <span className="pl-2 text-black">
-                开{item.openNum ? `(${item.openNum} ${item.openName} )` : '???'}
+                开{item.openNum ? `(${item.openNum}${item.openName})` : '???'}
               </span>
             </div>
-            <div>
+            <div className='text-2xl'>
               <span style={{ color: '#0033CC' }}>②波</span>〖<span className={item.color1 == item.openColor ? 'bg-yellow-300' : ''}>{item.color1_Name}</span>
               波+ <span className={item.color2 == item.openColor ? 'bg-yellow-300' : ''}>{item.color2_Name}</span> 波〗
               <span style={{ color: '#0033CC' }}>头数</span>〖{item.main.map((v, i) => (<span key={JSON.stringify(item.main) + i}
                 className={JSON.stringify(Number(item.openNum))[0] == v ? 'bg-yellow-300' : ''}>{v}</span>))}头〗
             </div>
-            <div>
+            <div className='text-xl'>
               <span style={{ color: '#0033CC' }}>主10码</span>
               <span>: </span>
               {item.nums?.map((n, _i) => (
                 <span
                   key={item.id + _i}
                   className={
-                    item.openNum == n ? 'bg-yellow-300' : ''
+                    item.openNum == n ? 'bg-yellow-300 text-2xl' : 'text-[20px]'
                   }
                 >
                   {n}

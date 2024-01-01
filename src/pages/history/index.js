@@ -32,15 +32,6 @@ export default function History({ data }) {
 
   return (
     <div className="content flex min-h-screen flex-col items-center pb-4 ">
-      {/* <Image
-        src="/images/222.jpg"
-        alt="Vercel Logo"
-        className="dark:invert"
-        width={768}
-        height={48}
-        priority
-      /> */}
-
       <div className=" mb-2 mt-4 w-full text-center text-xl font-bold ">
         <div>开奖历史记录</div>
         <ul className='flex gap-4'>

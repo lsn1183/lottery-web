@@ -30,14 +30,14 @@ export default function Table11({ title, data }) {
       </div>
       <ul>
         {list.map((item, i) => (
-          <li key={item.id} className="flex items-center justify-around h-10 font-bold" style={{
+          <li key={item.id} className="flex items-center justify-around h-10 font-bold text-2xl" style={{
             borderBottom: '1px solid #ccc',
           }}>
-            <div className="pl-2">{item.periods} 期：</div>
-            <div className=''>
-              【 {item.names.map((name, index) => (<span key={index + item.id} className={name == item.openName ? 'bg-yellow-400' : ''}>{name}{index < 5 ? ',' : ''}</span>))} 】
+            <div className="pl-2 ">{item.periods} 期：</div>
+            <div className='font-mono'>
+              【{item.names.map((name, index) => (<span key={index + item.id} className={name == item.openName ? 'bg-yellow-400' : ''}>{name}{index < 5 ? ',' : ''}</span>))}】
             </div>
-            <div className='w-32'>开：
+            <div className='w-28 text-xl'>开：
               <span className=''>{item.openNum || '????'}</span>
               {
                 item.openName &&

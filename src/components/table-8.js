@@ -33,9 +33,9 @@ export default function Table8({ title, data }) {
           <li key={item.id} className="flex items-center h-12 text-xl font-bold justify-around" style={{
             borderBottom: '1px solid #ccc',
           }}>
-            <div className="">{item.periods}期:</div>
-            <div className='text-2xl'>
-              <span>【{item.names.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-400' : ''}>{name}</span>))}】</span>
+            <div className="text-2xl">{item.periods}期:</div>
+            <div className=''>
+              <span>{item.names.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-400' : ''}>{name}</span>))}</span>
             </div>
 
             <div className='w-24 flex'>开:

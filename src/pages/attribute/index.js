@@ -80,7 +80,7 @@ function Attribute({ data }) {
 
   return (
     <div className='content overflow-scroll'>
-      <div className="w-full pb-4 text-xs overflow-auto">
+      <div className="w-full pb-4 text-lg overflow-auto">
         {/* 波色 */}
         <div className="flex h-14 w-full items-center justify-center bg-green-400 text-xl"
           style={{
@@ -94,7 +94,7 @@ function Attribute({ data }) {
           {colorList?.map((item) => (
             <li
               key={item.color}
-              className="flex items-center pb-2 pt-2"
+              className="flex items-center pb-2 pt-2 font-mono"
               style={{ borderBottom: '1px solid #ccc' }}
             >
               <div
