@@ -9,31 +9,31 @@ import moment from 'moment';
 import dynamic from 'next/dynamic';
 
 import ImgList6 from '@/components/image-6';
-import Table10 from '@/components/table-10';
-import Table11 from '@/components/table-11';
-import Table12 from '@/components/table-12';
+// import Table10 from '@/components/table-10';
+// import Table11 from '@/components/table-11';
+// import Table12 from '@/components/table-12';
 import Table2 from '@/components/table-2';
-import Table3 from '@/components/table-3';
-import Table4 from '@/components/table-4';
-import Table5 from '@/components/table-5';
-import Table6 from '@/components/table-6';
-import Table7 from '@/components/table-7';
-import Table8 from '@/components/table-8';
-import Table9 from '@/components/table-9';
+// import Table3 from '@/components/table-3';
+// import Table4 from '@/components/table-4';
+// import Table5 from '@/components/table-5';
+// import Table6 from '@/components/table-6';
+// import Table7 from '@/components/table-7';
+// import Table8 from '@/components/table-8';
+// import Table9 from '@/components/table-9';
 const ImgList1 = dynamic(() => import('@/components/image-1'))
 const ImgList2 = dynamic(() => import('@/components/image-2'))
 // const ImgList6 = dynamic(() => import('@/components/image-6'))
 // const Table2 = dynamic(() => import('@/components/table-2'))
-// const Table3 = dynamic(() => import('@/components/table-3'))
-// const Table4 = dynamic(() => import('@/components/table-4'))
-// const Table5 = dynamic(() => import('@/components/table-5'))
-// const Table6 = dynamic(() => import('@/components/table-6'))
-// const Table7 = dynamic(() => import('@/components/table-7'))
-// const Table8 = dynamic(() => import('@/components/table-8'))
-// const Table9 = dynamic(() => import('@/components/table-9'))
-// const Table10 = dynamic(() => import('@/components/table-10'))
-// const Table11 = dynamic(() => import('@/components/table-11'))
-// const Table12 = dynamic(() => import('@/components/table-12'))
+const Table3 = dynamic(() => import('@/components/table-3'))
+const Table4 = dynamic(() => import('@/components/table-4'))
+const Table5 = dynamic(() => import('@/components/table-5'))
+const Table6 = dynamic(() => import('@/components/table-6'))
+const Table7 = dynamic(() => import('@/components/table-7'))
+const Table8 = dynamic(() => import('@/components/table-8'))
+const Table9 = dynamic(() => import('@/components/table-9'))
+const Table10 = dynamic(() => import('@/components/table-10'))
+const Table11 = dynamic(() => import('@/components/table-11'))
+const Table12 = dynamic(() => import('@/components/table-12'))
 
 const Title = '欧洲彩';
 const openTime = '22:35'
