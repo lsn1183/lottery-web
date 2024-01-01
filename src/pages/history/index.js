@@ -49,12 +49,11 @@ export default function History({ data }) {
               <div className=" w-full bg-gray-200 pl-1 text-left text-lg">
                 <span>第</span>
                 <span className=" pl-1 pr-1 text-lg font-bold text-green-600">
-                  {item.periods}
+                  {item.periods < 10 ? '00' + item.periods : item.periods < 100 ? '0' + item.periods : item.periods}
                 </span>
                 <span>期开奖结果：</span>
               </div>
               <div className="flex items-center justify-around pb-3 pl-4 pr-4 pt-3 text-xl">
-
                 <div className="text-center">
                   <div
                     style={{
@@ -78,7 +77,7 @@ export default function History({ data }) {
                   >
                     {item.ordinary1}
                   </div>
-                  <div className=" text-sm text-neutral-700">
+                  <div className=" text-base text-neutral-700">
                     {item.ordinary1_property}
                   </div>
                 </div>
@@ -86,7 +85,6 @@ export default function History({ data }) {
                 <div className="text-center">
                   <div
                     style={{
-                      // color: item.ordinary2_color,
                       backgroundImage:
                         'url(' +
                         ballList.filter(
@@ -106,7 +104,7 @@ export default function History({ data }) {
                   >
                     {item.ordinary2}
                   </div>
-                  <div className=" text-sm text-neutral-600">
+                  <div className=" text-base text-neutral-700">
                     {item.ordinary2_property}
                   </div>
                 </div>
@@ -114,7 +112,6 @@ export default function History({ data }) {
                 <div className="text-center">
                   <div
                     style={{
-                      // color: item.particular_color,
                       backgroundImage:
                         'url(' +
                         ballList.filter(
@@ -134,7 +131,7 @@ export default function History({ data }) {
                   >
                     {item.ordinary3}
                   </div>
-                  <div className=" text-sm text-neutral-600">
+                  <div className=" text-base text-neutral-700">
                     {item.ordinary3_property}
                   </div>
                 </div>
@@ -162,7 +159,7 @@ export default function History({ data }) {
                   >
                     {item.ordinary4}
                   </div>
-                  <div className=" text-sm text-neutral-600">
+                  <div className=" text-base text-neutral-600">
                     {item.ordinary4_property}
                   </div>
                 </div>
@@ -190,7 +187,7 @@ export default function History({ data }) {
                   >
                     {item.ordinary5}
                   </div>
-                  <div className=" text-sm text-neutral-600">
+                  <div className=" text-base text-neutral-600">
                     {item.ordinary4_property}
                   </div>
                 </div>
@@ -218,12 +215,12 @@ export default function History({ data }) {
                   >
                     {item.ordinary6}
                   </div>
-                  <div className=" text-sm text-neutral-600">
+                  <div className=" text-base text-neutral-600">
                     {item.ordinary6_property}
                   </div>
                 </div>
                 {/* 分割标 */}
-                <div className=" text-2xl from-purple-400 font-bold text-gray-400">+</div>
+                <div className=" text-2xl from-purple-400 font-bold text-gray-600">+</div>
 
                 <div className="rounded-xl text-center">
                   <div
@@ -247,10 +244,10 @@ export default function History({ data }) {
                   >
                     {item.particular}
                   </div>
-                  <div className=" text-center text-sm text-neutral-600">
+                  <div className=" text-center text-base text-neutral-800">
                     <span>{item.particular_property.slice(0, 1)}</span>
                     <span>/</span>
-                    <span style={{ color: 'gold' }}>
+                    <span style={{ color: '#000000' }}>
                       {item.particular_property.slice(2, 3)}
                     </span>
                   </div>
