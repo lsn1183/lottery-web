@@ -70,7 +70,7 @@ export default function Table9({ title, data }) {
                     width={30}
                     height={30}
                     alt="img"
-                    src={!item.birds?.includes(item.openName) ? '/images/icons/success.png' : '/images/icons/err.png'}
+                    src={item.birds?.includes(item.openName) ? '/images/icons/success.png' : '/images/icons/err.png'}
                   /> : <div ><Image
                     width={30}
                     height={30}
