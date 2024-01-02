@@ -38,7 +38,7 @@ export default function Table2({ data, title }) {
       <div>
         {list.map((item, index) => (
           <div key={item.id} className='font-bold'>
-            <div className="header flex h-12 items-center justify-center bg-blue-400 p-1">
+            <div className="header flex h-12 items-center justify-center bg-[#1fa412] p-1 text-white">
               <Image
                 width={28}
                 height={20}
@@ -75,7 +75,7 @@ export default function Table2({ data, title }) {
                 </li>
               ))}
             </ul>
-            <div className="footer flex h-10 items-center justify-center bg-blue-300 p-1 text-zinc-800">
+            <div className="footer flex h-10 items-center justify-center bg-[#527A00] p-1 text-white bg-mg" >
               见证奇迹，成就梦想，彩霸王
             </div>
           </div>

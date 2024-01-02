@@ -12,7 +12,7 @@ export default function Nav() {
     <div className="nav-bar w-full p-4 font-bold">
       <div className="flex w-full justify-between">
         {navList.map((item) => (
-          <Link className="flex flex-col items-center justify-between text-base" key={item.name} href={item.path} >
+          <Link className="flex flex-col items-center justify-between text-base" key={item.name} href={item.path} prefetch={false}>
             <Image
               src={item.url}
               alt="Vercel Logo"

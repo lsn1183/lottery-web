@@ -781,4 +781,5 @@ const animals = {
   2024: animal_2024
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default { redNums, greenNums, blueNums, colors, animals, typeList };

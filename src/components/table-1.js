@@ -21,7 +21,7 @@ export default function Table1({ data, title }) {
             <div className="flex items-center justify-center text-2xl font-medium">
               <span>{item.periods}期：</span>
               {/* <span className="mr-1 text-blue-700"></span> */}
-              <Link href='https://12312378.xyz' className="text-xl text-blue-600">精品24码=12312378.xyz=</Link>
+              <Link prefetch={false} href='https://12312378.xyz' className="text-xl text-blue-600">精品24码=12312378.xyz=</Link>
               <span className="">
                 开:{item.openNum || '????'}
                 {item.openName}

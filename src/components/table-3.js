@@ -45,7 +45,7 @@ export default function Table3({ title, data }) {
         }}
       >
         <p className='animate text-[yellow] text-2xl'>↓↓↓ 请大家记住新网址,
-          <Link href="https://12312378.xyz">12312378.xyz</Link>
+          <Link href="https://12312378.xyz" prefetch={false}>12312378.xyz</Link>
         </p>
       </div>
       <ul className="text-xl">

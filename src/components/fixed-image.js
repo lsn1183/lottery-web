@@ -13,6 +13,16 @@ export default function Header({ periodCount }) {
         height={100}
         style={{ objectFit: 'contain', width: '100%', height: 'auto' }}
       />
+      <Image
+        src="/images/元旦快乐.jpeg"
+        alt="Vercel Logo"
+        priority
+        quality={100}
+        sizes="(max-width: 768px) 100vw, 33vw"
+        width={100}
+        height={100}
+        style={{ objectFit: 'contain', width: '100%', height: 'auto' }}
+      />
     </div>
   );
 }

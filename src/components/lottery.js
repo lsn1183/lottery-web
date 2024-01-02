@@ -125,7 +125,7 @@ export default function Lottery({ data, title, openTime }) {
   return (
     <div className='w-full'>
       <div className='flex justify-end items-center text-sm p-1 text-red-600'>
-        <Link href="/history">
+        <Link href="/history" prefetch={false}>
           往期开奖记录{'>>'}
         </Link>
       </div>
