@@ -10,7 +10,7 @@ export default function Table12({ title, data }) {
     periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
     return { ...item, ...openItem, periods }
   })
-  console.log('data', list);
+  // console.log('data', list);
   return (
     <div className="w-full">
       <div
