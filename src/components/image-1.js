@@ -19,7 +19,7 @@ export default function ImgList({ title = '' }) {
           <div className="relative" style={{ height: '80%' }}>
             <Image
               src={item.url}
-              alt="Vercel Logo"
+              alt="img"
               sizes="(max-width: 768px) 100vw, 33vw"
               width={100}
               height={120}
@@ -32,7 +32,7 @@ export default function ImgList({ title = '' }) {
       <div className=' relative'>
         <Image
           src='/images/icons/WX20240102-175148@2x.png'
-          alt="V"
+          alt="img"
           width={768}
           height={100}
           priority
@@ -43,7 +43,7 @@ export default function ImgList({ title = '' }) {
         <div className=' absolute top-6 right-8 bg-green-500 rounded-full animate-bounce'>
           <Image
             src='/images/nav/nav-3.jpeg'
-            alt="V"
+            alt="img"
             width={60}
             height={60}
             priority

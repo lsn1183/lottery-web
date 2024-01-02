@@ -5,7 +5,7 @@ export default function Header({ periodCount }) {
     <div className="header">
       <Image
         src="/images/top.jpg"
-        alt="Vercel Logo"
+        alt="img"
         priority
         quality={100}
         sizes="(max-width: 768px) 100vw, 33vw"
@@ -15,7 +15,7 @@ export default function Header({ periodCount }) {
       />
       <Image
         src="/images/roll/roll-693836.gif"
-        alt="Vercel Logo"
+        alt="img"
         priority
         quality={100}
         sizes="(max-width: 768px) 100vw, 33vw"

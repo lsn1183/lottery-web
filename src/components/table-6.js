@@ -33,6 +33,7 @@ export default function Table6({ title, data }) {
         <Image
           width={40}
           height={22}
+          alt="img"
           src='/images/icons/newArrow.jpeg'
         />
         <p>{title}论坛：必中6肖</p>
@@ -49,16 +50,19 @@ export default function Table6({ title, data }) {
                   <Image
                     width={20}
                     height={20}
+                    alt="img"
                     src='/images/icons/hot.jpeg'
                   />
                   <Image
                     width={20}
                     height={20}
+                    alt="img"
                     src='/images/icons/hot.jpeg'
                   />
                   <Image
                     width={20}
                     height={20}
+                    alt="img"
                     src='/images/icons/hot.jpeg'
                   />
                 </div>

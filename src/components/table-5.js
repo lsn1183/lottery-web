@@ -1,4 +1,5 @@
 import { getOpenItem } from '@/utils/utils';
+import Image from 'next/image';
 
 export default function Table5({ title, data }) {
   const { openHistoryData, multiZodiacData } = data
@@ -29,6 +30,12 @@ export default function Table5({ title, data }) {
           color: '#FFFF00',
         }}
       >
+        <Image
+          width={30}
+          height={30}
+          alt="img"
+          src={'/images/icons/hand.jpeg'}
+        />
         <p>{title}(内部论坛：精准五肖中特)</p>
       </div>
       <ul className='w-full'>

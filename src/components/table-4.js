@@ -27,6 +27,12 @@ export default function Table4({ title, data }) {
           backgroundImage: 'url(/images/roll/roll-bg2.jpeg)',
         }}
       >
+        <Image
+          width={30}
+          height={30}
+          alt="img"
+          src={'/images/icons/hand.jpeg'}
+        />
         <p>{title}：单双(發發發)</p>
       </div>
       <ul className='w-full'>
@@ -38,12 +44,19 @@ export default function Table4({ title, data }) {
 
             <div className='flex items-center h-4'>
               {
-                i > 0 &&
-                <div ><Image
-                  width={20}
-                  height={20}
-                  src={'/images/icons/icon-1.jpeg'}
-                /></div>
+                i > 0 ?
+                  <div ><Image
+                    width={30}
+                    height={30}
+                    alt="img"
+                    src={'/images/icons/icon-1.jpeg'}
+                  /></div>
+                  : <div ><Image
+                    width={30}
+                    height={30}
+                    alt="img"
+                    src={'/images/icons/new.gif'}
+                  /></div>
               }
               {
                 item.main == '单' && <div className='flex'>

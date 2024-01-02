@@ -13,6 +13,7 @@ export default function Table1({ data, title }) {
       return { ...item, ...openItem, periods };
     }),
   ];
+
   return (
     <div className="w-full">
       <ul className="flex flex-col gap-1">
@@ -28,8 +29,9 @@ export default function Table1({ data, title }) {
             </div>
             <div className="font-mono font-bold text-red-600 flex">
               <Image
-                width={28}
-                height={20}
+                width={30}
+                height={30}
+                alt="img"
                 src='/images/icons/xuanzhuan.gif'
               />
               {item.nums1?.split('.').map((ele, i) => (
@@ -41,8 +43,9 @@ export default function Table1({ data, title }) {
             </div>
             <div className="font-mono font-bold text-red-600 flex">
               <Image
-                width={28}
-                height={20}
+                width={30}
+                height={30}
+                alt="img"
                 src='/images/icons/xuanzhuan.gif'
               />
               {item.nums2?.split('.').map((ele, i) => (
@@ -54,8 +57,9 @@ export default function Table1({ data, title }) {
             </div>
             <div className=" font-mono font-bold text-red-600 flex">
               <Image
-                width={28}
-                height={20}
+                width={30}
+                height={30}
+                alt="img"
                 src='/images/icons/xuanzhuan.gif'
               />
               {item.nums3?.split('.').map((ele, i) => (
@@ -73,7 +77,7 @@ export default function Table1({ data, title }) {
           </p>
         </li>
       </ul>
-      <Image src="/images/nav/nav-3.png" alt='' width={768} height={100} />
+      <Image src="/images/nav/nav-888.png" alt='img' width={768} height={100} />
     </div>
   );
 }

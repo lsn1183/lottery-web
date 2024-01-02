@@ -38,10 +38,23 @@ export default function Table2({ data, title }) {
       <div>
         {list.map((item, index) => (
           <div key={item.id} className='font-bold'>
-            <div className="header flex h-12 items-center justify-center bg-[#1fa412] p-1 text-white">
+            <div className="header flex h-12 items-center justify-start bg-[#1fa412] p-1 pl-28 text-white">
               <Image
-                width={28}
+                width={30}
                 height={20}
+                alt="img"
+                src='/images/icons/newArrow.jpeg'
+              />
+              <Image
+                width={30}
+                height={20}
+                alt="img"
+                src='/images/icons/newArrow.jpeg'
+              />
+              <Image
+                width={30}
+                height={20}
+                alt="img"
                 src='/images/icons/newArrow.jpeg'
               />
               <span>精选</span>

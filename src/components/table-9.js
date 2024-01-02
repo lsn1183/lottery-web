@@ -2,26 +2,21 @@ import dataSource from '@/database/dataSource';
 import { getOpenItem } from '@/utils/utils';
 import Image from 'next/image';
 
-
 export default function Table9({ title, data }) {
   const { openHistoryData, fauvistData } = data
-  console.log(fauvistData, '----fauvistData', dataSource);
-
-
+  // console.log(fauvistData, '----fauvistData', dataSource);
   let arr1 = [], arr2 = [];
   const list = fauvistData.map((item, index) => {
     let { beast, birds, main, periods } = item
     const openItem = getOpenItem(openHistoryData, item)
     // arr1 = JSON.parse(beast) // 野
     // arr2 = JSON.parse(birds) // 家
-
     arr1 = dataSource.typeList.filter(({ type }) => type == '野肖')[0]['names'] // 野
     arr2 = dataSource.typeList.filter(({ type }) => type == '家肖')[0]['names']  // 家
 
     periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
     return { ...item, ...openItem, beast: arr1, birds: arr2, names: main, periods }
   })
-  console.log('data', list);
 
   return (
     <div className="w-full">
@@ -40,48 +35,57 @@ export default function Table9({ title, data }) {
           color: '#FFFF00',
         }}
       >
-        <p>{title}论坛：(绝杀家禽野兽)</p>
+        <p>管家特推：(绝杀家禽野兽)</p>
       </div>
       <ul className='w-full'>
         {list.map((item, i) => (
-          <li key={item.id} className="h-10 flex items-center justify-around font-bold text-2xl gap-4 " style={{
+          <li key={item.id} className="h-10 flex items-center justify-around font-bold text-2xl gap-4" style={{
             borderBottom: '1px solid #ccc',
           }}>
-            <div className="w-30">{item.periods} 期：</div>
+            <div className="w-28 text-center">{item.periods} 期：</div>
             {
-              item.names == '野肖' && <div className='flex'>
+              item.names == '野肖' && <div className='flex flex-auto'>
                 {
-                  i > 0 && <Image
+                  i > 0 ? <Image
                     width={30}
                     height={30}
+                    alt="img"
                     src={item.beast?.includes(item.openName) ? '/images/icons/success.png' : '/images/icons/err.png'}
-                  />
+                  /> : <div ><Image
+                    width={30}
+                    height={30}
+                    alt="img"
+                    src={'/images/icons/new.gif'}
+                  /></div>
                 }
                 【
                 <span>野兽</span>
                 】
               </div>
             }
-
             {
-              item.names == '家肖' && <div className='flex'>
+              item.names == '家肖' && <div className='flex flex-auto'>
                 {
-                  i > 0 && <Image
+                  i > 0 ? <Image
                     width={30}
                     height={30}
+                    alt="img"
                     src={!item.birds?.includes(item.openName) ? '/images/icons/success.png' : '/images/icons/err.png'}
-                  />
+                  /> : <div ><Image
+                    width={30}
+                    height={30}
+                    alt="img"
+                    src={'/images/icons/new.gif'}
+                  /></div>
                 }
                 【
                 <span className={item.birds?.some(name => name == item.openName) ? 'bg-yellow-400' : ''}>家畜</span>
                 】
               </div>
             }
-
             <div className='w-32'>开：
               <span className=''>{item.openNum || '????'}</span>
               {item.openName && <span>({item.openName})</span>}
-
             </div>
           </li>
         ))}

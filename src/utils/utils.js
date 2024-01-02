@@ -118,13 +118,13 @@ export function getRandomInt(min, max) {
  */
 export function getOpenItem(openData, item) {
   const index = openData.findIndex((o) => item.periods == o.periods);
-  const openNum = index != -1 ? openData[index].particular : undefined;
-  const openName =
-    index != -1
-      ? openData[index].particular_property?.substring(0, 1)
-      : undefined;
-  const openColor = index != -1
-    ? openData[index].particular_color
-    : undefined;
-  return { openNum, openName, openColor };
+  if (index === -1) return
+  const element = openData[index];
+  const openNum = element.particular;
+  const openName = element.particular_property?.substring(0, 1)
+  const openColor = element.particular_color
+  const ordinaryNames = [...new Array(6)].map((k, i) => (element[`ordinary${i + 1}_property`]?.substring(0, 1))) // 平码
+  const ordinaryColors = [...new Array(6)].map((k, i) => (element[`ordinary${i + 1}_color`])) // 平码波色
+
+  return { openNum, openName, openColor, ordinaryNames, ordinaryColors };
 }

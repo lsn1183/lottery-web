@@ -124,7 +124,30 @@ export default function Lottery({ data, title, openTime }) {
   // console.log('list:', historyItem.periods, periodCount, openData);
   return (
     <div className='w-full'>
-      <div className='flex justify-end items-center text-sm p-1 text-red-600'>
+      <div className='flex justify-between items-center text-sm p-1 text-red-600'>
+        <div className='flex'>
+          <Image
+            src='/images/icons/nahan.jpeg'
+            alt="img"
+            width={60}
+            height={60}
+            priority
+          />
+          <Image
+            src='/images/icons/nahan.jpeg'
+            alt="img"
+            width={60}
+            height={60}
+            priority
+          />
+          <Image
+            src='/images/icons/nahan.jpeg'
+            alt="img"
+            width={60}
+            height={60}
+            priority
+          />
+        </div>
         <Link href="/history" prefetch={false}>
           往期开奖记录{'>>'}
         </Link>
@@ -156,7 +179,7 @@ export default function Lottery({ data, title, openTime }) {
                 <Image
                   className={index < 6 ? '' : `shadow-md shadow-${item.color}-500 rounded-full`}
                   src={colorList.filter((color) => color.color == item.color)[0]?.url}
-                  alt="Vercel Logo"
+                  alt="Logo"
                   priority
                   quality={100}
                   width={index < 6 ? 100 : 120}

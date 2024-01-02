@@ -1,4 +1,5 @@
 import { getOpenItem } from '@/utils/utils';
+import Image from 'next/image';
 
 export default function Table8({ title, data }) {
   const { openHistoryData, multiZodiacData } = data
@@ -27,7 +28,13 @@ export default function Table8({ title, data }) {
           color: '#FFFF00',
         }}
       >
-        <p>{title}论坛：(内部八肖推荐)</p>
+        <Image
+          width={60}
+          height={60}
+          alt="img"
+          src={'/images/icons/奇奇准.gif'}
+        />
+        <p>高手解料：八肖推荐</p>
       </div>
       <ul className='w-full'>
         {list.map((item, i) => (
@@ -35,7 +42,13 @@ export default function Table8({ title, data }) {
             borderBottom: '1px solid #ccc',
           }}>
             <div className="text-2xl">{item.periods}期:</div>
-            <div className=''>
+            <div className='flex'>
+              <Image
+                width={40}
+                height={20}
+                alt="img"
+                src={'/images/icons/箭头.jpeg'}
+              />
               <span>{item.names.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-400' : ''}>{name}</span>))}</span>
             </div>
 

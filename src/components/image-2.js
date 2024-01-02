@@ -6,7 +6,7 @@ export default function ImgList({ title = '' }) {
     <div className="relative flex w-full flex-wrap justify-between gap-1">
       <Image
         src="/images/test.png"
-        alt="Vercel Logo"
+        alt="img"
         className="dark:invert"
         width={768}
         height={100}

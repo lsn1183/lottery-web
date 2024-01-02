@@ -23,13 +23,13 @@ export default function Table7({ title, data }) {
         className="bg-img flex h-14 w-full items-center justify-center border-lime-300 text-2xl text-yellow-300"
         style={{ backgroundImage: 'url(/images/roll/roll-bg5.gif)' }}
       ></div>
-      <div
-        className="bg-img flex h-14 w-full items-center justify-center border-lime-300  text-2xl"
-        style={{
-          backgroundImage: 'url(/images/roll/roll-bg2.jpeg)',
-          color: '#0017ff',
-        }}
-      >
+      <div className="bg-img flex h-14 w-full items-center justify-center text-lime-300  text-2xl bg-red-600 ">
+        <Image
+          width={60}
+          height={60}
+          alt="img"
+          src={'/images/icons/爆.gif'}
+        />
         <p>内部绝密资料：绝杀三肖</p>
       </div>
       <ul className='w-full'>
@@ -49,6 +49,7 @@ export default function Table7({ title, data }) {
                 i > 0 && <Image
                   width={30}
                   height={30}
+                  alt="img"
                   src={!item.names?.includes(item.openName) ? '/images/icons/success.png' : '/images/icons/err.png'}
                 />
               }

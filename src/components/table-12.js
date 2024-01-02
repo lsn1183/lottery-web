@@ -1,4 +1,5 @@
 import { getOpenItem } from '@/utils/utils';
+import Image from 'next/image';
 
 export default function Table12({ title, data }) {
   const { openHistoryData, zodiacData } = data
@@ -9,7 +10,7 @@ export default function Table12({ title, data }) {
     periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
     return { ...item, ...openItem, periods }
   })
-  // console.log('data', list);
+  console.log('data', list);
   return (
     <div className="w-full">
       <div
@@ -34,15 +35,28 @@ export default function Table12({ title, data }) {
           <li key={item.id} className="flex items-center justify-around h-10 font-bold font-mono" style={{
             borderBottom: '1px solid #ccc',
           }}>
-            <div className="pl-2">{item.periods}期：</div>
-            <div className=''>
-              【 <span className={item.single == item.openName ? 'bg-yellow-400' : ''}>{item.single}</span> 】
+            <div className="pl-2 w-32">{item.periods}期：</div>
+            <div className='flex-1'>
+              【 <span>{item.single}</span> 】
             </div>
-            <div className='w-32 flex'>开：
+            <div className='flex-1 flex pr-8'>开：
               <span className=''>{item.openNum || '????'}</span>
               {
                 item.openName &&
                 <span className=''>({item.openName})</span>
+              }
+              {
+                i > 0 ? <Image
+                  width={30}
+                  height={30}
+                  alt="img"
+                  src={item.ordinaryNames?.includes(item.single) ? '/images/icons/success.png' : '/images/icons/err.png'}
+                /> : <Image
+                  width={30}
+                  height={30}
+                  alt="img"
+                  src={'/images/icons/new.gif'}
+                />
               }
             </div>
           </li>

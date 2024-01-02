@@ -15,7 +15,7 @@ export default function Nav() {
           <Link className="flex flex-col items-center justify-between text-base" key={item.name} href={item.path} prefetch={false}>
             <Image
               src={item.url}
-              alt="Vercel Logo"
+              alt="img"
               className="dark:invert"
               width={46}
               height={46}
