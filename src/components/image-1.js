@@ -3,9 +3,9 @@ import Image from 'next/image';
 // 插图集合
 export default function ImgList({ title = '' }) {
   const list = [
-    { desc: title, url: '/images/nav/1.png' },
-    { desc: title, url: '/images/nav/2.png' },
-    { desc: title, url: '/images/nav/5.png' },
+    { desc: title, url: '/images/nav/nav-1.png' },
+    { desc: title, url: '/images/nav/nav-5.gif' },
+    { desc: title, url: '/images/nav/nav-4.webp' },
     // { desc: title, url: '/images/nav/4.png' },
     // { desc: title, url: '/images/nav/1.png' },
     // { desc: title, url: '/images/nav/1.png' },
@@ -29,14 +29,28 @@ export default function ImgList({ title = '' }) {
           <div className="flex-1 p-2 text-center text-base">{item.desc}</div>
         </div>
       ))}
-      <Image
-        src='/images/icons/欧洲建筑.png'
-        alt="V"
-        width={768}
-        height={100}
-        priority
-        style={{ height: "100%", width: "100%" }}
-      />
+      <div className=' relative'>
+        <Image
+          src='/images/icons/WX20240102-175148@2x.png'
+          alt="V"
+          width={768}
+          height={100}
+          priority
+          style={{ height: "100%", width: "100%" }}
+        />
+        <div className='absolute text-[#f80ab0] top-2 left-8 text-6xl'>欧洲彩</div>
+
+        <div className=' absolute top-6 right-8 bg-green-500 rounded-full animate-bounce'>
+          <Image
+            src='/images/nav/nav-3.jpeg'
+            alt="V"
+            width={60}
+            height={60}
+            priority
+          />
+        </div>
+      </div>
+      <div className='text-2xl animate-bounce font-medium text-red-600'>全网独家爆料，彩民们都赚疯了！！！</div>
     </div>
   );
 }

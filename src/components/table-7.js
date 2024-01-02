@@ -1,6 +1,7 @@
 
 
 import { getOpenItem } from '@/utils/utils';
+import Image from 'next/image';
 
 export default function Table7({ title, data }) {
   const { openHistoryData, multiZodiacData } = data
@@ -16,20 +17,20 @@ export default function Table7({ title, data }) {
     <div className="w-full font-medium">
       <div
         className="bg-img flex h-14 w-full items-center justify-center border-lime-300 text-2xl text-yellow-300"
-        style={{ backgroundImage: 'url(/images/roll-bg4.gif)' }}
+        style={{ backgroundImage: 'url(/images/roll/roll-bg4.gif)' }}
       ></div>
       <div
         className="bg-img flex h-14 w-full items-center justify-center border-lime-300 text-2xl text-yellow-300"
-        style={{ backgroundImage: 'url(/images/roll-bg5.gif)' }}
+        style={{ backgroundImage: 'url(/images/roll/roll-bg5.gif)' }}
       ></div>
       <div
         className="bg-img flex h-14 w-full items-center justify-center border-lime-300  text-2xl"
         style={{
-          backgroundImage: 'url(/images/roll-bg2.jpeg)',
+          backgroundImage: 'url(/images/roll/roll-bg2.jpeg)',
           color: '#0017ff',
         }}
       >
-        <p>{title}(天天中彩：绝杀三肖)</p>
+        <p>内部绝密资料：绝杀三肖</p>
       </div>
       <ul className='w-full'>
         {list.map((item, i) => (
@@ -38,12 +39,19 @@ export default function Table7({ title, data }) {
           }}>
             <div className="">{item.periods}期</div>
             <div className=''>
-              <span className='text-lime-700'>【绝杀三肖】</span>
-              <span>【 {item.names.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-300' : ''}>{name}</span>))} 】</span>
+              <span className='text-lime-700'>【杀三肖】</span>
+              <span>【 {item.names.map((name, index) => (<span key={index + name}>{name}</span>))} 】</span>
             </div>
-            <div className='pr-2'>开:
+            <div className='pr-2 flex w-28'>开:
               <span className=''>{item.openNum || '????'}</span>
               <span className=''>{item.openName}</span>
+              {
+                i > 0 && <Image
+                  width={30}
+                  height={30}
+                  src={!item.names?.includes(item.openName) ? '/images/icons/success.png' : '/images/icons/err.png'}
+                />
+              }
             </div>
           </li>
         ))}

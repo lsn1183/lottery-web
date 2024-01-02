@@ -14,16 +14,16 @@ export default function Table12({ title, data }) {
     <div className="w-full">
       <div
         className="bg-img flex h-10 w-full items-center justify-center border-lime-300 text-yellow-300"
-        style={{ backgroundImage: 'url(/images/roll-bg4.gif)' }}
+        style={{ backgroundImage: 'url(/images/roll/roll-bg4.gif)' }}
       ></div>
       <div
         className="bg-img flex h-10 w-full items-center justify-center border-lime-300  text-yellow-300"
-        style={{ backgroundImage: 'url(/images/roll-bg5.gif)' }}
+        style={{ backgroundImage: 'url(/images/roll/roll-bg5.gif)' }}
       ></div>
       <div
         className="bg-img flex h-14 w-full items-center justify-center border-lime-300 text-2xl font-bold"
         style={{
-          backgroundImage: 'url(/images/roll-bg2.jpeg)',
+          backgroundImage: 'url(/images/roll/roll-bg2.jpeg)',
           color: '#FFFF00',
         }}
       >

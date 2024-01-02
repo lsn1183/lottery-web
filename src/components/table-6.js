@@ -17,16 +17,16 @@ export default function Table6({ title, data }) {
     <div className="w-full font-medium">
       <div
         className="bg-img flex h-14 w-full items-center justify-center "
-        style={{ backgroundImage: 'url(/images/roll-bg4.gif)' }}
+        style={{ backgroundImage: 'url(/images/roll/roll-bg4.gif)' }}
       ></div>
       <div
         className="bg-img flex h-14 w-full items-center justify-center "
-        style={{ backgroundImage: 'url(/images/234.jpeg)' }}
+        style={{ backgroundImage: 'url(/images/roll/roll-234.jpeg)' }}
       ></div>
       <div
         className="bg-img flex h-14 w-full items-center justify-center "
         style={{
-          backgroundImage: 'url(/images/roll-bg2.jpeg)',
+          backgroundImage: 'url(/images/roll/roll-bg2.jpeg)',
           color: '#7c04ff',
         }}
       >
@@ -45,11 +45,23 @@ export default function Table6({ title, data }) {
             <div className="">{item.periods}期</div>
             <div className=''>
               {
-                i == 0 && <Image
-                  width={20}
-                  height={20}
-                  src='/images/icons/hot.jpeg'
-                />
+                i == 0 && <div className='flex'>
+                  <Image
+                    width={20}
+                    height={20}
+                    src='/images/icons/hot.jpeg'
+                  />
+                  <Image
+                    width={20}
+                    height={20}
+                    src='/images/icons/hot.jpeg'
+                  />
+                  <Image
+                    width={20}
+                    height={20}
+                    src='/images/icons/hot.jpeg'
+                  />
+                </div>
               }
               <span>【{item.names1.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-300 ' : ''}>{name}</span>))} 】</span>
             </div>

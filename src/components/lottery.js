@@ -170,11 +170,11 @@ export default function Lottery({ data, title, openTime }) {
                     transform: 'translate(-50%, -50%)',
                   }}
                 >
-                  <span className={'text-xl font-bold'}>
+                  <span className={'text-2xl font-bold'}>
                     {item.particular || item.ordinary}
                   </span>
                 </div>
-                <div className="p-1 text-center text-sm">
+                <div className="p-1 text-center text-base">
                   <span className="text-black">
                     {item.property?.substring(0, 1)}
                   </span>

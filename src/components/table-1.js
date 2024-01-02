@@ -20,7 +20,6 @@ export default function Table1({ data, title }) {
           <li key={item.id} className="flex flex-col gap-1 items-center border-b-2 text-2xl">
             <div className="flex items-center justify-center text-2xl font-medium">
               <span>{item.periods}期：</span>
-              {/* <span className="mr-1 text-blue-700"></span> */}
               <Link prefetch={false} href='https://12312378.xyz' className="text-xl text-blue-600">精品24码=12312378.xyz=</Link>
               <span className="">
                 开:{item.openNum || '????'}
@@ -74,7 +73,7 @@ export default function Table1({ data, title }) {
           </p>
         </li>
       </ul>
-      <Image src="/images/nav/3.png" alt='' width={768} height={100} />
+      <Image src="/images/nav/nav-3.png" alt='' width={768} height={100} />
     </div>
   );
 }

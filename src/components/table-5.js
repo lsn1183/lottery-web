@@ -16,16 +16,16 @@ export default function Table5({ title, data }) {
     <div className="w-full">
       <div
         className="bg-img flex h-14 w-full items-center justify-center"
-        style={{ backgroundImage: 'url(/images/roll-bg4.gif)' }}
+        style={{ backgroundImage: 'url(/images/roll/roll-bg4.gif)' }}
       ></div>
       <div
         className="bg-img flex h-14 w-full items-center justify-center "
-        style={{ backgroundImage: 'url(/images/2123.gif)' }}
+        style={{ backgroundImage: 'url(/images/roll/roll-2123.gif)' }}
       ></div>
       <div
         className="bg-img flex h-14 w-full items-center justify-center"
         style={{
-          backgroundImage: 'url(/images/roll-bg2.jpeg)',
+          backgroundImage: 'url(/images/roll/roll-bg2.jpeg)',
           color: '#FFFF00',
         }}
       >

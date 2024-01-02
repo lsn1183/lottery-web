@@ -14,7 +14,7 @@ export default function Header({ periodCount }) {
         style={{ objectFit: 'contain', width: '100%', height: 'auto' }}
       />
       <Image
-        src="/images/元旦快乐.jpeg"
+        src="/images/roll/roll-693836.gif"
         alt="Vercel Logo"
         priority
         quality={100}

@@ -80,7 +80,7 @@ function Attribute({ data }) {
         {/* 波色 */}
         <div className="flex h-14 w-full items-center justify-center bg-green-400 text-xl"
           style={{
-            backgroundImage: 'url(/images/roll-bg2.jpeg)',
+            backgroundImage: 'url(/images/roll/roll-bg2.jpeg)',
             color: '#bc0bd2',
           }}
         >
@@ -116,7 +116,7 @@ function Attribute({ data }) {
         <div
           className="bg-img flex h-14 w-full items-center justify-center border-lime-300  text-2xl"
           style={{
-            backgroundImage: 'url(/images/roll-bg2.jpeg)',
+            backgroundImage: 'url(/images/roll/roll-bg2.jpeg)',
             color: '#bc0bd2',
           }}
         >
@@ -152,7 +152,7 @@ function Attribute({ data }) {
         <div
           className="bg-img flex h-14 w-full items-center justify-center border-lime-300  text-2xl"
           style={{
-            backgroundImage: 'url(/images/roll-bg2.jpeg)',
+            backgroundImage: 'url(/images/roll/roll-bg2.jpeg)',
             color: '#bc0bd2',
           }}
         >

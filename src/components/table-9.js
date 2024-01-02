@@ -1,32 +1,42 @@
+import dataSource from '@/database/dataSource';
 import { getOpenItem } from '@/utils/utils';
+import Image from 'next/image';
+
 
 export default function Table9({ title, data }) {
   const { openHistoryData, fauvistData } = data
-  // console.log(fauvistData, '----fauvistData');
+  console.log(fauvistData, '----fauvistData', dataSource);
+
+
   let arr1 = [], arr2 = [];
   const list = fauvistData.map((item, index) => {
     let { beast, birds, main, periods } = item
     const openItem = getOpenItem(openHistoryData, item)
-    arr1 = JSON.parse(beast) // 野
-    arr2 = JSON.parse(birds) // 家
+    // arr1 = JSON.parse(beast) // 野
+    // arr2 = JSON.parse(birds) // 家
+
+    arr1 = dataSource.typeList.filter(({ type }) => type == '野肖')[0]['names'] // 野
+    arr2 = dataSource.typeList.filter(({ type }) => type == '家肖')[0]['names']  // 家
+
     periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
-    return { ...item, ...openItem, names3: arr1, names4: arr2, names: main, periods }
+    return { ...item, ...openItem, beast: arr1, birds: arr2, names: main, periods }
   })
-  // console.log('data', list);
+  console.log('data', list);
+
   return (
     <div className="w-full">
       <div
         className="bg-img flex h-14 w-full items-center justify-center border-lime-300 text-2xl text-yellow-300"
-        style={{ backgroundImage: 'url(/images/roll-bg4.gif)' }}
+        style={{ backgroundImage: 'url(/images/roll/roll-bg4.gif)' }}
       ></div>
       <div
         className="bg-img flex h-14 w-full items-center justify-center border-lime-300 text-2xl text-yellow-300"
-        style={{ backgroundImage: 'url(/images/roll-bg5.gif)' }}
+        style={{ backgroundImage: 'url(/images/roll/roll-bg5.gif)' }}
       ></div>
       <div
         className="bg-img flex h-14 w-full items-center justify-center border-lime-300  text-2xl font-bold"
         style={{
-          backgroundImage: 'url(/images/roll-bg2.jpeg)',
+          backgroundImage: 'url(/images/roll/roll-bg2.jpeg)',
           color: '#FFFF00',
         }}
       >
@@ -39,17 +49,31 @@ export default function Table9({ title, data }) {
           }}>
             <div className="w-30">{item.periods} 期：</div>
             {
-              item.names == '野肖' && <div className=''>
+              item.names == '野肖' && <div className='flex'>
+                {
+                  i > 0 && <Image
+                    width={30}
+                    height={30}
+                    src={item.beast?.includes(item.openName) ? '/images/icons/success.png' : '/images/icons/err.png'}
+                  />
+                }
                 【
-                <span className={item.names3.some(name => name == item.openName) ? 'bg-yellow-400' : ''}>野兽</span>
+                <span>野兽</span>
                 】
               </div>
             }
 
             {
-              item.names == '家肖' && <div className=''>
+              item.names == '家肖' && <div className='flex'>
+                {
+                  i > 0 && <Image
+                    width={30}
+                    height={30}
+                    src={!item.birds?.includes(item.openName) ? '/images/icons/success.png' : '/images/icons/err.png'}
+                  />
+                }
                 【
-                <span className={item.names3.some(name => name == item.openName) ? 'bg-yellow-400' : ''}>家畜</span>
+                <span className={item.birds?.some(name => name == item.openName) ? 'bg-yellow-400' : ''}>家畜</span>
                 】
               </div>
             }
@@ -57,6 +81,7 @@ export default function Table9({ title, data }) {
             <div className='w-32'>开：
               <span className=''>{item.openNum || '????'}</span>
               {item.openName && <span>({item.openName})</span>}
+
             </div>
           </li>
         ))}
