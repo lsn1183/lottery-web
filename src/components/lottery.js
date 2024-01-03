@@ -101,7 +101,7 @@ export default function Lottery({ data, title, openTime }) {
                 arr.push(element)
                 setOpenData([...arr])
                 // console.log(element, index, arr);
-              }, index * 1000);
+              }, 5000);
             })(element, index)
           })
         // setDays(0);
