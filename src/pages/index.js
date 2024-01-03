@@ -1,3 +1,4 @@
+import { Title, openTime } from '@/api/config';
 import { getAnimalList, getLatestColourData, getLatestFauvistData, getLatestMultiZodiacData, getLatestOpenHistoryData, getLatestRecommendData, getLatestZodiacData } from '@/api/query';
 import TopImage from '@/components/fixed-image';
 import Footer from '@/components/footer';
@@ -6,6 +7,7 @@ import NavBar from '@/components/nav-bar';
 import Roll from '@/components/roll';
 import Table1 from '@/components/table-1';
 import moment from 'moment';
+
 // import dynamic from 'next/dynamic';
 
 import ImgList1 from '@/components/image-1';
@@ -41,12 +43,9 @@ import Table9 from '@/components/table-9';
 // const Table11 = dynamic(() => import('@/components/table-11'))
 // const Table12 = dynamic(() => import('@/components/table-12'))
 
-const Title = '欧洲彩';
-const openTime = '13:45'
 // This gets called on every request
 export async function getServerSideProps({ req }) {
   // console.log('req', req.headers);
-
   // Fetch data from external API
   const todayDate = moment().format('YYYY-MM-DD HH:mm'); // 现在时间
   const today = moment().format('YYYY-MM-DD'); // 今天日期

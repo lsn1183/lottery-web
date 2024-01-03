@@ -14,7 +14,7 @@ const colorList = [
   { color: 'green', url: '/icon/ball-green.png' },
 ];
 const weeks = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-
+// 转换开奖数据展示
 const convertOpenData = (item) => {
   const { id, periods, year, ...other } = item;
   const data = group(Object.entries(other), 3).map((item) => {
@@ -38,26 +38,27 @@ const convertOpenData = (item) => {
   data[data.length - 1] = item1
   return data
 }
-
 export default function Lottery({ data, title, openTime }) {
   const { openHistoryData, periodCount, diffTime } = data;
+  // console.log('diffTime', diffTime);
   const historyItem = openHistoryData[0];
   if (!historyItem) return null;
-  const list = convertOpenData(historyItem);
+  const historyList = convertOpenData(historyItem);
+  // console.log('historyList', historyList);
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
-  const [diffTimes, setDiffTimes] = useState(diffTime);
   const [newPeriods, setPeriods] = useState(diffTime < 0 ? periodCount - 1 || 365 : periodCount);
-  const [openNums, setOpenNums] = useState(diffTime < 0 ? '???' : '');
-  const [openData, setOpenData] = useState(diffTime < 0 ? list : []);
-  let daysCount = moment().dayOfYear(); // 今年的第几天
+  const [openData, setOpenData] = useState(diffTime < 0 ? historyList : []);
+  // const [openNums, setOpenNums] = useState(diffTime < 0 ? '???' : '');
+  // const [diffTimes, setDiffTimes] = useState(diffTime);
+  const daysCount = moment().dayOfYear(); // 今年的第几天
   const years = moment().year(); // 今年
   const month = moment().format("MM"); // 今月
   const day = moment().format("DD"); // 今月
   const today = moment().format('YYYY-MM-DD'); // 今天日期
-  let countDownDate = moment(today + ' ' + openTime).valueOf(); //  距离开奖时间小时
+  const countDownDate = moment(today + ' ' + openTime).valueOf(); // 倒数时间，距离开奖时间小时
 
   const getOpenData = async () => {
     const result = await fetch(CLIENT_API + '/open/' + `${periodCount}`);
@@ -78,45 +79,63 @@ export default function Lottery({ data, title, openTime }) {
 
   useEffect(() => {
     let updateTime = setInterval(async () => {
+      let arr = []
       let now = new Date().getTime();
-      let difference = countDownDate - now <= 0 ? 0 : countDownDate - now;
+      // let difference = countDownDate - now <= 0 ? 0 : countDownDate - now;
+      let difference = countDownDate - now; // 计算误差时间
       let newDays = Math.floor(difference / (1000 * 60 * 60 * 24));
       let newHours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       let newMinutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
       let newSeconds = Math.floor((difference % (1000 * 60)) / 1000);
-      // setDays(newDays);
+      // console.log('newSeconds', newSeconds, newMinutes);
+      setDays(newDays);
       setHours(newHours);
       setMinutes(newMinutes);
       setSeconds(newSeconds);
+      // console.log('difference:', difference);
       if (difference <= 0) {
+        console.log('clearInterval清除了'); // 也就是开奖触发时间
         clearInterval(updateTime);
-        console.log('进来清除了'); // 也就是开奖触发时间
         const result = await getOpenData()
-        const item = result.data[0] || {};
-        let arr = []
-        difference < (-1 * 60 * 1000) ? setOpenData(convertOpenData(item)) :
-          convertOpenData(item).forEach((element, index) => {
-            (function (element, index) {
-              setTimeout(() => {
-                arr.push(element)
-                setOpenData([...arr])
-                // console.log(element, index, arr);
-              }, 5000);
-            })(element, index)
-          })
-        // setDays(0);
+        const openItem = result.data[0] || {};
+        setDays(0);
         setHours(0);
         setMinutes(0);
         setSeconds(0);
-        // setDiffTimes(0)
         setPeriods(periodCount)
-        setOpenNums(result?.data[0]?.particular)
-        if (historyItem?.periods !== periodCount) {
-          // console.log('插入新数据', item);
-          createOpenHistoryData(item)
+        // setDiffTimes(difference)
+        // setOpenNums(result?.data[0]?.particular)
+        // console.log('difference', difference, (-1 * 60 * 1000));
+        if (difference < (-1 * 60 * 1000)) { // 开奖一分钟后，不走开奖动画延时方法
+          setOpenData(convertOpenData(openItem))
+        } else {
+          let timer = undefined
+          let t = 3500
+          convertOpenData(openItem).forEach((element, index) => {
+            // console.log('element, index', element, index);
+            if (index === 1) setOpenData([]);// 开奖前清空旧数据
+            (function (element, index) {
+              let n = moment().valueOf()
+              timer = setTimeout((value) => {
+                arr.push(value)
+                setOpenData([...arr])
+                // console.log('setTimeout:', index, moment().valueOf() - n, value);
+                if (index == 6 && historyItem?.periods !== periodCount) {
+                  console.log('插入新数据');
+                  createOpenHistoryData(openItem)
+                  clearTimeout(timer)
+                }
+              }, (index * t), element);
+
+            })(element, index)
+          })
         }
+        // if (historyItem?.periods !== periodCount) {
+        //   console.log('插入新数据', item);
+        //   // createOpenHistoryData(item)
+        // }
       }
-    })
+    }, 1000)
     return () => {
       clearInterval(updateTime);
     }
@@ -154,7 +173,7 @@ export default function Lottery({ data, title, openTime }) {
       </div>
       <div className="flex text-xl flex-col gap-5 p-2 font-bold">
         <div className='flex justify-between'>
-          <div className='text-base'>
+          <div className='text-2xl'>
             {title}第<span className='text-red-500'>{newPeriods < 10 ? '00' + newPeriods : newPeriods < 100 ? '0' + newPeriods : newPeriods}</span>期开奖：
           </div>
           <div className="flex items-center font-bold">
@@ -175,7 +194,7 @@ export default function Lottery({ data, title, openTime }) {
                 : `ml-4 flex w-1/6 flex-1 flex-col items-center pt-2 font-bold`
               }
             >
-              <div className={diffTimes <= 0 ? "relative slide-in-right" : "relative"}>
+              <div className={diffTime == 0 ? "relative slide-in-right" : "relative"}>
                 <Image
                   className={index < 6 ? '' : `shadow-md shadow-${item.color}-500 rounded-full`}
                   src={colorList.filter((color) => color.color == item.color)[0]?.url}
@@ -193,7 +212,7 @@ export default function Lottery({ data, title, openTime }) {
                     transform: 'translate(-50%, -50%)',
                   }}
                 >
-                  <span className={'text-2xl font-bold'}>
+                  <span className={'text-3xl font-bold'}>
                     {item.particular || item.ordinary}
                   </span>
                 </div>
@@ -207,9 +226,9 @@ export default function Lottery({ data, title, openTime }) {
             </li>
           ))}
         </ul>
-        <div className="text-base font-medium">
+        <div className="text-xl font-medium">
           <div>第<span className='text-red-500'>{periodCount < 10 ? '00' + periodCount : periodCount < 100 ? '0' + periodCount : periodCount}</span>期开奖:
-            <span className='text-red-500 text-sm'> {month}月{day}日 {weeks[moment().day()]} 22点35分</span></div>
+            <span className='text-red-500 text-base'> {month}月{day}日 {weeks[moment().day()]} 22点35分</span></div>
           {/* <p>
             {title}{Number(periodCount)}期开奖结果：{openNums}
           </p> */}

@@ -39,53 +39,57 @@ export default function Table9({ title, data }) {
       </div>
       <ul className='w-full'>
         {list.map((item, i) => (
-          <li key={item.id} className="h-10 flex items-center justify-around font-bold text-2xl gap-4" style={{
+          <li key={item.id} className="h-10 flex items-center justify-around font-bold text-2xl" style={{
             borderBottom: '1px solid #ccc',
           }}>
             <div className="w-28 text-center">{item.periods} 期：</div>
-            {
-              item.names == '野肖' && <div className='flex flex-auto'>
-                {
-                  i > 0 ? <Image
-                    width={30}
-                    height={30}
-                    alt="img"
-                    src={item.beast?.includes(item.openName) ? '/images/icons/success.png' : '/images/icons/err.png'}
-                  /> : <div ><Image
+            <div className='flex-1'>
+              {
+                item.names == '野肖' && <div className='flex flex-auto'>
+                  <Image
                     width={30}
                     height={30}
                     alt="img"
                     src={'/images/icons/new.gif'}
-                  /></div>
-                }
-                【
-                <span className={item.beast?.some(name => name == item.openName) ? 'bg-yellow-400' : ''}>野兽</span>
-                】
-              </div>
-            }
-            {
-              item.names == '家肖' && <div className='flex flex-auto'>
-                {
-                  i > 0 ? <Image
-                    width={30}
-                    height={30}
-                    alt="img"
-                    src={item.birds?.includes(item.openName) ? '/images/icons/success.png' : '/images/icons/err.png'}
-                  /> : <div ><Image
+                  />
+                  【
+                  <span className={item.beast?.some(name => name == item.openName) ? 'bg-yellow-400' : ''}>野兽</span>
+                  】
+                </div>
+              }
+              {
+                item.names == '家肖' && <div className='flex flex-auto'>
+                  <Image
                     width={30}
                     height={30}
                     alt="img"
                     src={'/images/icons/new.gif'}
-                  /></div>
-                }
-                【
-                <span className={item.birds?.some(name => name == item.openName) ? 'bg-yellow-400' : ''}>家畜</span>
-                】
-              </div>
-            }
-            <div className='w-32'>开：
+                  />
+                  【
+                  <span className={item.birds?.some(name => name == item.openName) ? 'bg-yellow-400' : ''}>家畜</span>
+                  】
+                </div>
+              }
+            </div>
+            <div className='flex w-40'>开：
               <span className=''>{item.openNum || '????'}</span>
               {item.openName && <span>({item.openName})</span>}
+              {
+                i > 0 && item.names == '野肖' && <Image
+                  width={30}
+                  height={30}
+                  alt="img"
+                  src={item.beast?.includes(item.openName) ? '/images/icons/success.png' : '/images/icons/err.png'}
+                />
+              }
+              {
+                i > 0 && item.names == '家肖' && <Image
+                  width={30}
+                  height={30}
+                  alt="img"
+                  src={item.birds?.includes(item.openName) ? '/images/icons/success.png' : '/images/icons/err.png'}
+                />
+              }
             </div>
           </li>
         ))}
