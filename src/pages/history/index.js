@@ -58,6 +58,33 @@ export default function History({ data }) {
                 <div className="text-center">
                   <div
                     style={{
+                      // color: item.ordinary6_color,
+                      backgroundImage:
+                        'url(' +
+                        ballList.filter(
+                          (c) => c.color == item.ordinary6_color
+                        )[0]['url'] +
+                        ')',
+                      margin: '0 auto',
+                      width: '2rem',
+                      height: '2rem',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'center',
+                      backgroundSize: 'cover',
+                      fontSize: '1rem',
+                      fontWeight: 700,
+                      color: '#000',
+                    }}
+                  >
+                    {item.ordinary6}
+                  </div>
+                  <div className=" text-base text-neutral-600">
+                    {item.ordinary6_property}
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div
+                    style={{
                       color: item.ordinary1_color,
                       backgroundImage:
                         'url(' +
@@ -193,36 +220,9 @@ export default function History({ data }) {
                   </div>
                 </div>
 
-                <div className="text-center">
-                  <div
-                    style={{
-                      // color: item.ordinary6_color,
-                      backgroundImage:
-                        'url(' +
-                        ballList.filter(
-                          (c) => c.color == item.ordinary6_color
-                        )[0]['url'] +
-                        ')',
-                      margin: '0 auto',
-                      width: '2rem',
-                      height: '2rem',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'center',
-                      backgroundSize: 'cover',
-                      fontSize: '1rem',
-                      fontWeight: 700,
-                      color: '#000',
-                    }}
-                  >
-                    {item.ordinary6}
-                  </div>
-                  <div className=" text-base text-neutral-600">
-                    {item.ordinary6_property}
-                  </div>
-                </div>
+
                 {/* 分割标 */}
                 <div className=" text-2xl from-purple-400 font-bold text-gray-600">+</div>
-
                 <div className="rounded-xl text-center">
                   <div
                     style={{
