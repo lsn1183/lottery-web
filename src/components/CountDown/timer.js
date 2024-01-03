@@ -56,21 +56,21 @@ export const TimerContainer = ({ days, hours, minutes, seconds }) => {
     seconds = "0" + seconds
   }
 
-  if (days < 0) {
-    days = days
-  }
+  // if (days < 0) {
+  //   days = days
+  // }
 
-  if (hours < 0) {
-    hours = hours
-  }
+  // if (hours < 0) {
+  //   hours = hours
+  // }
 
-  if (minutes < 0) {
-    minutes = minutes
-  }
+  // if (minutes < 0) {
+  //   minutes = minutes
+  // }
 
-  if (seconds < 0) {
-    seconds = seconds
-  }
+  // if (seconds < 0) {
+  //   seconds = seconds
+  // }
 
   return (
     <div className="rounded">
