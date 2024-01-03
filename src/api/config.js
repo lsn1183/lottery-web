@@ -3,4 +3,4 @@ export const CLIENT_API = process.env.NODE_ENV === 'development' ? 'http://local
 // console.log('process.env', process.env.NODE_ENV);
 
 export const Title = '欧洲彩';
-export const openTime = '16:30';
+export const openTime = '16:40';

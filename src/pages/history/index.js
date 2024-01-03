@@ -82,7 +82,6 @@ export default function History({ data }) {
                     {item.ordinary1_property}
                   </div>
                 </div>
-
                 <div className="text-center">
                   <div
                     style={{
