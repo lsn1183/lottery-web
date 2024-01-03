@@ -99,7 +99,7 @@ export default function Footer({ data }) {
           color: '#bc0bd2',
         }}
       >
-        <p>合数单双</p>
+        <p>合单双</p>
       </div>
       <ul className="flex flex-col">
         {numsList?.map((item) => (

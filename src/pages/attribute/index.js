@@ -120,7 +120,7 @@ function Attribute({ data }) {
             color: '#bc0bd2',
           }}
         >
-          <p>合数单双</p>
+          <p>单双</p>
         </div>
         <ul className="flex flex-col">
           {numsList?.map((item) => (

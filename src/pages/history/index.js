@@ -19,13 +19,14 @@ export async function getServerSideProps() {
 }
 
 export default function History({ data }) {
+  const year = moment().year()
   const { list } = data || [];
   const yearList = [2023, 2024]
   const datas = {
     2023: list.filter(item => item.year == 2023),
     2024: list.filter(item => item.year == 2024)
   }
-  let [active, setActive] = useState(2023)
+  let [active, setActive] = useState(year)
   const handleSelect = (v) => {
     setActive(v)
   }
