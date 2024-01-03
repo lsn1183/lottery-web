@@ -42,7 +42,7 @@ import Table9 from '@/components/table-9';
 // const Table12 = dynamic(() => import('@/components/table-12'))
 
 const Title = '欧洲彩';
-const openTime = '13:30'
+const openTime = '13:45'
 // This gets called on every request
 export async function getServerSideProps({ req }) {
   // console.log('req', req.headers);
