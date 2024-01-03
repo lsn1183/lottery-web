@@ -48,6 +48,7 @@ export function formatRemainTime(time = 0) {
   res += addZero(time) + timeArr.at(-1)?.s;
   return res;
 }
+
 // 数组分组
 export function group(array, subGroupLength) {
   var index = 0;
@@ -55,7 +56,6 @@ export function group(array, subGroupLength) {
   while (index < array.length) {
     newArray.push(array.slice(index, (index += subGroupLength)));
   }
-
   return newArray;
 }
 
@@ -125,6 +125,33 @@ export function getOpenItem(openData, item) {
   const openColor = element.particular_color
   const ordinaryNames = [...new Array(6)].map((k, i) => (element[`ordinary${i + 1}_property`]?.substring(0, 1))) // 平码
   const ordinaryColors = [...new Array(6)].map((k, i) => (element[`ordinary${i + 1}_color`])) // 平码波色
-
   return { openNum, openName, openColor, ordinaryNames, ordinaryColors };
+}
+
+/** 转换本期开奖数据展示
+ * @params 
+ * @params item 当前单期数据
+ */
+export const convertOpenData = (item) => {
+  const { id, periods, year, ...other } = item;
+  const data = group(Object.entries(other), 3).map((item) => {
+    // console.log(item, 'item');
+    let newItem = {};
+    item?.forEach((element, index) => {
+      const splitArr = element[0].split('_');
+      let key =
+        splitArr.length > 1
+          ? splitArr[1]
+          : splitArr[0].indexOf('ordinary') != -1
+            ? 'ordinary'
+            : splitArr[0];
+      newItem[key] = element[1];
+    });
+    return newItem;
+  })
+  const particularIndex = data.findIndex(item => item.particular) // 特码下标
+  const particularItem = data[particularIndex]
+  data.splice(particularIndex, 1)
+  data.push(particularItem)
+  return data
 }

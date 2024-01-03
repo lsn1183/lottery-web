@@ -1,43 +1,14 @@
 'use client'
 import { CLIENT_API } from '@/api/config';
-import { group } from '@/utils/utils';
+import { colorList, weeks } from '@/utils/constant';
+import { convertOpenData } from '@/utils/utils';
 import moment from 'moment';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { TimerContainer } from './CountDown/timer';
 
-// 波色类型列表
-const colorList = [
-  { color: 'red', url: '/icon/ball-red.png' },
-  { color: 'blue', url: '/icon/ball-blue.png' },
-  { color: 'green', url: '/icon/ball-green.png' },
-];
-const weeks = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-// 转换开奖数据展示
-const convertOpenData = (item) => {
-  const { id, periods, year, ...other } = item;
-  const data = group(Object.entries(other), 3).map((item) => {
-    let newItem = {};
-    item?.forEach((element, index) => {
-      const splitArr = element[0].split('_');
-      let key =
-        splitArr.length > 1
-          ? splitArr[1]
-          : splitArr[0].indexOf('ordinary') != -1
-            ? 'ordinary'
-            : splitArr[0];
-      newItem[key] = element[1];
-    });
-    return newItem;
-  })
-  const sourceIndex = data.findIndex(item => item.particular)
-  const item1 = data[sourceIndex]
-  const item2 = data[data.length - 1]
-  data[sourceIndex] = item2
-  data[data.length - 1] = item1
-  return data
-}
+
 export default function Lottery({ data, title, openTime }) {
   const { openHistoryData, periodCount, diffTime } = data;
   // console.log('diffTime', diffTime);
@@ -122,7 +93,7 @@ export default function Lottery({ data, title, openTime }) {
                 // console.log('setTimeout:', index, moment().valueOf() - n, value);
                 if (index == 6 && historyItem?.periods !== periodCount) {
                   console.log('插入新数据');
-                  createOpenHistoryData(openItem)
+                  // createOpenHistoryData(openItem)
                   clearTimeout(timer)
                 }
               }, (index * t), element);
@@ -191,9 +162,13 @@ export default function Lottery({ data, title, openTime }) {
             <li key={item.ordinary + item.property}
               className={index < 6
                 ? `flex w-1/6 flex-1 flex-col items-center pt-2`
-                : `ml-4 flex w-1/6 flex-1 flex-col items-center pt-2 font-bold`
+                : `flex w-1/6 flex-1 flex-col items-center pt-2 ml-4 font-bold relative`
               }
             >
+              {/* 加号分割特码 */}
+              {index === 6 &&
+                <div className="text-4xl z-10 from-purple-400 font-bold text-gray-600 absolute top-2 left-[-1.5rem]">+</div>
+              }
               <div className={diffTime == 0 ? "relative slide-in-right" : "relative"}>
                 <Image
                   className={index < 6 ? '' : `shadow-md shadow-${item.color}-500 rounded-full`}

@@ -32,30 +32,45 @@ export default function Table12({ title, data }) {
       </div>
       <ul>
         {list.map((item, i) => (
-          <li key={item.id} className="flex items-center justify-around h-10 font-bold font-mono" style={{
+          <li key={item.id} className="flex text-1xl items-center h-10 font-bold font-mono justify-around" style={{
             borderBottom: '1px solid #ccc',
           }}>
-            <div className="pl-2 w-32">{item.periods}期：</div>
-            <div className='flex-1'>
+            <div className="w-1/4 text-center">{item.periods}期：</div>
+            <div className='w-1/4 flex items-center'>
+              <div>
+                <Image
+                  width={30}
+                  height={30}
+                  alt="img"
+                  src={'/images/icons/new.gif'}
+                />
+                <Image
+                  width={30}
+                  height={30}
+                  alt="img"
+                  src={'/images/icons/new.gif'}
+                />
+                <Image
+                  width={30}
+                  height={30}
+                  alt="img"
+                  src={'/images/icons/new.gif'}
+                />
+              </div>
               【 <span>{item.single}</span> 】
             </div>
-            <div className='flex-1 flex pr-8'>开：
-              <span className=''>{item.openNum || '????'}</span>
+            <div className='flex w-2/4 text-right'>开：
+              <span>{item.openNum || '??????'}</span>
               {
                 item.openName &&
                 <span className=''>({item.openName})</span>
               }
               {
-                i > 0 ? <Image
+                i > 0 && <Image
                   width={30}
                   height={30}
                   alt="img"
                   src={item.ordinaryNames?.includes(item.single) ? '/images/icons/success.png' : '/images/icons/err.png'}
-                /> : <Image
-                  width={30}
-                  height={30}
-                  alt="img"
-                  src={'/images/icons/new.gif'}
                 />
               }
             </div>

@@ -43,9 +43,9 @@ export default function Table9({ title, data }) {
             borderBottom: '1px solid #ccc',
           }}>
             <div className="w-28 text-center">{item.periods} 期：</div>
-            <div className='flex-1'>
+            <div className='flex-1 flex justify-center'>
               {
-                item.names == '野肖' && <div className='flex flex-auto'>
+                item.names == '野肖' && <div className='flex'>
                   <Image
                     width={30}
                     height={30}
@@ -58,7 +58,7 @@ export default function Table9({ title, data }) {
                 </div>
               }
               {
-                item.names == '家肖' && <div className='flex flex-auto'>
+                item.names == '家肖' && <div className='flex'>
                   <Image
                     width={30}
                     height={30}
