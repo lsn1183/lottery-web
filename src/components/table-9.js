@@ -59,7 +59,7 @@ export default function Table9({ title, data }) {
                   /></div>
                 }
                 【
-                <span>野兽</span>
+                <span className={item.beast?.some(name => name == item.openName) ? 'bg-yellow-400' : ''}>野兽</span>
                 】
               </div>
             }
