@@ -1,11 +1,14 @@
 import Image from 'next/image';
 
 // 插图集合
-export default function ImgList({ title = '' }) {
+export default function ImageTwo({ title = '' }) {
   return (
-    <div className="relative flex w-full flex-wrap justify-between gap-1">
+    <div className=" flex w-full flex-wrap justify-between gap-1 bg-red-600">
+      <p className="top-7 pl-5 pr-5 text-2xl text-yellow-300">
+        财神爷送特码，财运来了，挡也挡不住！！
+      </p>
       <Image
-        src="/images/test.png"
+        src="/images/玄机图/test-4.png"
         alt="img"
         className="dark:invert"
         width={768}
@@ -13,10 +16,7 @@ export default function ImgList({ title = '' }) {
         priority
         style={{ height: '100%', width: '100%' }}
       />
-      {/* <p className=" absolute top-7 pl-5 pr-5 text-sm text-yellow-300">
-        不要小瞧平特，中起来也是能赚到钱的，
-        继续支持我的,保证带你们继续赢下去的。
-      </p> */}
+
     </div>
   );
 }

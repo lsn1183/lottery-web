@@ -7,12 +7,11 @@ import NavBar from '@/components/nav-bar';
 import Roll from '@/components/roll';
 import Table1 from '@/components/table-1';
 import moment from 'moment';
-
 // import dynamic from 'next/dynamic';
-
 import ImgList1 from '@/components/image-1';
 import ImgList2 from '@/components/image-2';
 import ImgList3 from '@/components/image-3';
+import NavImage from '@/components/nav-image';
 
 import Table10 from '@/components/table-10';
 import Table11 from '@/components/table-11';
@@ -86,10 +85,11 @@ export default function Page({ data }) {
       <TopImage />
       {/* 导航按钮 */}
       <NavBar title={Title} />
-      <ImgList1 title={Title} />
+      <NavImage title={Title} />
       <Lottery title={Title} data={data} openTime={openTime} />
       <Roll title={Title} />
       <Table1 title={Title} data={data} />
+      <ImgList1 title={Title} />
       <Table2 title={Title} data={data} />
       <Table3 title={Title} data={data} />
       <ImgList2 title={Title} />

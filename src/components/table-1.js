@@ -77,7 +77,6 @@ export default function Table1({ data, title }) {
           </p>
         </li>
       </ul>
-      <Image src="/images/nav/nav-888.png" alt='img' width={768} height={100} />
     </div>
   );
 }
