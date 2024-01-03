@@ -82,6 +82,7 @@ export default function History({ data }) {
                     {item.ordinary1_property}
                   </div>
                 </div>
+                {/* 2 */}
                 <div className="text-center">
                   <div
                     style={{
@@ -108,14 +109,14 @@ export default function History({ data }) {
                     {item.ordinary2_property}
                   </div>
                 </div>
-
+                {/* 3 */}
                 <div className="text-center">
                   <div
                     style={{
                       backgroundImage:
                         'url(' +
                         ballList.filter(
-                          (c) => c.color == item.particular_color
+                          (c) => c.color == item.ordinary3_color
                         )[0]['url'] +
                         ')',
                       margin: '0 auto',
