@@ -13,18 +13,16 @@ export default function Nav() {
       <div className="flex w-full justify-between">
         {navList.map((item) => (
           <Link className="flex flex-col items-center justify-between text-base" key={item.name} href={item.path} passHref prefetch={false}>
-            <a>
 
-              <Image
-                src={item.url}
-                alt="img"
-                className="dark:invert"
-                width={46}
-                height={46}
-                priority
-              />
-              <div className="p-2 text-stone-900">{item.name}</div>
-            </a>
+            <Image
+              src={item.url}
+              alt="img"
+              className="dark:invert"
+              width={46}
+              height={46}
+              priority
+            />
+            <div className="p-2 text-stone-900">{item.name}</div>
           </Link>
         ))}
       </div>
