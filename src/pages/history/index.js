@@ -188,7 +188,7 @@ export default function History({ data }) {
                     {item.ordinary5}
                   </div>
                   <div className=" text-base text-neutral-600">
-                    {item.ordinary4_property}
+                    {item.ordinary5_property}
                   </div>
                 </div>
 
