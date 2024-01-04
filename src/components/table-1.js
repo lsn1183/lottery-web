@@ -2,8 +2,8 @@ import { getOpenItem } from '@/utils/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function Table1({ data, title }) {
-  const { recommendData, periodCount, openHistoryData } = data;
+export default function Table1({ data }) {
+  const { recommendData, openHistoryData } = data;
 
   const list = [
     ...recommendData.map((item) => {

@@ -46,14 +46,13 @@ import Table9 from '@/components/table-9';
 export async function getServerSideProps({ req }) {
   // console.log('req', req.headers);
   // Fetch data from external API
-  const todayDate = moment().format('YYYY-MM-DD HH:mm'); // 现在时间
+  const nowDate = moment().format('YYYY-MM-DD HH:mm'); // 现在时间
   const today = moment().format('YYYY-MM-DD'); // 今天日期
-  const targetDate = moment(today + ' ' + openTime); // 目标时间
-  const diffTime = moment(todayDate).diff(targetDate, 'MM'); // 现在时间和目标时间比较
+  const openDate = moment(today + ' ' + openTime); // 目标时间
+  const diffTime = moment(openDate).diff(nowDate, 'seconds'); // 现在时间和开奖时间比较， 小于0则过时
   let periodCount = moment().dayOfYear(); // 今年的第几天
   const year = moment().year(); // 今年年份
   console.log(year + '年第：' + periodCount + '天');
-  console.log('开奖时间倒计时：', diffTime);
   const result = await getAnimalList({ year });
   const result1 = await getLatestOpenHistoryData({ year });
   const result2 = await getLatestRecommendData({ year });
