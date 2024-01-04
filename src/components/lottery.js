@@ -40,93 +40,89 @@ export default function Lottery({ data, title, openTime }) {
   const [openData, setOpenData] = useState(diffTime < 0 ? [] : historyList);
   let timerRef = useRef(null);
   let updateTimeRef = useRef(null)
-  // const [openNums, setOpenNums] = useState(diffTime < 0 ? '???' : '');
-  // const [diffTimes, setDiffTimes] = useState(diffTime);
-  const daysCount = moment().dayOfYear(); // 今年的第几天908
+
+  const daysCount = moment().dayOfYear(); // 今年的第几天
   const years = moment().year(); // 今年
   const month = moment().format("MM"); // 今月
   const day = moment().format("DD"); // 今月
   const today = moment().format('YYYY-MM-DD'); // 今天日期
-  const openDate = moment(today + ' ' + openTime).valueOf(); // 倒数时间，距离开奖时间小时
-  const endDate = moment().endOf('day').valueOf(); // 23:59
+  const openDate = moment(today + ' ' + openTime).valueOf(); // 倒数时间，距离开奖时间小时 输出时间戳，单位为毫秒
+  const endTime = moment().endOf('day').valueOf(); // 23:59 输出时间戳，单位为毫秒
+  const diffOpenTimeEnd = Math.floor((endTime - openDate) / 1000); // 今天结束最后时间
 
+  async function func() {
+    let arr = [];
+    let t = 3500;
+    let now = new Date().getTime();
+    let diffEndTime = Math.floor((endTime - now) / 1000); // 计算即将结束今天时间误差 输出时间戳，单位为秒
+    let difference = null;
+    if (diffEndTime <= diffOpenTimeEnd) {
+      difference = Math.floor(((diffOpenTimeEnd + openDate + (24 * 60 * 60 * 1000)) - now) / 1000); // 计算开奖误差时间, 秒
+    } else {
+      difference = Math.floor((openDate - now) / 1000); // 计算开奖误差时间, 秒
+    }
+    let newDays = Math.floor(difference / (60 * 60 * 24));
+    let newHours = Math.floor((difference % (60 * 60 * 24)) / (60 * 60));
+    let newMinutes = Math.floor((difference % (60 * 60)) / (60));
+    let newSeconds = Math.floor((difference % (60)));
+
+    setDays(newDays);
+    setHours(newHours);
+    setMinutes(newMinutes);
+    setSeconds(newSeconds);
+    if (difference > 15 && difference <= 5 * 60) {
+      setOpenData([]);// 开奖前清空旧数据
+    }
+    if (difference === 0) {
+      clearInterval(updateTimeRef);
+      // console.log('clearInterval:', updateTimeRef); // 也就是开奖触发时间
+      const result = await getOpenData(periodCount)
+      const openItem = result.data[0] || {};
+      setDays(0);
+      setHours(0);
+      setMinutes(0);
+      setSeconds(0);
+      convertOpenData(openItem).forEach((element, index) => {
+        // console.log('element, index', element, index);
+        // if (index === 1) setOpenData([]);// 开奖前清空旧数据
+        (function (element, index) {
+          let n = moment().valueOf()
+          timerRef = setTimeout((value) => {
+            arr.push(value)
+            setOpenData([...arr])
+            if (index == 6 && historyItem?.periods !== periodCount) {
+              clearTimeout(timerRef)
+              console.log('插入新数据, 开奖完成',);
+              updateTimeRef = setInterval(func, 1000)
+            }
+          }, (index * t), element);
+
+        })(element, index)
+      })
+      // }
+      // if (historyItem?.periods !== periodCount) {
+      //   console.log('插入新数据', item);
+      //   // createOpenHistoryData(item)
+      // }
+    }
+
+  }
   // TO DO 使用webscok还是轮询进行时间数据交换
   useEffect(() => {
-    updateTimeRef = setInterval(async () => {
-      let arr = []
-      let now = new Date().getTime();
-      // let difference = openDate - now <= 0 ? 0 : openDate - now;
-      let difference = Math.floor((openDate - now) / 1000); // 计算开奖误差时间, 秒
-      let diffEndTime = endDate - now; // 计算即将结束今天时间误差
-      console.log('difference-1:', difference);
-
-      let newDays = Math.floor(difference / (60 * 60 * 24));
-      let newHours = Math.floor((difference % (60 * 60 * 24)) / (60 * 60));
-      let newMinutes = Math.floor((difference % (60 * 60)) / (60));
-      let newSeconds = Math.floor((difference % (60)));
-
-      setDays(newDays);
-      setHours(newHours);
-      setMinutes(newMinutes);
-      setSeconds(newSeconds);
-
-      if (difference === 0) {
-        clearInterval(updateTimeRef);
-        console.log('clearInterval:', updateTimeRef); // 也就是开奖触发时间
-        const result = await getOpenData(periodCount)
+    updateTimeRef = setInterval(func, 1000)
+    // console.log('hello');
+    if (diffTime < 0 && openData.length === 0) {
+      getOpenData(periodCount).then(result => {
         const openItem = result.data[0] || {};
-        setDays(0);
-        setHours(0);
-        setMinutes(0);
-        setSeconds(0);
-        // setPeriods(periodCount)
-        // setDiffTimes(difference)
-        // setOpenNums(result?.data[0]?.particular)
-        console.log('difference-< -6000', difference < (-1 * 60));
-        if (difference < (-5 * 60)) { // 开奖5分钟后，不走开奖动画延时方法
-          // setOpenData(convertOpenData(openItem))
-        } else {
-
-          let t = 3500
-          convertOpenData(openItem).forEach((element, index) => {
-            console.log('element, index', element, index);
-            if (index === 1) setOpenData([]);// 开奖前清空旧数据
-            (function (element, index) {
-              let n = moment().valueOf()
-              timerRef = setTimeout((value) => {
-                arr.push(value)
-                setOpenData([...arr])
-                console.log('setTimeout:', index, moment().valueOf() - n, value);
-                if (index == 6 && historyItem?.periods !== periodCount) {
-                  console.log('插入新数据');
-                  // createOpenHistoryData(openItem)
-                  if (difference <= 0) {
-                    console.log("进来重置时间了",);
-                    difference = (openDate + 24 * 60 * 60 * 1000) - now // 过了开奖后，加一天倒计下一个开奖日期
-                  }
-                  console.log('difference-2:', difference,);
-                  // clearTimeout(timer)
-                }
-              }, (index * t), element);
-
-            })(element, index)
-          })
-        }
-        // if (historyItem?.periods !== periodCount) {
-        //   console.log('插入新数据', item);
-        //   // createOpenHistoryData(item)
-        // }
-      } else if (difference < 0) {
-        console.log('小于0', difference);
-      }
-
-    }, 1000)
+        setOpenData(convertOpenData(openItem))
+      })
+    }
     return () => {
       clearInterval(updateTimeRef);
       clearTimeout(timerRef)
-
     }
   }, []);
+
   // console.log('list:', historyItem.periods, periodCount, openData);
   return (
     <div className='w-full'>
