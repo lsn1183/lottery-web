@@ -66,6 +66,110 @@
 .p {
   animation: blink 1s linear infinite; 
 }
+// 文字闪闪发亮效果
+.text {
+  background-color: black;
+  color: rgb(234, 27, 27);
+  font-size: 180px;
+  font-weight: bold;
+  font-family: sans-serif;
+  text-transform: uppercase;
+}
+.text::before {
+  content: attr(data-text);
+  position: absolute;
+  color: white;
+  filter: blur(0.02em);
+}
+.text::before {
+  mix-blend-mode: difference;
+}
+.neon {
+  position: relative;
+}
+.gradient {
+  position: absolute;
+  background: linear-gradient(45deg, red, gold, lightgreen, gold, red);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.spotlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+      radial-gradient(
+          circle,
+          white,
+          transparent 25%
+      ) center / 25% 25%,
+      radial-gradient(
+          circle,
+          white,
+          black 25%
+      ) center / 12.5% 12.5%;
+}
+.neon {
+  overflow: hidden;
+}
+
+.spotlight {
+  top: -100%;
+  left: -100%;
+  animation: light 5s linear infinite;
+}
+
+@keyframes light {
+  to {
+      transform: translate(50%, 50%);
+  }
+}
+.spotlight {
+  mix-blend-mode: color-dodge;
+}
+.neon {
+  filter: brightness(200%);
+}
+
+.text {
+  user-select: none;
+}
+
+.card-remark {
+  font-family: Arial, sans-serif; /* 选择字体 */
+ font-size: 36px; /* 设置字体大小 */
+  color: rgba(255, 0, 0, 0.5); /* 初始颜色 */
+   animation: shimmer 1s infinite; /* 应用动画效果 */
+}
+@keyframes shimmer {
+0% {
+color: rgba(255, 0, 0, 0.5);
+}
+50% {
+color: rgba(255, 255, 255, 0.8);
+text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+100% {
+color: rgba(255, 255, 255, 0.5);
+}
+}
+@keyframes masked-animation {
+  0% {
+      background-position: 0 0;
+  }
+  100% {
+      background-position: -100% 0;
+  }
+}
+
+// -------------------
+
+
+
 @keyframes blink {
   0% { opacity: 1; }
   50% { opacity: 0.8; }

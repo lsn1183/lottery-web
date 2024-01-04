@@ -12,7 +12,7 @@ export default function NavImage({ title = '' }) {
   ];
 
   return (
-    <div className="mt-2 flex flex-wrap justify-start bg-orange-200 p-2 font-bold ">
+    <div className="mt-2 flex flex-wrap justify-start bg-orange-200 font-bold">
 
       {list.map((item, index) => (
         <div key={index} className="c_item flex-1 border">
@@ -48,6 +48,12 @@ export default function NavImage({ title = '' }) {
             height={60}
             priority
           />
+        </div>
+        <div className="neon h-10 font-bold">
+          <span className="text" data-text=""></span>
+          <span className="gradient">
+          </span>
+          <span className="spotlight"></span>
         </div>
       </div>
       <div className='text-2xl animate-bounce font-medium text-red-600'>全网独家爆料，彩民们都赚疯了！！！</div>
