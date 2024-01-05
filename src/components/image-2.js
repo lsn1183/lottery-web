@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-// 玄机图
+// 横财富玄机图
 export default function ImageTwo({ periodCount }) {
   return (
     <div className=" flex w-full flex-wrap justify-between gap-1 bg-red-600">

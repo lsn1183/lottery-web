@@ -76,7 +76,7 @@ export default function Lottery({ data, title, openTime }) {
     if (difference === 0) {
       clearInterval(updateTimeRef);
       // console.log('clearInterval:', updateTimeRef); // 也就是开奖触发时间
-      const result = await getOpenData(periodCount)
+      const result = await getOpenData(5)
       const openItem = result.data[0] || {};
       setDays(0);
       setHours(0);
