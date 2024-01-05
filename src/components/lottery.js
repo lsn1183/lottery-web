@@ -164,7 +164,9 @@ export default function Lottery({ data, title, openTime }) {
       <div className="flex text-xl flex-col gap-5 p-2 font-bold">
         <div className='flex justify-between'>
           <div className='text-2xl'>
-            {title}第<span className='text-red-500'>{newPeriods < 10 ? '00' + newPeriods : newPeriods < 100 ? '0' + newPeriods : newPeriods}</span>期开奖：
+            {/* {title}第<span className='text-red-500'>{newPeriods < 10 ? '00' + newPeriods : newPeriods < 100 ? '0' + newPeriods : newPeriods}</span>期开奖： */}
+            {title}第<span className='text-red-500'>{'005'}</span>期开奖：
+
           </div>
           <div className="flex items-center font-bold">
             <TimerContainer
