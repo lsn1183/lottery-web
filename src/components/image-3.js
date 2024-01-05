@@ -7,7 +7,7 @@ export default function ImageThree() {
   return (
     <div className="flex w-full flex-wrap justify-between gap-1 mt-2">
       <Image
-        src={`/images/main/${days}.png` || `/images/main/${days}.jpeg` || `/images/main/${days}.jpg`}
+        src={`/images/main/${days}.png` || `/images/main/${days}.jpeg`}
         alt="img"
         width={768}
         height={200}
