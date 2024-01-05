@@ -46,10 +46,10 @@ import Table9 from '@/components/table-9';
 export async function getServerSideProps({ req }) {
   // console.log('req', req.headers);
   // Fetch data from external API
-  const nowDate = moment().format('YYYY-MM-DD HH:mm'); // 现在时间
-  const today = moment().format('YYYY-MM-DD'); // 今天日期
-  const openDate = moment(today + ' ' + openTime); // 目标时间
-  const diffTime = moment(openDate).diff(nowDate, 'seconds'); // 现在时间和开奖时间比较， 小于0则过时
+  // const nowDate = moment().format('YYYY-MM-DD HH:mm'); // 现在时间
+  // const today = moment().format('YYYY-MM-DD'); // 今天日期
+  // const openDate = moment(today + ' ' + openTime); // 目标时间
+  // const diffTime = moment(openDate).diff(nowDate, 'seconds'); // 现在时间和开奖时间比较， 小于0则过时
   let periodCount = moment().dayOfYear(); // 今年的第几天
   const year = moment().year(); // 今年年份
   console.log(year + '年第：' + periodCount + '天');
@@ -70,14 +70,13 @@ export async function getServerSideProps({ req }) {
     multiZodiacData: result5.list || [],
     fauvistData: result6.list || [],
     periodCount,
-    diffTime,
   };
 
   return { props: { data } }
 }
 
 export default function Page({ data }) {
-
+  const { periodCount } = data
   return (
     <main className="content overflow-y-auto">
       {/* 顶部图片 */}
@@ -88,12 +87,12 @@ export default function Page({ data }) {
       <Lottery title={Title} data={data} openTime={openTime} />
       <Roll title={Title} />
       <Table1 title={Title} data={data} />
-      <ImgList1 title={Title} />
+      <ImgList1 title={Title} periodCount={periodCount} />
       <Table2 title={Title} data={data} />
       <Table3 title={Title} data={data} />
-      <ImgList2 title={Title} />
+      <ImgList2 title={Title} periodCount={periodCount} />
       <Table4 title={Title} data={data} />
-      <ImgList3 title={Title} />
+      <ImgList3 title={Title} periodCount={periodCount} />
       <Table5 title={Title} data={data} />
       <Table6 title={Title} data={data} />
       <Table7 title={Title} data={data} />

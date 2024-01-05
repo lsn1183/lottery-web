@@ -1,14 +1,14 @@
 import Image from 'next/image';
 
 // 插图集合
-export default function ImageTwo({ title = '' }) {
+export default function ImageTwo({ periodCount }) {
   return (
     <div className=" flex w-full flex-wrap justify-between gap-1 bg-red-600">
       <p className="top-7 pl-5 pr-5 text-2xl text-yellow-300">
         财神爷送特码，财运来了，挡也挡不住！！
       </p>
       <Image
-        src="/images/玄机图/test-4.png"
+        src={`/images/玄机图/${periodCount}.png`}
         alt="img"
         className="dark:invert"
         width={768}
