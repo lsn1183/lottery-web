@@ -110,12 +110,19 @@ export default function Lottery({ data, title, openTime }) {
   // TO DO 使用webscok还是轮询进行时间数据交换
   useEffect(() => {
     updateTimeRef = setInterval(func, 1000)
+
+    getOpenData(5).then(result => {
+
+      console.log(result);
+      const openItem = result.data[0] || {};
+      setOpenData(convertOpenData(openItem))
+    })
     // console.log('hello');
     if (diffTime < 0 && openData.length === 0) {
-      getOpenData(5).then(result => {
-        const openItem = result.data[0] || {};
-        setOpenData(convertOpenData(openItem))
-      })
+      // getOpenData(5).then(result => {
+      //   const openItem = result.data[0] || {};
+      //   setOpenData(convertOpenData(openItem))
+      // })
     }
     return () => {
       clearInterval(updateTimeRef);
