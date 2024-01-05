@@ -112,7 +112,7 @@ export default function Lottery({ data, title, openTime }) {
     updateTimeRef = setInterval(func, 1000)
     // console.log('hello');
     if (diffTime < 0 && openData.length === 0) {
-      getOpenData(periodCount).then(result => {
+      getOpenData(5).then(result => {
         const openItem = result.data[0] || {};
         setOpenData(convertOpenData(openItem))
       })
