@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-// 插图集合
+// 波叔推荐
 export default function ImageThree({ periodCount }) {
   console.log(periodCount, typeof periodCount);
   // let days = moment().dayOfYear(); // 今年的第几天

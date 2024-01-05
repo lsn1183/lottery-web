@@ -87,16 +87,16 @@ export default function Page({ data }) {
       <Lottery title={Title} data={data} openTime={openTime} />
       <Roll title={Title} />
       <Table1 title={Title} data={data} />
-      <ImgList1 title={Title} periodCount={periodCount} />
       <Table2 title={Title} data={data} />
+      <ImgList1 title={Title} periodCount={periodCount} />
       <Table3 title={Title} data={data} />
-      <ImgList2 title={Title} periodCount={periodCount} />
       <Table4 title={Title} data={data} />
-      <ImgList3 title={Title} periodCount={periodCount} />
       <Table5 title={Title} data={data} />
+      <ImgList2 title={Title} periodCount={periodCount} />
       <Table6 title={Title} data={data} />
       <Table7 title={Title} data={data} />
       <Table8 title={Title} data={data} />
+      <ImgList3 title={Title} periodCount={periodCount} />
       <Table9 title={Title} data={data} />
       <Table10 title={Title} data={data} />
       <Table11 title={Title} data={data} />

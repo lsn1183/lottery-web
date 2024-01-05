@@ -16,6 +16,11 @@ export default function Table1({ data }) {
 
   return (
     <div className="w-full">
+      <div className="text-basefont-medium bg-red-500 text-black pt-2 pb-2 text-center">
+        <p>三四出码开二二，亡羊补牢出能发</p>
+        <p>宰相府里三千客，算得一八今期来</p>
+        <p>今期特码找桂花，富家小姐多娇美</p>
+      </div>
       <ul className="flex flex-col gap-1">
         {list.map((item, i) => (
           <li key={item.id} className="flex flex-col gap-1 items-center border-b-2 text-2xl">
@@ -71,17 +76,6 @@ export default function Table1({ data }) {
             </div>
           </li>
         ))}
-        <li className="m-2 text-start text-xl text-purple-600 font-medium">
-          <p className="">
-            头等舱可以优先登机，银行VIP可以不用排队，世界从不平等，
-            人有多大胆，彩有多大发，不怕买不中，只怕你不买。
-            {/* 人生就像一场戏，在等待中错过了美丽。正如歌中所唱：该出手时就出手。因为财富就在你身边。当你付出时，财富从你身边轻轻划过，留下的是悔恨、遗憾。每个人的一生，成功都需要机遇，没有机遇，那你成功的可能性只有30%，而成功的人不单单是建立在有雄厚家底的基础上，更多的人是靠白手起家的，现在你的成功机遇来了，不要错过了就后悔莫及！把握机会，成功就在眼前！ */}
-          </p>
-          <p>
-            密切关注本站，手慢只能拍大腿🦵。
-
-          </p>
-        </li>
       </ul>
     </div>
   );
