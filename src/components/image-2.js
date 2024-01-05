@@ -8,7 +8,7 @@ export default function ImageTwo({ periodCount }) {
         财神爷送特码，财运来了，挡也挡不住！！
       </p>
       <Image
-        src={`/images/玄机图/${periodCount}.png`}
+        src={`/images/玄机图/${periodCount}.png`|| `/images/玄机图/${5}.png`}
         alt="img"
         className="dark:invert"
         width={768}

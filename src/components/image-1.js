@@ -1,4 +1,5 @@
 import Image from 'next/image';
+
 // 四不像
 export default function ImgOne({ periodCount }) {
   return (

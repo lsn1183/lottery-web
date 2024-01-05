@@ -2,17 +2,14 @@
 import { CLIENT_API } from '@/api/config';
 import { colorList, weeks } from '@/utils/constant';
 import { convertOpenData } from '@/utils/utils';
+// import { socket } from '@/utils/webSocket';
 import moment from 'moment';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { TimerContainer } from './CountDown/timer';
 
-const getOpenData = async (periodCount) => {
-  const result = await fetch(CLIENT_API + '/open/' + `${periodCount}`);
-  return await result.json();
-}
-
+var socket ;
 const createOpenHistoryData = async (params) => {
   const result = await fetch(CLIENT_API + '/history/create', {
     headers: {
@@ -24,7 +21,10 @@ const createOpenHistoryData = async (params) => {
   });
   return await result.json();
 }
-
+const getOpenData = async (periodCount) => {
+  const result = await fetch(CLIENT_API + '/open/' + `${periodCount}`);
+  return await result.json();
+};
 export default function Lottery({ data, title, openTime }) {
   const { openHistoryData, periodCount, diffTime } = data;
   // console.log('diffTime', diffTime);
@@ -40,6 +40,7 @@ export default function Lottery({ data, title, openTime }) {
   const [openData, setOpenData] = useState(diffTime < 0 ? [] : historyList);
   let timerRef = useRef(null);
   let updateTimeRef = useRef(null)
+ 
 
   const daysCount = moment().dayOfYear(); // 今年的第几天
   const years = moment().year(); // 今年
@@ -49,6 +50,18 @@ export default function Lottery({ data, title, openTime }) {
   const openDate = moment(today + ' ' + openTime).valueOf(); // 倒数时间，距离开奖时间小时 输出时间戳，单位为毫秒
   const endTime = moment().endOf('day').valueOf(); // 23:59 输出时间戳，单位为毫秒
   const diffOpenTimeEnd = Math.floor((endTime - openDate) / 1000); // 今天结束最后时间
+
+  // const socketClient = io("http://localhost:3001/");
+  // console.log(socketClient);
+  // socketClient.onAny((...args) => {
+  //   console.log(args);
+  // });
+  // socketClient.on("connect", () => {
+  //   console.log("socket 连接成功");
+  // });
+  // socketClient.on("connect_error", (err) => {
+  //   console.log("socket 连接err", err);
+  // });
 
   async function func() {
     let arr = [];
@@ -100,17 +113,21 @@ export default function Lottery({ data, title, openTime }) {
 
         })(element, index)
       })
-      // }
-      // if (historyItem?.periods !== periodCount) {
-      //   console.log('插入新数据', item);
-      //   // createOpenHistoryData(item)
-      // }
     }
-
   }
+  // 点击btn发送socket消息
+  const handleClick = () => {
+    // socket.emit("newMessage", '哈哈哈', (e) => {
+    //   console.log(e);
+    // });
+
+  };
+
   // TO DO 使用webscok还是轮询进行时间数据交换
   useEffect(() => {
-    updateTimeRef = setInterval(func, 1000)
+   
+    // socket.connect(); // 让socket连接起来
+    // updateTimeRef = setInterval(func, 1000)
 
     // console.log('hello');
     if (diffTime < 0 && openData.length === 0) {
@@ -120,13 +137,19 @@ export default function Lottery({ data, title, openTime }) {
         setOpenData(convertOpenData(openItem))
       })
     }
+    // 组件挂载完毕完成后，监听onMessage事件
+    // socket.on("onMessage", (e) => {
+    //   console.log(e);
+    //   // chatList.list.push(e.content);
+    // });
     return () => {
       clearInterval(updateTimeRef);
-      clearTimeout(timerRef)
+      clearTimeout(timerRef);
+      // socket.disconnect(); //组件销毁时断开连接
     }
   }, []);
 
-  console.log('list:', historyItem.periods, periodCount, openData);
+  // console.log('list:', historyItem.periods, periodCount, openData);
   return (
     <div className='w-full'>
       <div className='flex justify-between items-center text-sm p-1 text-red-600'>
@@ -157,6 +180,7 @@ export default function Lottery({ data, title, openTime }) {
           往期开奖记录{'>>'}
         </Link>
       </div>
+      <button onClick={handleClick}>点击</button>
       <div className="flex text-xl flex-col gap-5 p-2 font-bold">
         <div className='flex justify-between'>
           <div className='text-2xl'>
@@ -178,14 +202,14 @@ export default function Lottery({ data, title, openTime }) {
             <li key={item?.ordinary + item?.property}
               className={index < 6
                 ? `flex w-1/6 flex-1 flex-col items-center pt-2`
-                : `flex w-1/6 flex-1 flex-col items-center pt-2 ml-4 font-bold relative`
+                : `flex w-1/6 flex-1 flex-col items-center pt-2 ml-4 font-bold`
               }
             >
               {/* 加号分割特码 */}
               {index === 6 &&
                 <div className="text-4xl z-10 from-purple-400 font-bold text-gray-600 absolute top-3 left-[-1.5rem]">+</div>
               }
-              <div className={diffTime == 0 ? "relative slide-in-right" : "relative"}>
+              <div className={"relative"}>
                 <Image
                   className={index < 6 ? '' : `shadow-md shadow-${item.color}-500 rounded-full`}
                   src={colorList.filter((color) => color.color == item?.color)[0]?.url}
@@ -220,9 +244,7 @@ export default function Lottery({ data, title, openTime }) {
         <div className="text-xl font-medium">
           <div>第<span className='text-red-500'>{periodCount < 10 ? '00' + periodCount : periodCount < 100 ? '0' + periodCount : periodCount}</span>期开奖:
             <span className='text-red-500 text-base'> {month}月{day}日 {weeks[moment().day()]} 22点35分</span></div>
-          {/* <p>
-            {title}{Number(periodCount)}期开奖结果：{openNums}
-          </p> */}
+
         </div>
       </div>
     </div>
