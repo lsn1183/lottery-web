@@ -72,11 +72,13 @@ export default function Lottery({ data, title, openTime }) {
     setSeconds(newSeconds);
     if (difference > 15 && difference <= 5 * 60) {
       setOpenData([]);// 开奖前清空旧数据
+      // setPeriods(periodCount)
+
     }
     if (difference === 0) {
       clearInterval(updateTimeRef);
       // console.log('clearInterval:', updateTimeRef); // 也就是开奖触发时间
-      const result = await getOpenData(5)
+      const result = await getOpenData(periodCount)
       const openItem = result.data[0] || {};
       setDays(0);
       setHours(0);
@@ -84,7 +86,6 @@ export default function Lottery({ data, title, openTime }) {
       setSeconds(0);
       convertOpenData(openItem).forEach((element, index) => {
         // console.log('element, index', element, index);
-        // if (index === 1) setOpenData([]);// 开奖前清空旧数据
         (function (element, index) {
           let n = moment().valueOf()
           timerRef = setTimeout((value) => {
@@ -111,18 +112,13 @@ export default function Lottery({ data, title, openTime }) {
   useEffect(() => {
     updateTimeRef = setInterval(func, 1000)
 
-    getOpenData(5).then(result => {
-
-      console.log(result);
-      const openItem = result.data[0] || {};
-      setOpenData(convertOpenData(openItem))
-    })
     // console.log('hello');
     if (diffTime < 0 && openData.length === 0) {
-      // getOpenData(5).then(result => {
-      //   const openItem = result.data[0] || {};
-      //   setOpenData(convertOpenData(openItem))
-      // })
+      getOpenData(periodCount).then(result => {
+        const openItem = result.data[0] || {};
+        // console.log(convertOpenData(openItem),'111111111');
+        setOpenData(convertOpenData(openItem))
+      })
     }
     return () => {
       clearInterval(updateTimeRef);
@@ -130,7 +126,7 @@ export default function Lottery({ data, title, openTime }) {
     }
   }, []);
 
-  // console.log('list:', historyItem.periods, periodCount, openData);
+  console.log('list:', historyItem.periods, periodCount, openData);
   return (
     <div className='w-full'>
       <div className='flex justify-between items-center text-sm p-1 text-red-600'>
@@ -164,8 +160,7 @@ export default function Lottery({ data, title, openTime }) {
       <div className="flex text-xl flex-col gap-5 p-2 font-bold">
         <div className='flex justify-between'>
           <div className='text-2xl'>
-            {/* {title}第<span className='text-red-500'>{newPeriods < 10 ? '00' + newPeriods : newPeriods < 100 ? '0' + newPeriods : newPeriods}</span>期开奖： */}
-            {title}第<span className='text-red-500'>{'005'}</span>期开奖：
+            {title}第<span className='text-red-500'>{newPeriods < 10 ? '00' + newPeriods : newPeriods < 100 ? '0' + newPeriods : newPeriods}</span>期开奖：
 
           </div>
           <div className="flex items-center font-bold">
@@ -180,7 +175,7 @@ export default function Lottery({ data, title, openTime }) {
 
         <ul className="flex justify-between gap-2">
           {openData?.map((item, index) => (
-            <li key={item.ordinary + item.property}
+            <li key={item?.ordinary + item?.property}
               className={index < 6
                 ? `flex w-1/6 flex-1 flex-col items-center pt-2`
                 : `flex w-1/6 flex-1 flex-col items-center pt-2 ml-4 font-bold relative`
@@ -188,17 +183,17 @@ export default function Lottery({ data, title, openTime }) {
             >
               {/* 加号分割特码 */}
               {index === 6 &&
-                <div className="text-4xl z-10 from-purple-400 font-bold text-gray-600 absolute top-2 left-[-1.5rem]">+</div>
+                <div className="text-4xl z-10 from-purple-400 font-bold text-gray-600 absolute top-3 left-[-1.5rem]">+</div>
               }
               <div className={diffTime == 0 ? "relative slide-in-right" : "relative"}>
                 <Image
                   className={index < 6 ? '' : `shadow-md shadow-${item.color}-500 rounded-full`}
-                  src={colorList.filter((color) => color.color == item.color)[0]?.url}
+                  src={colorList.filter((color) => color.color == item?.color)[0]?.url}
                   alt="Logo"
                   priority
                   quality={100}
-                  width={index < 6 ? 100 : 120}
-                  height={index < 6 ? 100 : 120}
+                  width={100}
+                  height={100}
                 ></Image>
                 <div
                   className="absolute font-bold"
@@ -209,14 +204,14 @@ export default function Lottery({ data, title, openTime }) {
                   }}
                 >
                   <span className={'text-3xl font-bold'}>
-                    {item.particular || item.ordinary}
+                    {item?.particular || item?.ordinary}
                   </span>
                 </div>
                 <div className="p-1 text-center text-base">
                   <span className="text-black">
-                    {item.property?.substring(0, 1)}
+                    {item?.property?.substring(0, 1)}
                   </span>
-                  <span className="text-black">{item.property?.substring(1)}</span>
+                  <span className="text-black">{item?.property?.substring(1)}</span>
                 </div>
               </div>
             </li>
