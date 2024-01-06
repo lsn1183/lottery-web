@@ -44,13 +44,15 @@ export default function Lottery({ data, title, openTime }) {
   const daysCount = moment().dayOfYear(); // 今年的第几天
   const years = moment().year(); // 今年
   const month = moment().format("MM"); // 今月
-  const day = moment().format("DD"); // 今月
+  const day = moment().format("DD"); // 今天
   const today = moment().format('YYYY-MM-DD'); // 今天日期
   const openDate = moment(today + ' ' + openTime).valueOf(); // 倒数时间，距离开奖时间小时 输出时间戳，单位为毫秒
   const endTime = moment().endOf('day').valueOf(); // 23:59 输出时间戳，单位为毫秒
   const diffOpenTimeEnd = Math.floor((endTime - openDate) / 1000); // 今天结束最后时间
 
-  async function func() {
+  async function func(args) {
+    //函数本身的逻辑
+    //函数执行完后，重置定时器
     let arr = [];
     let t = 3500;
     let now = new Date().getTime();
@@ -72,8 +74,7 @@ export default function Lottery({ data, title, openTime }) {
     setSeconds(newSeconds);
     if (difference > 15 && difference <= 5 * 60) {
       setOpenData([]);// 开奖前清空旧数据
-      // setPeriods(periodCount)
-
+      setPeriods(periodCount)
     }
     if (difference === 0) {
       clearInterval(updateTimeRef);
@@ -100,23 +101,21 @@ export default function Lottery({ data, title, openTime }) {
 
         })(element, index)
       })
-      // }
-      // if (historyItem?.periods !== periodCount) {
-      //   console.log('插入新数据', item);
-      //   // createOpenHistoryData(item)
-      // }
     }
 
+    console.log('difference: ', difference, diffTime);
+    timerRef = setTimeout(func, 1000, args);
   }
+
   // TO DO 使用webscok还是轮询进行时间数据交换
   useEffect(() => {
-    updateTimeRef = setInterval(func, 1000)
+    // updateTimeRef = setInterval(func, 1000)
 
-    // console.log('hello');
+    timerRef = setTimeout(func, 1000, '');
+
     if (diffTime < 0 && openData.length === 0) {
       getOpenData(periodCount).then(result => {
         const openItem = result.data[0] || {};
-        // console.log(convertOpenData(openItem),'111111111');
         setOpenData(convertOpenData(openItem))
       })
     }
@@ -126,7 +125,9 @@ export default function Lottery({ data, title, openTime }) {
     }
   }, []);
 
-  console.log('list:', historyItem.periods, periodCount, openData);
+  console.log('list:', historyItem.periods, periodCount,);
+  const getNewPeriodS = () =>{
+  }
   return (
     <div className='w-full'>
       <div className='flex justify-between items-center text-sm p-1 text-red-600'>
@@ -161,7 +162,6 @@ export default function Lottery({ data, title, openTime }) {
         <div className='flex justify-between'>
           <div className='text-2xl'>
             {title}第<span className='text-red-500'>{newPeriods < 10 ? '00' + newPeriods : newPeriods < 100 ? '0' + newPeriods : newPeriods}</span>期开奖：
-
           </div>
           <div className="flex items-center font-bold">
             <TimerContainer
@@ -173,17 +173,17 @@ export default function Lottery({ data, title, openTime }) {
           </div>
         </div>
 
-        <ul className="flex justify-between gap-2">
+        <ul className="flex justify-start gap-2">
           {openData?.map((item, index) => (
             <li key={item?.ordinary + item?.property}
               className={index < 6
-                ? `flex w-1/6 flex-1 flex-col items-center pt-2`
-                : `flex w-1/6 flex-1 flex-col items-center pt-2 ml-4 font-bold relative`
+                ? `flex w-1/6 flex-1 flex-col items-center justify-start pt-2`
+                : `flex w-1/6 flex-1 flex-col items-center pt-2 ml-4 relative`
               }
             >
               {/* 加号分割特码 */}
               {index === 6 &&
-                <div className="text-4xl z-10 from-purple-400 font-bold text-gray-600 absolute top-3 left-[-1.5rem]">+</div>
+                <div className="text-4xl z-10 from-purple-400 text-gray-600 absolute top-3 left-[-1.5rem]">+</div>
               }
               <div className={diffTime == 0 ? "relative slide-in-right" : "relative"}>
                 <Image

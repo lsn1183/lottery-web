@@ -42,17 +42,9 @@ import Table9 from '@/components/table-9';
 // const Table11 = dynamic(() => import('@/components/table-11'))
 // const Table12 = dynamic(() => import('@/components/table-12'))
 
-// This gets called on every request
-export async function getServerSideProps({ req }) {
-  // console.log('req', req.headers);
-  // Fetch data from external API
-  // const nowDate = moment().format('YYYY-MM-DD HH:mm'); // 现在时间
-  // const today = moment().format('YYYY-MM-DD'); // 今天日期
-  // const openDate = moment(today + ' ' + openTime); // 目标时间
-  // const diffTime = moment(openDate).diff(nowDate, 'seconds'); // 现在时间和开奖时间比较， 小于0则过时
-  let periodCount = moment().dayOfYear(); // 今年的第几天
+// This gets called on every request   Fetch data from external API
+export async function getServerSideProps() {
   const year = moment().year(); // 今年年份
-  console.log(year + '年第：' + periodCount + '天');
   const result = await getAnimalList({ year });
   const result1 = await getLatestOpenHistoryData({ year });
   const result2 = await getLatestRecommendData({ year });
@@ -69,14 +61,21 @@ export async function getServerSideProps({ req }) {
     colourData: result4?.list || [],
     multiZodiacData: result5.list || [],
     fauvistData: result6.list || [],
-    periodCount,
   };
-
   return { props: { data } }
 }
 
 export default function Page({ data }) {
-  const { periodCount } = data
+  // const { periodCount, diffTime } = data
+  const nowDate = moment().format('YYYY-MM-DD HH:mm'); // 现在时间
+  const today = moment().format('YYYY-MM-DD'); // 今天日期
+  const openDate = moment(today + ' ' + openTime); // 目标时间
+  const diffTime = moment(openDate).diff(nowDate, 'seconds'); // 现在时间和开奖时间比较， 小于0则过时
+  let periodCount = moment().dayOfYear(); // 今年的第几天
+  const year = moment().year(); // 今年年份
+  console.log(year + '年第：' + periodCount + '天');
+  let datas = {...data, periodCount, diffTime}
+
   return (
     <main className="content overflow-y-auto">
       {/* 顶部图片 */}
@@ -84,24 +83,24 @@ export default function Page({ data }) {
       {/* 导航按钮 */}
       <NavBar title={Title} />
       <NavImage title={Title} />
-      <Lottery title={Title} data={data} openTime={openTime} />
+      <Lottery title={Title} data={datas} openTime={openTime} diffTime={diffTime} />
       <Roll title={Title} />
-      <Table1 title={Title} data={data} />
-      <Table2 title={Title} data={data} />
+      <Table1 title={Title} data={datas} />
+      <Table2 title={Title} data={datas} />
       <ImgList1 title={Title} periodCount={periodCount} />
-      <Table3 title={Title} data={data} />
-      <Table4 title={Title} data={data} />
-      <Table5 title={Title} data={data} />
+      <Table3 title={Title} data={datas} />
+      <Table4 title={Title} data={datas} />
+      <Table5 title={Title} data={datas} />
       <ImgList2 title={Title} periodCount={periodCount} />
-      <Table6 title={Title} data={data} />
-      <Table7 title={Title} data={data} />
-      <Table8 title={Title} data={data} />
+      <Table6 title={Title} data={datas} />
+      <Table7 title={Title} data={datas} />
+      <Table8 title={Title} data={datas} />
       <ImgList3 title={Title} periodCount={periodCount} />
-      <Table9 title={Title} data={data} />
-      <Table10 title={Title} data={data} />
-      <Table11 title={Title} data={data} />
-      <Table12 title={Title} data={data} />
-      <Footer title={Title} data={data} />
+      <Table9 title={Title} data={datas} />
+      <Table10 title={Title} data={datas} />
+      <Table11 title={Title} data={datas} />
+      <Table12 title={Title} data={datas} />
+      <Footer title={Title} data={datas} />
 
     </main>
   )

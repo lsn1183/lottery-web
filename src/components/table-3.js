@@ -44,7 +44,7 @@ export default function Table3({ title, data }) {
           color: 'rgb(255, 255, 0)',
         }}
       >
-        <p className='animate text-[yellow] text-2xl'>↓↓↓ 请大家记住新网址,
+        <p className='text-[yellow] text-2xl'>↓↓↓ 请大家记住新网址,
           <Link href="https://12312378.xyz" prefetch={false}>12312378.xyz</Link>
         </p>
       </div>

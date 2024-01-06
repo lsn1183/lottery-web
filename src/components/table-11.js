@@ -3,16 +3,15 @@ import Image from 'next/image';
 
 export default function Table11({ title, data }) {
   const { openHistoryData, zodiacData } = data
-  console.log(zodiacData, '----zodiacData');
+  // console.log(zodiacData, '----zodiacData');
   const list = zodiacData.map((item, index) => {
     let { mantissa, periods } = item // 论坛：金牌六尾
     const openItem = getOpenItem(openHistoryData, item)
-
     periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
-
     return { ...item, ...openItem, names: mantissa? JSON.parse(mantissa) : [], periods }
   })
-  console.log('data', list);
+
+  // console.log('data', list);
   return (
     <div className="w-full">
       <div
