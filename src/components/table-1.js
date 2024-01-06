@@ -17,9 +17,9 @@ export default function Table1({ data }) {
   return (
     <div className="w-full">
       <div className="text-basefont-medium bg-red-500 text-black pt-2 pb-2 text-center">
-        <p>三四出码开二二，亡羊补牢出能发</p>
-        <p>宰相府里三千客，算得一八今期来</p>
-        <p>今期特码找桂花，富家小姐多娇美</p>
+        <p>田字出头讲义气，六合生财益万家</p>
+        <p>一三五九中特码，牛头马面二四开</p>
+        <p>今期定取美人归，一阴一阳好发财</p>
       </div>
       <ul className="flex flex-col gap-1">
         {list.map((item, i) => (

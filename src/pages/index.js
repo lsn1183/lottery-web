@@ -75,7 +75,6 @@ export default function Page({ data }) {
   const year = moment().year(); // 今年年份
   console.log(year + '年第：' + periodCount + '天');
   let datas = {...data, periodCount, diffTime}
-
   return (
     <main className="content overflow-y-auto">
       {/* 顶部图片 */}
