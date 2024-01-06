@@ -5,7 +5,7 @@ import { convertOpenData } from '@/utils/utils';
 import moment from 'moment';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { TimerContainer } from './CountDown/timer';
 
 const getOpenData = async (periodCount) => {
@@ -41,23 +41,29 @@ export default function Lottery({ data, title, openTime }) {
   let timerRef = useRef(null);
   let updateTimeRef = useRef(null)
 
-  const daysCount = moment().dayOfYear(); // 今年的第几天
-  const years = moment().year(); // 今年
   const month = moment().format("MM"); // 今月
-  const day = moment().format("DD"); // 今天
+  // const day = moment().format("DD"); // 今天
   const today = moment().format('YYYY-MM-DD'); // 今天日期
   const openDate = moment(today + ' ' + openTime).valueOf(); // 倒数时间，距离开奖时间小时 输出时间戳，单位为毫秒
   const endTime = moment().endOf('day').valueOf(); // 23:59 输出时间戳，单位为毫秒
   const diffOpenTimeEnd = Math.floor((endTime - openDate) / 1000); // 今天结束最后时间
+  const [day, setNewDay] = useState(moment().format("DD")) // 今天
+  const numList = useMemo(() => { // 计算属性
+    const list = []
+    for (let index = 0; index < day; index++) {
+      list.push(index)
+    }
+    console.log(day, list)
+    return day
+  }, [day])
 
+  let difference = null;
   async function func(args) {
     //函数本身的逻辑
     //函数执行完后，重置定时器
     let arr = [];
-    let t = 3500;
     let now = new Date().getTime();
     let diffEndTime = Math.floor((endTime - now) / 1000); // 计算即将结束今天时间误差 输出时间戳，单位为秒
-    let difference = null;
     if (diffEndTime <= diffOpenTimeEnd) {
       difference = Math.floor(((diffOpenTimeEnd + openDate + (24 * 60 * 60 * 1000)) - now) / 1000); // 计算开奖误差时间, 秒
     } else {
@@ -77,7 +83,7 @@ export default function Lottery({ data, title, openTime }) {
       setPeriods(periodCount)
     }
     if (difference === 0) {
-      clearInterval(updateTimeRef);
+      clearTimeout(updateTimeRef);
       // console.log('clearInterval:', updateTimeRef); // 也就是开奖触发时间
       const result = await getOpenData(periodCount)
       const openItem = result.data[0] || {};
@@ -85,6 +91,7 @@ export default function Lottery({ data, title, openTime }) {
       setHours(0);
       setMinutes(0);
       setSeconds(0);
+      let t = 4000;
       convertOpenData(openItem).forEach((element, index) => {
         // console.log('element, index', element, index);
         (function (element, index) {
@@ -95,39 +102,53 @@ export default function Lottery({ data, title, openTime }) {
             if (index == 6 && historyItem?.periods !== periodCount) {
               clearTimeout(timerRef)
               console.log('插入新数据, 开奖完成',);
-              updateTimeRef = setInterval(func, 1000)
+              // updateTimeRef = setInterval(func, 1000)
+              updateTimeRef = setTimeout(func, 1000, args);
             }
-          }, (index * t), element);
+          }, t * index, element);
 
         })(element, index)
       })
     }
-
-    console.log('difference: ', difference, diffTime);
-    timerRef = setTimeout(func, 1000, args);
+    updateTimeRef = setTimeout(func, 1000, args);
+    console.log('difference: ', difference, "diffTime：", diffTime);
   }
 
   // TO DO 使用webscok还是轮询进行时间数据交换
   useEffect(() => {
     // updateTimeRef = setInterval(func, 1000)
-
-    timerRef = setTimeout(func, 1000, '');
-
+    updateTimeRef = setTimeout(func, 1000, '')
+    console.log('openData:', openData);
     if (diffTime < 0 && openData.length === 0) {
       getOpenData(periodCount).then(result => {
         const openItem = result.data[0] || {};
         setOpenData(convertOpenData(openItem))
       })
+    }else {
+      
     }
     return () => {
-      clearInterval(updateTimeRef);
+      // clearInterval(updateTimeRef);
+      clearTimeout(updateTimeRef);
       clearTimeout(timerRef)
     }
   }, []);
 
   console.log('list:', historyItem.periods, periodCount,);
-  const getNewPeriodS = () =>{
+
+  function getPeriodNum(periodCount) {
+    let newPeriodCount = periodCount;
+    if (diffTime < 0) {
+      newPeriodCount += 1
+    }
+    return newPeriodCount < 10 ? '00' + newPeriodCount : newPeriodCount < 100 ? '0' + newPeriodCount : newPeriodCount
   }
+
+  const onLoadeData = () => {
+
+    console.log('点击了');
+  }
+
   return (
     <div className='w-full'>
       <div className='flex justify-between items-center text-sm p-1 text-red-600'>
@@ -173,7 +194,7 @@ export default function Lottery({ data, title, openTime }) {
           </div>
         </div>
 
-        <ul className="flex justify-start gap-2">
+        <ul className="flex justify-start gap-2 h-24">
           {openData?.map((item, index) => (
             <li key={item?.ordinary + item?.property}
               className={index < 6
@@ -217,12 +238,13 @@ export default function Lottery({ data, title, openTime }) {
             </li>
           ))}
         </ul>
-        <div className="text-xl font-medium">
-          <div>第<span className='text-red-500'>{periodCount < 10 ? '00' + periodCount : periodCount < 100 ? '0' + periodCount : periodCount}</span>期开奖:
+        <div className="text-xl font-medium flex items-center justify-between">
+          <div>第<span className='text-red-500'>{getPeriodNum(periodCount)}</span>期开奖:
             <span className='text-red-500 text-base'> {month}月{day}日 {weeks[moment().day()]} 22点35分</span></div>
           {/* <p>
             {title}{Number(periodCount)}期开奖结果：{openNums}
           </p> */}
+          {/* <button className=' border pt-1 pb-1 pl-2 pr-2 text-base text-red-600' onClick={onLoadeData}>刷新</button> */}
         </div>
       </div>
     </div>
