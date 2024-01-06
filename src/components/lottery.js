@@ -102,7 +102,6 @@ export default function Lottery({ data, title, openTime }) {
         })(element, index)
       })
     }
-
     console.log('difference: ', difference, diffTime);
     timerRef = setTimeout(func, 1000, args);
   }
@@ -113,7 +112,7 @@ export default function Lottery({ data, title, openTime }) {
 
     timerRef = setTimeout(func, 1000, '');
 
-    if (diffTime < 0 && openData.length === 0) {
+    if (diffTime < 0) {
       getOpenData(periodCount).then(result => {
         const openItem = result.data[0] || {};
         setOpenData(convertOpenData(openItem))
@@ -125,7 +124,7 @@ export default function Lottery({ data, title, openTime }) {
     }
   }, []);
 
-  console.log('list:', historyItem.periods, periodCount,);
+  // console.log('list:', historyItem.periods, periodCount,);
   const getNewPeriodS = () =>{
   }
   return (
