@@ -6,9 +6,7 @@ export default function NavImage({ title = '' }) {
     { desc: title, url: '/images/nav/nav-1.png' },
     { desc: title, url: '/images/nav/nav-5.gif' },
     { desc: title, url: '/images/nav/nav-4.webp' },
-    // { desc: title, url: '/images/nav/4.png' },
-    // { desc: title, url: '/images/nav/1.png' },
-    // { desc: title, url: '/images/nav/1.png' },
+
   ];
 
   return (
@@ -29,7 +27,7 @@ export default function NavImage({ title = '' }) {
           <div className="flex-1 p-2 text-center text-base">{item.desc}</div>
         </div>
       ))}
-      <div className=' relative'>
+      <div className='relative w-full'>
         <Image
           src='/images/icons/WX20240102-175148@2x.png'
           alt="img"
@@ -40,7 +38,7 @@ export default function NavImage({ title = '' }) {
         />
         <div className='absolute text-[#f80ab0] top-2 left-8 text-6xl'>欧洲彩</div>
 
-        <div className=' absolute top-6 right-8 bg-green-500 rounded-full animate-bounce'>
+        <div className='absolute top-6 right-8 bg-green-500 rounded-full animate-bounce'>
           <Image
             src='/images/nav/nav-3.jpeg'
             alt="img"
@@ -49,6 +47,7 @@ export default function NavImage({ title = '' }) {
             priority
           />
         </div>
+        {/* 色彩滚动条 */}
         <div className="neon h-10 font-bold">
           <span className="text" data-text=""></span>
           <span className="gradient">
