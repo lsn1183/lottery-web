@@ -109,9 +109,7 @@ export default function Lottery({ data, title, openTime }) {
   // TO DO 使用webscok还是轮询进行时间数据交换
   useEffect(() => {
     // updateTimeRef = setInterval(func, 1000)
-
     timerRef = setTimeout(func, 1000, '');
-
     if (diffTime < 0) {
       getOpenData(periodCount).then(result => {
         const openItem = result.data[0] || {};
