@@ -260,7 +260,8 @@ export default function Lottery({ data, title, openTime }) {
         </ul>
         <div className="text-xl font-medium flex items-center justify-between">
           {/* <span>{diffTime}</span> */}
-          <div>第<span className='text-red-500'>{periodNumToStr(diffTime < 0 ? periodCount + 1 : periodCount)}</span>期开奖:
+          {/* <div>第<span className='text-red-500'>{periodNumToStr(diffTime < 0 ? periodCount + 1 : periodCount)}</span>期开奖: */}
+          <div>第<span className='text-red-500'>{periodNumToStr(periodCount)}</span>期开奖:
             <span className='text-red-500 text-base'> {month}月{day}日 {weeks[moment().day()]} 22点35分</span></div>
           {/* <p>
             {title}{Number(periodCount)}期开奖结果：{openNums}
