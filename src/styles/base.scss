@@ -168,8 +168,6 @@ color: rgba(255, 255, 255, 0.5);
 
 // -------------------
 
-
-
 @keyframes blink {
   0% { opacity: 1; }
   50% { opacity: 0.8; }
@@ -179,8 +177,8 @@ color: rgba(255, 255, 255, 0.5);
 
 
 .slide-in-right {
-  -webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-  animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  -webkit-animation: slide-in-right 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: slide-in-right 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 /**
  * ----------------------------------------
@@ -194,10 +192,20 @@ color: rgba(255, 255, 255, 0.5);
     transform: translateX(1000px);
     opacity: 0;
   }
+  25% {
+    -webkit-transform: translateX(750px);
+    transform: translateX(750px);
+    opacity: 0.25;
+  }
   50% {
     -webkit-transform: translateX(500px);
     transform: translateX(500px);
     opacity: 0.5;
+  }
+  75% {
+    -webkit-transform: translateX(250px);
+    transform: translateX(250px);
+    opacity: 0.75;
   }
   100% {
     -webkit-transform: translateX(0);
