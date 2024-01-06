@@ -132,7 +132,7 @@ export default function Lottery({ data, title, openTime }) {
       historyList = convertOpenData(historyFirstItem);
     }
     if (diffTime > 300) { // 大于5分钟
-      console.log('historyList', historyList);
+      // console.log('historyList', historyList);
       historyFirstItem?.periods == periodCount - 1 ?
         setOpenData(historyList) : getOpenData(periodCount - 1).then(result => {
           const openItem = result.data[0] || {};
