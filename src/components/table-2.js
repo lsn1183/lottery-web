@@ -1,24 +1,23 @@
+import dataSource from '@/database/dataSource';
 import { getOpenItem } from '@/utils/utils';
 import Image from 'next/image';
 
-export default function Table2({ data, title }) {
-  const { multiZodiacData, animalData, openHistoryData } = data;
-  // console.log('multiZodiacData', multiZodiacData);
-  let newItem, selection, arr, animals, openItem;
-  const list = multiZodiacData?.map((item, i) => {
-    newItem = {};
-    let { nine, id, periods } = item // 9肖
+export default function Table9({ title, data }) {
+  const { openHistoryData, fauvistData } = data
+  // console.log(fauvistData, '----fauvistData', dataSource);
+  let arr1 = [], arr2 = [];
+  const list = fauvistData.map((item, index) => {
+    let { beast, birds, main, periods } = item
+    const openItem = getOpenItem(openHistoryData, item)
+    // arr1 = JSON.parse(beast) // 野
+    // arr2 = JSON.parse(birds) // 家
+    arr1 = dataSource.typeList.filter(({ type }) => type == '野肖')[0]['names'] // 野
+    arr2 = dataSource.typeList.filter(({ type }) => type == '家肖')[0]['names']  // 家
+
     periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
-    arr = JSON.parse(nine);
-    openItem = getOpenItem(openHistoryData, item);
-    animals = arr.map((name, index) => {
-      return arr.slice(0, index + 1);
-    });
-    // console.log('openItem', selection);
-    newItem = { id, periods, animals, ...openItem };
-    return newItem;
-  });
-  // console.log(list, '11111-Table2');
+    return { ...item, ...openItem, beast: arr1, birds: arr2, names: main, periods }
+  })
+
   return (
     <div className="w-full">
       <div
@@ -30,70 +29,71 @@ export default function Table2({ data, title }) {
         style={{ backgroundImage: 'url(/images/roll/roll-bg5.gif)' }}
       ></div>
       <div
-        className="bg-img flex h-14 w-full items-center justify-center border-lime-300 text-3xl text-yellow-300"
-        style={{ backgroundImage: 'url(/images/roll/roll-bg2.jpeg)' }}
+        className="bg-img flex h-14 w-full items-center justify-center border-lime-300  text-2xl font-bold"
+        style={{
+          backgroundImage: 'url(/images/roll/roll-bg2.jpeg)',
+          color: '#FFFF00',
+        }}
       >
-        <p>{title}论坛(必中九肖)</p>
+        <p>特准：(家禽野兽)</p>
       </div>
-      <div>
-        {list.map((item, index) => (
-          <div key={item.id} className='font-bold'>
-            <div className="header flex h-12 items-center justify-start bg-[#1fa412] p-1 pl-28 text-white">
-              <Image
-                width={30}
-                height={20}
-                alt="img"
-                src='/images/icons/newArrow.jpeg'
-              />
-              <Image
-                width={30}
-                height={20}
-                alt="img"
-                src='/images/icons/newArrow.jpeg'
-              />
-              <Image
-                width={30}
-                height={20}
-                alt="img"
-                src='/images/icons/newArrow.jpeg'
-              />
-              <span>精选</span>
-              <span>{item.selection?.map((s, i) => (<span key={item.id + i} className={s == item.openNum ? ' bg-yellow-300' : ''}>{s}{i < item.selection.length - 1 ? '.' : ''}</span>))}</span>
+      <ul className='w-full'>
+        {list.map((item, i) => (
+          <li key={item.id} className="h-10 flex items-center justify-around font-bold text-2xl" style={{
+            borderBottom: '1px solid #ccc',
+          }}>
+            <div className="w-28 text-center">{item.periods} 期：</div>
+            <div className='flex-1 flex justify-center'>
+              {
+                item.names == '野肖' && <div className='flex'>
+                  <Image
+                    width={30}
+                    height={30}
+                    alt="img"
+                    src={'/images/icons/new.gif'}
+                  />
+                  【
+                  <span className={item.beast?.some(name => name == item.openName) ? 'bg-yellow-400' : ''}>野兽</span>
+                  】
+                </div>
+              }
+              {
+                item.names == '家肖' && <div className='flex'>
+                  <Image
+                    width={30}
+                    height={30}
+                    alt="img"
+                    src={'/images/icons/new.gif'}
+                  />
+                  【
+                  <span className={item.birds?.some(name => name == item.openName) ? 'bg-yellow-400' : ''}>家畜</span>
+                  】
+                </div>
+              }
             </div>
-            <ul>
-              {item.animals?.map((child, i) => (
-                <li
-                  key={item.id + i}
-                  className="flex h-10 text-xl font-medium"
-                  style={{ borderTop: '1px solid #ccc' }}
-                >
-                  <div
-                    className="flex w-24 items-center justify-center font-serif"
-                    style={{ backgroundColor: 'rgb(0, 204, 51)' }}
-                  >
-                    <span>{item.periods}</span>
-                    <span>期</span>
-                    <span>{child?.length}</span>
-                    <span>肖</span>
-                  </div>
-                  <div className={'flex flex-1 items-center justify-center text-blue-600 '}>
-                    {child.map((c, i) => (<span key={i + c} className={c.indexOf(item.openName) !== -1 ? ' bg-yellow-300' : ''}>{c}{i < child.length - 1 ? '.' : ''}</span>))}
-                  </div>
-                  <div
-                    className="flex w-16 items-center justify-center font-serif"
-                    style={{ backgroundColor: 'rgb(0, 204, 51)' }}
-                  >
-                    {item.openNum ? (`${item.openNum} ${item.openName}`) : '????'}
-                  </div>
-                </li>
-              ))}
-            </ul>
-            <div className="footer flex h-10 items-center justify-center bg-[#527A00] p-1 text-white bg-mg" >
-              见证奇迹，成就梦想，彩霸王
+            <div className='flex w-40'>开：
+              <span className=''>{item.openNum || '????'}</span>
+              {item.openName && <span>({item.openName})</span>}
+              {
+                i > 0 && item.names == '野肖' && <Image
+                  width={30}
+                  height={30}
+                  alt="img"
+                  src={item.beast?.includes(item.openName) ? '/images/icons/success.png' : '/images/icons/err.png'}
+                />
+              }
+              {
+                i > 0 && item.names == '家肖' && <Image
+                  width={30}
+                  height={30}
+                  alt="img"
+                  src={item.birds?.includes(item.openName) ? '/images/icons/success.png' : '/images/icons/err.png'}
+                />
+              }
             </div>
-          </div>
+          </li>
         ))}
-      </div>
-    </div >
+      </ul>
+    </div>
   );
 }

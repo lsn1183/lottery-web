@@ -27,7 +27,6 @@ export default function Table6({ title, data }) {
         className="bg-img flex h-14 w-full items-center justify-center "
         style={{
           backgroundImage: 'url(/images/roll/roll-bg2.jpeg)',
-          color: '#7c04ff',
         }}
       >
         <Image
@@ -36,7 +35,7 @@ export default function Table6({ title, data }) {
           alt="img"
           src='/images/icons/newArrow.jpeg'
         />
-        <p>{title}论坛：必中6肖</p>
+        <p>必中6肖</p>
       </div>
       <ul className='w-full'>
         {list.map((item, i) => (

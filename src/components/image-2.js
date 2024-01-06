@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-// 横财富玄机图
+// 横财富玄机图， 特码真心版
 export default function ImageTwo({ periodCount }) {
   return (
     <div className=" flex w-full flex-wrap justify-between gap-1 bg-red-600">
@@ -8,7 +8,7 @@ export default function ImageTwo({ periodCount }) {
         财神爷送特码，财运来了，挡也挡不住！！
       </p>
       <Image
-        src={`/images/玄机图/${periodCount}.png`}
+        src={`/images/玄机图/${periodCount}-1.png`}
         alt="img"
         className="dark:invert"
         width={768}

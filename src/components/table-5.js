@@ -36,7 +36,7 @@ export default function Table5({ title, data }) {
           alt="img"
           src={'/images/icons/hand.jpeg'}
         />
-        <p>{title}(内部论坛：精准五肖中特)</p>
+        <p>(内部揭秘：五肖中特)</p>
       </div>
       <ul className='w-full'>
         {list.map((item, i) => (

@@ -34,7 +34,7 @@ export default function Table8({ title, data }) {
           alt="img"
           src={'/images/icons/奇奇准.gif'}
         />
-        <p>高手解料：八肖推荐</p>
+        <p>火爆八肖</p>
       </div>
       <ul className='w-full'>
         {list.map((item, i) => (

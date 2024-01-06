@@ -1,60 +1,98 @@
 import { getOpenItem } from '@/utils/utils';
 import Image from 'next/image';
 
-export default function Table10({ title, data }) {
-  const { openHistoryData, multiZodiacData } = data
-  // console.log(multiZodiacData, '----multiZodiacData');
-  const list = multiZodiacData.map((item, index) => {
-    let { four, periods } = item // 8肖
-    const openItem = getOpenItem(openHistoryData, item)
+export default function Table2({ data, title }) {
+  const { multiZodiacData, openHistoryData } = data;
+  // console.log('multiZodiacData', multiZodiacData);
+  let newItem, arr, animals, openItem;
+  const list = multiZodiacData?.map((item, i) => {
+    newItem = {};
+    let { ten, id, periods } = item // 9肖
     periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
-    return { ...item, ...openItem, names: JSON.parse(four), periods }
-  })
-  // console.log('data', list);
+    arr = JSON.parse(ten);
+    openItem = getOpenItem(openHistoryData, item);
+    animals = arr.map((name, index) => {
+      return arr.slice(0, index + 1);
+    });
+    newItem = { id, periods, animals, ...openItem };
+    return newItem;
+  });
+  // console.log(list, '11111-Table2');
   return (
     <div className="w-full">
       <div
-        className="bg-img flex h-10 w-full items-center justify-center border-lime-300 text-yellow-300"
+        className="bg-img flex h-14 w-full items-center justify-center border-lime-300 text-2xl text-yellow-300"
         style={{ backgroundImage: 'url(/images/roll/roll-bg4.gif)' }}
       ></div>
       <div
-        className="bg-img flex h-10 w-full items-center justify-center border-lime-300  text-yellow-300"
+        className="bg-img flex h-14 w-full items-center justify-center border-lime-300 text-2xl text-yellow-300"
         style={{ backgroundImage: 'url(/images/roll/roll-bg5.gif)' }}
       ></div>
       <div
-        className="bg-img flex h-14 w-full items-center justify-center border-lime-300 text-2xl font-bold"
-        style={{
-          backgroundImage: 'url(/images/roll/roll-bg2.jpeg)',
-          color: '#FFFF00',
-        }}
+        className="bg-img flex h-14 w-full items-center justify-center border-lime-300 text-3xl text-yellow-300"
+        style={{ backgroundImage: 'url(/images/roll/roll-bg2.jpeg)' }}
       >
-        <p>單車變寶馬：神奇四肖</p>
+        <p>稳赚十肖</p>
       </div>
-      <ul className="w-full">
-        {list.map((item, i) => (
-          <li key={item.id} className="flex items-center justify-around h-10 font-bold" style={{
-            borderBottom: '1px solid #ccc',
-          }}>
-            <div className="pl-2">{item.periods} 期：</div>
-            <div className='flex'>
+      <div>
+        {list.map((item, index) => (
+          <div key={item.id} className='font-bold'>
+            <div className="header flex h-12 items-center justify-center bg-[#1fa412] p-1 text-white">
               <Image
-                width={40}
+                width={30}
                 height={20}
                 alt="img"
-                src={'/images/icons/hot.jpeg'}
+                src='/images/icons/newArrow.jpeg'
               />
-              【 {item.names.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-400' : ''}>{name}</span>))} 】
+              <Image
+                width={30}
+                height={20}
+                alt="img"
+                src='/images/icons/newArrow.jpeg'
+              />
+              <Image
+                width={30}
+                height={20}
+                alt="img"
+                src='/images/icons/newArrow.jpeg'
+              />
+              <span>精选</span>
+              <span>{item.selection?.map((s, i) => (<span key={item.id + i} className={s == item.openNum ? ' bg-yellow-300' : ''}>{s}{i < item.selection.length - 1 ? '.' : ''}</span>))}</span>
             </div>
-            <div className='w-32'>开：
-              <span className=''>{item.openNum || '????'}</span>
-              {
-                item.openName &&
-                <span className=''>({item.openName})</span>
-              }
+            <ul>
+              {item.animals?.map((child, i) => (
+                <li
+                  key={item.id + i}
+                  className="flex h-10 text-xl font-medium"
+                  style={{ borderTop: '1px solid #ccc' }}
+                >
+                  <div
+                    className="flex w-24 items-center justify-center font-serif"
+                    style={{ backgroundColor: 'rgb(0, 204, 51)' }}
+                  >
+                    <span>{item.periods}</span>
+                    <span>期</span>
+                    <span>{child?.length}</span>
+                    <span>肖</span>
+                  </div>
+                  <div className={'flex flex-1 items-center justify-center text-blue-600 '}>
+                    {child.map((c, i) => (<span key={i + c} className={c.indexOf(item.openName) !== -1 ? ' bg-yellow-300' : ''}>{c}{i < child.length - 1 ? '.' : ''}</span>))}
+                  </div>
+                  <div
+                    className="flex w-16 items-center justify-center font-serif"
+                    style={{ backgroundColor: 'rgb(0, 204, 51)' }}
+                  >
+                    {item.openNum ? (`${item.openNum} ${item.openName}`) : '????'}
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <div className="footer flex h-10 items-center justify-center bg-[#527A00] p-1 text-white bg-mg" >
+              见证奇迹，成就梦想，彩霸王
             </div>
-          </li>
+          </div>
         ))}
-      </ul>
-    </div>
+      </div>
+    </div >
   );
 }

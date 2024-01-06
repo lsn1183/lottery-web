@@ -5,7 +5,6 @@ import Footer from '@/components/footer';
 import Lottery from '@/components/lottery';
 import NavBar from '@/components/nav-bar';
 import Roll from '@/components/roll';
-import Table1 from '@/components/table-1';
 import moment from 'moment';
 // import dynamic from 'next/dynamic';
 import ImgList1 from '@/components/image-1';
@@ -13,34 +12,23 @@ import ImgList2 from '@/components/image-2';
 import ImgList3 from '@/components/image-3';
 import NavImage from '@/components/nav-image';
 
+import Table1 from '@/components/table-1-1';
 import Table10 from '@/components/table-10';
 import Table11 from '@/components/table-11';
-import Table12 from '@/components/table-12';
-import Table2 from '@/components/table-2';
-import Table3 from '@/components/table-3';
 import Table4 from '@/components/table-4';
+// import Table11 from '@/components/table-6-1';
+// import Table12 from '@/components/table-1-1';
+import Table2 from '@/components/table-2';
+import Table2_1 from '@/components/table-2-1';
+import Table3 from '@/components/table-3';
+import Table3_1 from '@/components/table-3-1';
 import Table5 from '@/components/table-5';
 import Table6 from '@/components/table-6';
-import Table7 from '@/components/table-7';
+import Table6_1 from '@/components/table-6-1';
+// import Table7 from '@/components/table-3';
 import Table8 from '@/components/table-8';
 import Table9 from '@/components/table-9';
-// const ImgList1 = dynamic(() => import('@/components/image-1'))
-// const ImgList2 = dynamic(() => import('@/components/image-2'))
-// const ImgList6 = dynamic(() => import('@/components/image-6'))
-// const TopImage = dynamic(() => import('@/components/fixed-image'))
 
-// const ImgList6 = dynamic(() => import('@/components/image-6'))
-// const Table2 = dynamic(() => import('@/components/table-2'))
-// const Table3 = dynamic(() => import('@/components/table-3'))
-// const Table4 = dynamic(() => import('@/components/table-4'))
-// const Table5 = dynamic(() => import('@/components/table-5'))
-// const Table6 = dynamic(() => import('@/components/table-6'))
-// const Table7 = dynamic(() => import('@/components/table-7'))
-// const Table8 = dynamic(() => import('@/components/table-8'))
-// const Table9 = dynamic(() => import('@/components/table-9'))
-// const Table10 = dynamic(() => import('@/components/table-10'))
-// const Table11 = dynamic(() => import('@/components/table-11'))
-// const Table12 = dynamic(() => import('@/components/table-12'))
 
 // This gets called on every request   Fetch data from external API
 export async function getServerSideProps() {
@@ -86,19 +74,23 @@ export default function Page({ data }) {
       <Roll title={Title} />
       <Table1 title={Title} data={datas} />
       <Table2 title={Title} data={datas} />
+      <Table2_1 title={Title} data={datas} />
       <ImgList1 title={Title} periodCount={periodCount} />
       <Table3 title={Title} data={datas} />
+      <Table3_1 title={Title} data={datas} />
+
       <Table4 title={Title} data={datas} />
       <Table5 title={Title} data={datas} />
       <ImgList2 title={Title} periodCount={periodCount} />
       <Table6 title={Title} data={datas} />
-      <Table7 title={Title} data={datas} />
+      <Table6_1 title={Title} data={datas} />
+      {/* <Table7 title={Title} data={datas} /> */}
       <Table8 title={Title} data={datas} />
       <ImgList3 title={Title} periodCount={periodCount} />
       <Table9 title={Title} data={datas} />
       <Table10 title={Title} data={datas} />
       <Table11 title={Title} data={datas} />
-      <Table12 title={Title} data={datas} />
+      {/* <Table12 title={Title} data={datas} /> */}
       <Footer title={Title} data={datas} />
 
     </main>

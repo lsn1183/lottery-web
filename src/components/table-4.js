@@ -1,82 +1,56 @@
 import { getOpenItem } from '@/utils/utils';
 import Image from 'next/image';
 
-export default function Table4({ title, data }) {
+export default function Table10({ title, data }) {
   const { openHistoryData, multiZodiacData } = data
-  // console.log(data, '----');
-  const list = multiZodiacData.map(item => {
-    let { periods, main } = item
+  // console.log(multiZodiacData, '----multiZodiacData');
+  const list = multiZodiacData.map((item, index) => {
+    let { four, periods } = item // 8肖
     const openItem = getOpenItem(openHistoryData, item)
     periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
-    return { ...item, main, ...openItem, periods }
+    return { ...item, ...openItem, names: JSON.parse(four), periods }
   })
   // console.log('data', list);
   return (
     <div className="w-full">
       <div
-        className="bg-img flex h-14 w-full items-center justify-center border-lime-300 text-2xl text-yellow-300"
+        className="bg-img flex h-10 w-full items-center justify-center border-lime-300 text-yellow-300"
         style={{ backgroundImage: 'url(/images/roll/roll-bg4.gif)' }}
       ></div>
       <div
-        className="bg-img flex h-14 w-full items-center justify-center border-lime-300 text-2xl text-yellow-300"
+        className="bg-img flex h-10 w-full items-center justify-center border-lime-300  text-yellow-300"
         style={{ backgroundImage: 'url(/images/roll/roll-bg5.gif)' }}
       ></div>
       <div
-        className="bg-img flex h-14 w-full items-center justify-center border-lime-300  text-2xl font-medium"
+        className="bg-img flex h-14 w-full items-center justify-center border-lime-300 text-2xl font-bold"
         style={{
           backgroundImage: 'url(/images/roll/roll-bg2.jpeg)',
+          color: '#FFFF00',
         }}
       >
-        <Image
-          width={30}
-          height={30}
-          alt="img"
-          src={'/images/icons/hand.jpeg'}
-        />
-        <p>{title}：单双(發發發)</p>
+        <p>單車變寶馬：神奇四肖</p>
       </div>
-      <ul className='w-full'>
+      <ul className="w-full">
         {list.map((item, i) => (
-          <li key={item.id} className="flex font-medium h-10 justify-around items-center text-2xl" style={{
+          <li key={item.id} className="flex items-center justify-around h-10 font-bold" style={{
             borderBottom: '1px solid #ccc',
           }}>
-            <div className='w-20 text-center'>{item.periods} 期</div>
-
-            <div className='flex items-center h-4'>
-              {
-                i > 0 ?
-                  <div ><Image
-                    width={30}
-                    height={30}
-                    alt="img"
-                    src={'/images/icons/icon-1.jpeg'}
-                  /></div>
-                  : <div ><Image
-                    width={30}
-                    height={30}
-                    alt="img"
-                    src={'/images/icons/new.gif'}
-                  /></div>
-              }
-              {
-                item.main == '单' && <div className='flex'>
-                  <span className={item.openNum && Number(item.openNum) % 2 !== 0 ? ' bg-yellow-200' : ''}>【单】</span>
-                  {/* <span>【 {item.single.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-300' : ''}>{name}</span>))} 】</span> */}
-                </div>
-              }
-              {
-                item.main == '双' &&
-                <div className='flex'>
-
-                  <span className={item.openNum && Number(item.openNum) % 2 == 0 ? ' bg-yellow-200' : ''}>【双】</span>
-                  {/* <span>【 {item.double.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-300' : ''}>{name}</span>))} 】</span> */}
-                </div>
-              }
+            <div className="pl-2">{item.periods} 期：</div>
+            <div className='flex'>
+              <Image
+                width={40}
+                height={20}
+                alt="img"
+                src={'/images/icons/hot.jpeg'}
+              />
+              【 {item.names.map((name, index) => (<span key={index + name} className={name == item.openName ? 'bg-yellow-400' : ''}>{name}</span>))} 】
             </div>
-
-            <div >开：
-              <span className='pl-1 pr-1'>{item.openNum || '????'}</span>
-              <span className=''>{item.openName}</span>
+            <div className='w-32'>开：
+              <span className=''>{item.openNum || '????'}</span>
+              {
+                item.openName &&
+                <span className=''>({item.openName})</span>
+              }
             </div>
           </li>
         ))}
