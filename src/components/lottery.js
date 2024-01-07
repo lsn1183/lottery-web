@@ -219,17 +219,16 @@ export default function Lottery({ data, title, openTime }) {
           {openData?.map((item, index) => (
             <li key={item?.ordinary + item?.property}
               className={index < 6
-                ? `flex w-1/6 flex-1 flex-col items-center justify-start pt-2 max-w-[100px]`
-                : `flex w-1/6 flex-1 flex-col items-center pt-2 ml-4 relative max-w-[100px]`
+                ? `flex w-1/6 flex-1 flex-col items-center justify-start pt-2 max-w-[140px]`
+                : `flex w-1/6 flex-1 flex-col items-center pt-2 ml-4 relative max-w-[140px]`
               }
             >
               {/* 加号分割特码 */}
               {index === 6 &&
                 <div className="text-4xl z-10 from-purple-400 text-gray-600 absolute top-3 left-[-1.5rem]">+</div>
               }
-              <div className={diffTime == 0 ? "relative slide-in-right max-w-[100px]" : "relative max-w-[100px]"}>
+              <div className={diffTime == 0 ? "relative slide-in-right" : "relative"}>
                 <Image
-                  className={index < 6 ? '' : `shadow-md shadow-${item.color}-500 rounded-full`}
                   src={colorList.filter((color) => color.color == item?.color)[0]?.url}
                   alt="Logo"
                   priority
@@ -238,7 +237,7 @@ export default function Lottery({ data, title, openTime }) {
                   height={100}
                 ></Image>
                 <div
-                  className="absolute font-bold"
+                  className="absolute"
                   style={{
                     left: '48%',
                     top: '25%',

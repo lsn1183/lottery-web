@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Table3({ title, data }) {
   const { colourData, openHistoryData } = data
-  console.log('colourData', colourData);
+  // console.log('colourData', colourData);
   const colorList = [
     { color: 'blue', name: '蓝' },
     { color: 'green', name: '绿' },
@@ -15,7 +15,7 @@ export default function Table3({ title, data }) {
     color2,
     openItem,
     numArray = [];
-  const list = colourData.filter(item=> item.id != "1675a533-050d-4d6f-a55c-b8c96fa22ebf").map((item) => {
+  const list = colourData.map((item) => {
     let { periods } = item
     color1_Name = colorList.filter((c) => c.color == item.color1)[0]['name'];
     color1 = colorList.filter((c) => c.color == item.color1)[0]['color'];
