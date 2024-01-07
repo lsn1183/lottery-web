@@ -4,9 +4,9 @@ import Image from 'next/image';
 
 export default function Table9({ title, data }) {
   const { openHistoryData, fauvistData } = data
-  // console.log(fauvistData, '----fauvistData', dataSource);
+  console.log(fauvistData, '----fauvistData');
   let arr1 = [], arr2 = [];
-  const list = fauvistData.map((item, index) => {
+  const list = fauvistData.filter(item=> item.id !== "c26fe0cb-759d-4522-9956-dad4f33e1b81").map((item, index) => {
     let { beast, birds, main, periods } = item
     const openItem = getOpenItem(openHistoryData, item)
     // arr1 = JSON.parse(beast) // 野

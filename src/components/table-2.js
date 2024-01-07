@@ -2,9 +2,9 @@ import { getOpenItem } from '@/utils/utils';
 import Image from 'next/image';
 
 export default function Table2({ data, title }) {
-  const { multiZodiacData, animalData, openHistoryData } = data;
+  const { multiZodiacData, openHistoryData } = data;
   // console.log('multiZodiacData', multiZodiacData);
-  let newItem, selection, arr, animals, openItem;
+  let newItem, arr, animals, openItem;
   const list = multiZodiacData?.map((item, i) => {
     newItem = {};
     let { nine, id, periods } = item // 9肖
