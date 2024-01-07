@@ -24,11 +24,17 @@ export default function Table7({ title, data }) {
         style={{ backgroundImage: 'url(/images/roll/roll-bg5.gif)' }}
       ></div>
       <div className="bg-img flex h-14 w-full items-center justify-center text-lime-300  text-2xl bg-red-600 ">
-        <Image
+        {/* <Image
           width={60}
           height={60}
           alt="img"
           src={'/images/icons/爆.gif'}
+        /> */}
+        <Image
+          width={60}
+          height={60}
+          alt="img"
+          src={'/images/icons/奇奇准.gif'}
         />
         <p>内部绝密资料：绝杀三肖</p>
       </div>
