@@ -14,6 +14,7 @@ import ImgList3 from '@/components/image-3';
 import NavImage from '@/components/nav-image';
 
 import Table10 from '@/components/table-10';
+import Table10_1 from '@/components/table-10-1';
 import Table11 from '@/components/table-11';
 import Table12 from '@/components/table-12';
 import Table2 from '@/components/table-2';
@@ -85,6 +86,7 @@ export default function Page({ data }) {
       <Lottery title={Title} data={datas} openTime={openTime} diffTime={diffTime} />
       <Roll title={Title} />
       <Table1 title={Title} data={datas} />
+      <Table10_1 title={Title} data={datas} />
       <Table2 title={Title} data={datas} />
       <ImgList1 title={Title} periodCount={periodCount} />
       <Table3 title={Title} data={datas} />
