@@ -1,4 +1,4 @@
-export const API = 'https://12312378.xyz/api';
+export const API = 'http://localhost:3001';
 export const CLIENT_API = process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://12312378.xyz/api';
 
 export const Title = '欧洲彩';
