@@ -24,6 +24,8 @@ export default function Table3({ title, data }) {
     openItem = getOpenItem(openHistoryData, item);
     periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
 
+    console.log(openItem , typeof openItem)
+    
     numArray = item.nums.split('.');
     return {
       ...item,
@@ -69,7 +71,7 @@ export default function Table3({ title, data }) {
               <span style={{ color: '#0033CC' }}>②波</span>〖<span className={item.color1 == item.openColor ? 'bg-yellow-300' : ''}>{item.color1_Name}</span>
               波+ <span className={item.color2 == item.openColor ? 'bg-yellow-300' : ''}>{item.color2_Name}</span> 波〗
               <span style={{ color: '#0033CC' }}>头数</span>〖{item.main.map((v, i) => (<span key={JSON.stringify(item.main) + i}
-                className={JSON.stringify(Number(item.openNum))[0] == v ? 'bg-yellow-300' : ''}>{v}</span>))}头〗
+                className={ typeof item?.openNum == 'string' && item?.openNum[0] == v ? 'bg-yellow-300' : ''}>{v}</span>))}头〗
             </div>
             <div className='text-xl'>
               <span style={{ color: '#0033CC' }}>主10码</span>
