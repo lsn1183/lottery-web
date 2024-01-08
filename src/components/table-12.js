@@ -37,7 +37,7 @@ export default function Table12({ title, data }) {
           }}>
             <div className="w-24 text-center">{item.periods}期：</div>
             <div className='flex items-center flex-grow justify-center'>
-              「平特①肖」【<span>{item.single}</span>】
+              【{item.single}】
             </div>
             <div className='flex text-left'>开：
               <span>{item.openNum || '??????'}</span>
