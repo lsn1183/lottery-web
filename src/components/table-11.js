@@ -53,14 +53,14 @@ export default function Table11({ title, data }) {
             <div className='flex'>开:
               <span>{item.openNum || '????'}</span>
               {item.openName && <span className=''>({item.openName})</span>}
-              {
+              {/* {
                 i > 0 && <Image
                   width={30}
                   height={30}
                   alt="img"
                   src={!item.birds?.includes(item.openName) ? '/images/icons/success.png' : '/images/icons/err.png'}
                 />
-              }
+              } */}
             </div>
           </li>
         ))}
