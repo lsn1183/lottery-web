@@ -3,10 +3,12 @@ import Image from 'next/image';
 
 export default function Table12({ title, data }) {
   const { openHistoryData, zodiacData } = data
-  // console.log(multiZodiacData, '----multiZodiacData');
+  console.log(zodiacData, '----zodiacData');
   const list = zodiacData.map((item, index) => {
     let { periods } = item // ：平特①肖中
-    const openItem = getOpenItem(openHistoryData, item)
+    const openItem = getOpenItem(openHistoryData, item);
+    openItem?.ordinaryNames.push(openItem.openName)
+    console.log('openItem', openItem, openItem?.ordinaryNames?.some(v => v == item?.openName));
     periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
     return { ...item, ...openItem, periods }
   })
@@ -36,21 +38,22 @@ export default function Table12({ title, data }) {
             borderBottom: '1px solid #ccc',
           }}>
             <div className="w-24 text-center">{item.periods}期：</div>
-            <div className='flex items-center flex-grow justify-center'>
-              【{item.single}】
+            <div className='flex items-center justify-center'>
+              平特①肖【{item.single}】
             </div>
-            <div className='flex text-left'>开：
-              <span>{item.openNum || '??????'}</span>
+            <div className='flex justify-center w-20'>
+              <span>{item.openNum || '????'}</span>
               {
                 item.openName &&
-                <span className=''>({item.openName})</span>
+                <span>({item.openName})</span>
               }
               {
                 i > 0 && <Image
                   width={30}
                   height={30}
                   alt="img"
-                  src={item?.single == item?.openName ? '/images/icons/success.png' : '/images/icons/err.png'}
+                  // ordinaryNames 平码集合
+                  src={item?.ordinaryNames?.some(v => v == item?.single) ? '/images/icons/success.png' : '/images/icons/err.png'}
                 />
               }
             </div>
