@@ -60,12 +60,12 @@ export default function Lottery({ data, title, openTime }) {
      *  diffEndTime < diffOpenTimeEnd 开奖后
      */
     if (diffEndTime > diffOpenTimeEnd) { // 开奖前
-      console.log('开奖前');
+      // console.log('开奖前');
       differenceS = Math.floor((openDate - now) / 1000); // 秒
     } else if (diffEndTime == diffOpenTimeEnd) { // 正在开奖
       console.log('正在开奖中');
     } else {  // 开奖后， 恢复计时器
-      console.log('开奖后');
+      // console.log('开奖后');
       differenceS = Math.floor(((openDate + 24 * 60 * 60 * 1000) - now) / 1000); //  秒
     }
     // console.log('difference: ', differenceS, "diffTime：", diffTime);

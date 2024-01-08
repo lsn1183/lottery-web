@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Table1({ data }) {
+  const { periodCount } = data
   const { recommendData, openHistoryData } = data;
 
   const list = [
@@ -14,13 +15,23 @@ export default function Table1({ data }) {
     }),
   ];
 
+  const periodNumToStr = (num) => {
+    let newPeriodCount = num;
+    return newPeriodCount < 10 ? '00' + newPeriodCount : newPeriodCount < 100 ? '0' + newPeriodCount : newPeriodCount
+  }
+
   return (
     <div className="w-full">
       {/* 诗句 */}
       <div className="text-basefont-medium bg-red-500 text-black pt-2 pb-2 text-center">
-        <p>二牛六蛇合八码，今期生肖守为主</p>
-        <p>金木水火留不住，唯独老牛未见开</p>
-        <p>猴后灵牛头发角，提六吼九必功成</p>
+        <div className=' text-yellow-300'>第{periodNumToStr(periodCount)}期玄机诗</div>
+        {
+          periodCount == 8 && <div>
+            <p>二牛六蛇合八码，今期生肖守为主</p>
+            <p>金木水火留不住，唯独老牛未见开</p>
+            <p>猴后灵牛头发角，提六吼九必功成</p>
+          </div>
+        }
       </div>
       <ul className="flex flex-col gap-1">
         {list.map((item, i) => (

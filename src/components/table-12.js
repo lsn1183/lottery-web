@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function Table12({ title, data }) {
   const { openHistoryData, zodiacData } = data
-  console.log(zodiacData, '----zodiacData');
+  // console.log(zodiacData, '----zodiacData');
   const list = zodiacData.map((item, index) => {
     // single 推荐肖，ordinaryNames 本期开奖肖
     let { periods } = item // ：平特①肖中
@@ -12,10 +12,10 @@ export default function Table12({ title, data }) {
     periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
     return { ...item, ...openItem, periods }
   })
-  console.log('data', list);
+  // console.log('data', list);
   const checkNames = (item) => {
     let _index = item.ordinaryNames?.findIndex(v => v.substring(0, 1) == item?.single)
-    console.log(_index, '_index', item);
+    // console.log(_index, '_index', item);
     return _index !== -1 ? item?.ordinaryNames[_index] :  item.openName + '/' + item.openNum
   }
   return (
