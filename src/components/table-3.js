@@ -23,9 +23,7 @@ export default function Table3({ title, data }) {
     color2 = colorList.filter((c) => c.color == item.color2)[0]['color'];
     openItem = getOpenItem(openHistoryData, item);
     periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
-
-    console.log(openItem , typeof openItem)
-    
+    // console.log(openItem , typeof openItem)
     numArray = item.nums.split('.');
     return {
       ...item,
