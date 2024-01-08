@@ -5,14 +5,19 @@ export default function Table12({ title, data }) {
   const { openHistoryData, zodiacData } = data
   console.log(zodiacData, '----zodiacData');
   const list = zodiacData.map((item, index) => {
+    // single 推荐肖，ordinaryNames 本期开奖肖
     let { periods } = item // ：平特①肖中
     const openItem = getOpenItem(openHistoryData, item);
-    openItem?.ordinaryNames.push(openItem.openName)
-    console.log('openItem', openItem, openItem?.ordinaryNames?.some(v => v == item?.openName));
+    openItem?.ordinaryNames.push(openItem.openName + '/' + openItem.openNum)
     periods = periods < 10 ? '00' + periods : periods < 100 ? '0' + periods : periods
     return { ...item, ...openItem, periods }
   })
   console.log('data', list);
+  const checkNames = (item) => {
+    let _index = item.ordinaryNames?.findIndex(v => v.substring(0, 1) == item?.single)
+    console.log(_index, '_index', item);
+    return _index !== -1 ? item?.ordinaryNames[_index] :  item.openName + '/' + item.openNum
+  }
   return (
     <div className="w-full">
       <div
@@ -42,10 +47,13 @@ export default function Table12({ title, data }) {
               平特①肖【{item.single}】
             </div>
             <div className='flex justify-center w-20'>
-              <span>{item.openNum || '????'}</span>
+                <span>{ !item.openNum ? '????' : ''}</span>
               {
                 item.openName &&
-                <span>({item.openName})</span>
+                <span>(
+                  {/* {item.openName} */}
+                  {checkNames(item)}
+                  )</span>
               }
               {
                 i > 0 && <Image
@@ -53,7 +61,7 @@ export default function Table12({ title, data }) {
                   height={30}
                   alt="img"
                   // ordinaryNames 平码集合
-                  src={item?.ordinaryNames?.some(v => v == item?.single) ? '/images/icons/success.png' : '/images/icons/err.png'}
+                  src={item?.ordinaryNames?.some(v => v.substring(0,1) == item?.single) ? '/images/icons/success.png' : '/images/icons/err.png'}
                 />
               }
             </div>

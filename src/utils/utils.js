@@ -123,7 +123,11 @@ export function getOpenItem(openData, item) {
   const openNum = element.particular;
   const openName = element.particular_property?.substring(0, 1)
   const openColor = element.particular_color
-  const ordinaryNames = [...new Array(6)].map((k, i) => (element[`ordinary${i + 1}_property`]?.substring(0, 1))) // 平码
+  const ordinaryNames = [...new Array(6)].map((k, i) => {
+    let key = element[`ordinary${i + 1}_property`]?.substring(0, 1)
+    let num = element[`ordinary${i + 1}`]
+    return  key+ '/' + num
+  } ) // 平码
   const ordinaryColors = [...new Array(6)].map((k, i) => (element[`ordinary${i + 1}_color`])) // 平码波色
   return { openNum, openName, openColor, ordinaryNames, ordinaryColors };
 }

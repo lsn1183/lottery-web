@@ -18,9 +18,9 @@ export default function Table1({ data }) {
     <div className="w-full">
       {/* 诗句 */}
       <div className="text-basefont-medium bg-red-500 text-black pt-2 pb-2 text-center">
-        <p>单双在秋意，生肖今又逢</p>
-        <p>三六从中走，四五却走来</p>
-        <p>点灯苦读书，今朝必状元</p>
+        <p>二牛六蛇合八码，今期生肖守为主</p>
+        <p>金木水火留不住，唯独老牛未见开</p>
+        <p>猴后灵牛头发角，提六吼九必功成</p>
       </div>
       <ul className="flex flex-col gap-1">
         {list.map((item, i) => (
