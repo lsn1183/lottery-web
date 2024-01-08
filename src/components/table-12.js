@@ -35,31 +35,11 @@ export default function Table12({ title, data }) {
           <li key={item.id} className="flex text-1xl items-center h-10 font-bold font-mono justify-around" style={{
             borderBottom: '1px solid #ccc',
           }}>
-            <div className="w-1/4 text-center">{item.periods}期：</div>
-            <div className='w-1/4 flex items-center'>
-              <div>
-                <Image
-                  width={30}
-                  height={30}
-                  alt="img"
-                  src={'/images/icons/new.gif'}
-                />
-                <Image
-                  width={30}
-                  height={30}
-                  alt="img"
-                  src={'/images/icons/new.gif'}
-                />
-                <Image
-                  width={30}
-                  height={30}
-                  alt="img"
-                  src={'/images/icons/new.gif'}
-                />
-              </div>
-              【 <span>{item.single}</span> 】
+            <div className="w-24 text-center">{item.periods}期：</div>
+            <div className='flex items-center flex-grow justify-center'>
+              「平特①肖」【<span>{item.single}</span>】
             </div>
-            <div className='flex w-2/4 text-right'>开：
+            <div className='flex text-left'>开：
               <span>{item.openNum || '??????'}</span>
               {
                 item.openName &&
